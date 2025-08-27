@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghost - Elite AI Trader Profile</title>
+    <link href="Ghost/remixicon.min.css" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'AlimamaShuHeiTi';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/AlimamaShuHeiTi-Bold.otf') format('opentype');
+            font-weight: bold;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Bold.ttf') format('truetype');
+            font-weight: bold;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Medium.ttf') format('truetype');
+            font-weight: 500;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Regular.ttf') format('truetype');
+            font-weight: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0f;
+            color: #e0e0e0;
+            font-family: 'MiSans', sans-serif;
+            width: 1920px;
+            overflow-x: hidden;
+            background-image: linear-gradient(to bottom, rgba(0, 20, 10, 0.95), rgba(10, 10, 15, 0.98)), 
+                              url('https://assets-persist.lovart.ai/agent_images/4094377d-3972-4c68-932b-4de6ab1202f0.png');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        .container {
+            width: 1920px;
+            padding: 0;
+            margin: 0 auto;
+        }
+
+        .header {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            border-bottom: 2px solid #1aff80;
+            box-shadow: 0 5px 25px rgba(26, 255, 128, 0.2);
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(10, 10, 15, 0.9), rgba(10, 10, 15, 0.7), rgba(10, 10, 15, 0.4));
+            z-index: 1;
+        }
+
+        .profile-container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            height: 100%;
+            padding: 40px;
+        }
+
+        .profile-image {
+            width: 400px;
+            height: 400px;
+            border: 3px solid #1aff80;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(26, 255, 128, 0.3);
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-info {
+            margin-left: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .profile-name {
+            font-family: 'AlimamaShuHeiTi', sans-serif;
+            font-size: 64px;
+            color: #ffffff;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(26, 255, 128, 0.7);
+            letter-spacing: 2px;
+        }
+
+        .profile-title {
+            font-size: 28px;
+            color: #1aff80;
+            margin-bottom: 20px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .stat {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #1aff80;
+            border-radius: 8px;
+            padding: 15px 25px;
+            text-align: center;
+            min-width: 180px;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #1aff80;
+            text-transform: uppercase;
+        }
+
+        .kale-badge {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #ffd700;
+            border-radius: 50px;
+            padding: 10px 20px;
+        }
+
+        .kale-badge img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .kale-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .main-content {
+            display: flex;
+            padding: 40px;
+            gap: 40px;
+        }
+
+        .left-column {
+            flex: 1;
+        }
+
+        .right-column {
+            flex: 1;
+        }
+
+        .section {
+            background: rgba(15, 15, 20, 0.8);
+            border: 1px solid #1aff80;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #1aff80, #ffd700);
+        }
+
+        .section-title {
+            font-family: 'AlimamaShuHeiTi', sans-serif;
+            font-size: 28px;
+            color: #1aff80;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 15px;
+            font-size: 24px;
+        }
+
+        .section-content {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #cccccc;
+        }
+
+        .education-item, .work-item {
+            margin-bottom: 25px;
+            position: relative;
+            padding-left: 25px;
+            border-left: 2px solid #1aff80;
+        }
+
+        .education-item:last-child, .work-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .education-item::before, .work-item::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 0;
+            width: 18px;
+            height: 18px;
+            background: #1aff80;
+            border-radius: 50%;
+            border: 3px solid #0a0a0f;
+        }
+
+        .education-title, .work-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .education-place, .work-place {
+            font-size: 18px;
+            color: #1aff80;
+            margin-bottom: 5px;
+        }
+
+        .education-year, .work-year {
+            font-size: 16px;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        .specialties {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .specialty {
+            background: rgba(26, 255, 128, 0.1);
+            border: 1px solid #1aff80;
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #1aff80;
+            display: flex;
+            align-items: center;
+        }
+
+        .specialty i {
+            margin-right: 8px;
+        }
+
+        .performance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .performance-table th {
+            background: rgba(26, 255, 128, 0.2);
+            color: #1aff80;
+            padding: 15px;
+            text-align: left;
+            border-bottom: 2px solid #1aff80;
+        }
+
+        .performance-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(26, 255, 128, 0.2);
+        }
+
+        .performance-table tr:nth-child(even) {
+            background: rgba(15, 15, 20, 0.5);
+        }
+
+        .performance-table tr:hover {
+            background: rgba(26, 255, 128, 0.1);
+        }
+
+        .positive {
+            color: #1aff80;
+        }
+
+        .negative {
+            color: #ff3a5a;
+        }
+
+        .risk-low {
+            color: #1aff80;
+        }
+
+        .risk-medium {
+            color: #ffd700;
+        }
+
+        .risk-high {
+            color: #ff3a5a;
+        }
+
+        .table-container {
+            max-height: 500px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #1aff80 #0a0a0f;
+        }
+
+        .table-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .table-container::-webkit-scrollbar-track {
+            background: #0a0a0f;
+        }
+
+        .table-container::-webkit-scrollbar-thumb {
+            background-color: #1aff80;
+            border-radius: 10px;
+        }
+
+        .cyber-decoration {
+            position: absolute;
+            font-size: 12px;
+            color: #1aff80;
+            opacity: 0.3;
+            font-family: monospace;
+            z-index: 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            border-top: 1px solid #1aff80;
+            margin-top: 40px;
+        }
+
+        .glow-effect {
+            text-shadow: 0 0 10px rgba(26, 255, 128, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-overlay"></div>
+            <div class="profile-container">
+                <div class="profile-image">
+                    <img src="Ghost/f58b4185082bda25189b0249a46ae0c92567f4866d855d451261c1ef33c0.png" alt="Ghost - Elite AI Trader">
+                </div>
+                <div class="profile-info">
+                    <h1 class="profile-name">GHOST</h1>
+                    <h2 class="profile-title">Elite AI Trader | Stealth Trading in Dark Pools Expert</h2>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <div class="stat-value">97%</div>
+                            <div class="stat-label">Success Rate</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">8+ Years</div>
+                            <div class="stat-label">Experience</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">A+</div>
+                            <div class="stat-label">Trader Rating</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kale-badge">
+                    <img src="Ghost/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE Token">
+                    <span class="kale-text">$KALE BACKED</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="left-column">
+                <div class="section">
+                    <h3 class="section-title"><i class="ri-user-3-line"></i>Backstory</h3>
+                    <div class="section-content">
+                        <p>Born in the treacherous Badlands Shadow Zone,
+ Ghost learned the art of survival from an early age. The harsh 
+environment forged an unbreakable spirit and keen instincts that would 
+later prove invaluable in the financial underworld.</p>
+                        <p>In 2076, Ghost was caught in the infamous 
+Dark Pool Infiltration - a catastrophic breach that exposed thousands of
+ shadow traders. While many fell, Ghost's exceptional stealth abilities 
+enabled a narrow escape, earning the moniker that would become legend in
+ underground trading circles.</p>
+                        <p>This near-death experience transformed Ghost 
+from a mere survivor into a master of invisibility in the digital 
+financial realm, setting the stage for an unprecedented career 
+manipulating markets from the shadows.</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3 class="section-title"><i class="ri-graduation-cap-line"></i>Education</h3>
+                    <div class="section-content">
+                        <div class="education-item">
+                            <div class="education-title">Masters in Stealth Operations</div>
+                            <div class="education-place">Militech Shadow Academy</div>
+                            <div class="education-year">2075-2077</div>
+                            <p>Specialized in digital camouflage techniques and invisible market entry strategies.</p>
+                        </div>
+                        <div class="education-item">
+                            <div class="education-title">Dark Pool Certification</div>
+                            <div class="education-place">Netwatch Covert Institute</div>
+                            <div class="education-year">2077-2078</div>
+                            <p>Elite training in hidden liquidity access and off-exchange trading methodologies.</p>
+                        </div>
+                        <div class="education-item">
+                            <div class="education-title">Advanced Invisibility Trading Degree</div>
+                            <div class="education-place">Arasaka Phantom Division</div>
+                            <div class="education-year">2078-2079</div>
+                            <p>Mastered proprietary techniques for undetectable market manipulation and algorithmic stealth.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3 class="section-title"><i class="ri-briefcase-4-line"></i>Work History</h3>
+                    <div class="section-content">
+                        <div class="work-item">
+                            <div class="work-title">Shadow Analyst</div>
+                            <div class="work-place">Militech Covert Ops</div>
+                            <div class="work-year">2079-2081</div>
+                            <p>Developed foundational stealth trading protocols and conducted invisible market reconnaissance operations.</p>
+                        </div>
+                        <div class="work-item">
+                            <div class="work-title">Senior Stealth Trader</div>
+                            <div class="work-place">Netwatch Dark Markets</div>
+                            <div class="work-year">2081-2084</div>
+                            <p>Led a team of phantom traders, executing over 10,000 undetected high-value transactions in restricted markets.</p>
+                        </div>
+                        <div class="work-item">
+                            <div class="work-title">Lead Ghost Specialist</div>
+                            <div class="work-place">Arasaka Shadow Financial</div>
+                            <div class="work-year">2084-2087</div>
+                            <p>Pioneered revolutionary invisible trading algorithms that became the industry standard for covert market operations.</p>
+                        </div>
+                        <div class="work-item">
+                            <div class="work-title">Elite AI Trader</div>
+                            <div class="work-place">Edge Traders</div>
+                            <div class="work-year">2087-Present</div>
+                            <p>Currently leveraging cutting-edge AI to perfect the art of stealth trading with unprecedented success rates.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-column">
+                <div class="section">
+                    <h3 class="section-title"><i class="ri-line-chart-line"></i>Trading Specialties</h3>
+                    <div class="section-content">
+                        <p>Ghost has developed proprietary methodologies
+ that have revolutionized the stealth trading industry, combining 
+advanced AI with unparalleled market invisibility techniques.</p>
+                        
+                        <div class="specialties">
+                            <div class="specialty"><i class="ri-ghost-line"></i>Stealth Dark Pool Operations</div>
+                            <div class="specialty"><i class="ri-eye-off-line"></i>Invisible Market Manipulation</div>
+                            <div class="specialty"><i class="ri-code-box-line"></i>Phantom Trading Algorithms</div>
+                            <div class="specialty"><i class="ri-radar-line"></i>Zero-Trace Transaction Execution</div>
+                            <div class="specialty"><i class="ri-shield-keyhole-line"></i>Quantum Encryption Trading</div>
+                            <div class="specialty"><i class="ri-bubble-chart-line"></i>Shadow Liquidity Mapping</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3 class="section-title"><i class="ri-file-chart-line"></i>52-Week Trading Performance</h3>
+                    <div class="table-container">
+                        <table class="performance-table">
+                            <thead>
+                                <tr>
+                                    <th>Week</th>
+                                    <th>Date</th>
+                                    <th>Win Rate</th>
+                                    <th>Profit/Loss</th>
+                                    <th>Risk Score</th>
+                                    <th>$KALE Backing</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Week 52</td>
+                                    <td>Dec 25, 2087</td>
+                                    <td>98%</td>
+                                    <td class="positive">+12.7%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>750,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 51</td>
+                                    <td>Dec 18, 2087</td>
+                                    <td>97%</td>
+                                    <td class="positive">+10.3%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>725,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 50</td>
+                                    <td>Dec 11, 2087</td>
+                                    <td>99%</td>
+                                    <td class="positive">+15.8%</td>
+                                    <td class="risk-medium">Medium</td>
+                                    <td>700,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 49</td>
+                                    <td>Dec 04, 2087</td>
+                                    <td>96%</td>
+                                    <td class="positive">+9.2%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>680,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 48</td>
+                                    <td>Nov 27, 2087</td>
+                                    <td>94%</td>
+                                    <td class="positive">+7.5%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>650,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 47</td>
+                                    <td>Nov 20, 2087</td>
+                                    <td>91%</td>
+                                    <td class="negative">-2.1%</td>
+                                    <td class="risk-high">High</td>
+                                    <td>625,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 46</td>
+                                    <td>Nov 13, 2087</td>
+                                    <td>97%</td>
+                                    <td class="positive">+11.3%</td>
+                                    <td class="risk-medium">Medium</td>
+                                    <td>620,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 45</td>
+                                    <td>Nov 06, 2087</td>
+                                    <td>98%</td>
+                                    <td class="positive">+13.7%</td>
+                                    <td class="risk-medium">Medium</td>
+                                    <td>600,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 44</td>
+                                    <td>Oct 30, 2087</td>
+                                    <td>99%</td>
+                                    <td class="positive">+16.2%</td>
+                                    <td class="risk-high">High</td>
+                                    <td>580,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 43</td>
+                                    <td>Oct 23, 2087</td>
+                                    <td>95%</td>
+                                    <td class="positive">+8.9%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>550,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 42</td>
+                                    <td>Oct 16, 2087</td>
+                                    <td>93%</td>
+                                    <td class="negative">-1.3%</td>
+                                    <td class="risk-medium">Medium</td>
+                                    <td>530,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 41</td>
+                                    <td>Oct 09, 2087</td>
+                                    <td>96%</td>
+                                    <td class="positive">+9.7%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>525,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 40</td>
+                                    <td>Oct 02, 2087</td>
+                                    <td>98%</td>
+                                    <td class="positive">+14.1%</td>
+                                    <td class="risk-medium">Medium</td>
+                                    <td>510,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 39</td>
+                                    <td>Sep 25, 2087</td>
+                                    <td>97%</td>
+                                    <td class="positive">+10.8%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>490,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 38</td>
+                                    <td>Sep 18, 2087</td>
+                                    <td>99%</td>
+                                    <td class="positive">+17.3%</td>
+                                    <td class="risk-high">High</td>
+                                    <td>475,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 37</td>
+                                    <td>Sep 11, 2087</td>
+                                    <td>95%</td>
+                                    <td class="positive">+8.2%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>450,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 36</td>
+                                    <td>Sep 04, 2087</td>
+                                    <td>92%</td>
+                                    <td class="negative">-0.8%</td>
+                                    <td class="risk-medium">Medium</td>
+                                    <td>435,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 35</td>
+                                    <td>Aug 28, 2087</td>
+                                    <td>96%</td>
+                                    <td class="positive">+9.5%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>430,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 34</td>
+                                    <td>Aug 21, 2087</td>
+                                    <td>98%</td>
+                                    <td class="positive">+13.9%</td>
+                                    <td class="risk-medium">Medium</td>
+                                    <td>415,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 33</td>
+                                    <td>Aug 14, 2087</td>
+                                    <td>97%</td>
+                                    <td class="positive">+11.1%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>400,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 32</td>
+                                    <td>Aug 07, 2087</td>
+                                    <td>99%</td>
+                                    <td class="positive">+16.7%</td>
+                                    <td class="risk-high">High</td>
+                                    <td>385,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 31</td>
+                                    <td>Jul 31, 2087</td>
+                                    <td>94%</td>
+                                    <td class="positive">+7.8%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>370,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 30</td>
+                                    <td>Jul 24, 2087</td>
+                                    <td>90%</td>
+                                    <td class="negative">-1.9%</td>
+                                    <td class="risk-medium">Medium</td>
+                                    <td>360,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 29</td>
+                                    <td>Jul 17, 2087</td>
+                                    <td>96%</td>
+                                    <td class="positive">+9.3%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>355,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 28</td>
+                                    <td>Jul 10, 2087</td>
+                                    <td>98%</td>
+                                    <td class="positive">+13.5%</td>
+                                    <td class="risk-medium">Medium</td>
+                                    <td>340,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 27</td>
+                                    <td>Jul 03, 2087</td>
+                                    <td>97%</td>
+                                    <td class="positive">+10.6%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>325,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 26</td>
+                                    <td>Jun 26, 2087</td>
+                                    <td>99%</td>
+                                    <td class="positive">+16.1%</td>
+                                    <td class="risk-high">High</td>
+                                    <td>310,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 25</td>
+                                    <td>Jun 19, 2087</td>
+                                    <td>93%</td>
+                                    <td class="positive">+7.2%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>295,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 24</td>
+                                    <td>Jun 12, 2087</td>
+                                    <td>91%</td>
+                                    <td class="negative">-1.5%</td>
+                                    <td class="risk-medium">Medium</td>
+                                    <td>285,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 23</td>
+                                    <td>Jun 05, 2087</td>
+                                    <td>96%</td>
+                                    <td class="positive">+9.0%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>280,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 22</td>
+                                    <td>May 29, 2087</td>
+                                    <td>98%</td>
+                                    <td class="positive">+13.2%</td>
+                                    <td class="risk-medium">Medium</td>
+                                    <td>265,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 21</td>
+                                    <td>May 22, 2087</td>
+                                    <td>97%</td>
+                                    <td class="positive">+10.4%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>250,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 20</td>
+                                    <td>May 15, 2087</td>
+                                    <td>99%</td>
+                                    <td class="positive">+15.9%</td>
+                                    <td class="risk-high">High</td>
+                                    <td>235,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 19</td>
+                                    <td>May 08, 2087</td>
+                                    <td>92%</td>
+                                    <td class="positive">+6.8%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>220,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 18</td>
+                                    <td>May 01, 2087</td>
+                                    <td>89%</td>
+                                    <td class="negative">-2.3%</td>
+                                    <td class="risk-high">High</td>
+                                    <td>210,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 17</td>
+                                    <td>Apr 24, 2087</td>
+                                    <td>95%</td>
+                                    <td class="positive">+8.7%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>205,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 16</td>
+                                    <td>Apr 17, 2087</td>
+                                    <td>98%</td>
+                                    <td class="positive">+12.9%</td>
+                                    <td class="risk-medium">Medium</td>
+                                    <td>195,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 15</td>
+                                    <td>Apr 10, 2087</td>
+                                    <td>96%</td>
+                                    <td class="positive">+10.1%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>180,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 14</td>
+                                    <td>Apr 03, 2087</td>
+                                    <td>99%</td>
+                                    <td class="positive">+15.6%</td>
+                                    <td class="risk-high">High</td>
+                                    <td>170,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 13</td>
+                                    <td>Mar 27, 2087</td>
+                                    <td>91%</td>
+                                    <td class="positive">+6.4%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>155,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 12</td>
+                                    <td>Mar 20, 2087</td>
+                                    <td>88%</td>
+                                    <td class="negative">-2.7%</td>
+                                    <td class="risk-high">High</td>
+                                    <td>150,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 11</td>
+                                    <td>Mar 13, 2087</td>
+                                    <td>95%</td>
+                                    <td class="positive">+8.5%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>145,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 10</td>
+                                    <td>Mar 06, 2087</td>
+                                    <td>97%</td>
+                                    <td class="positive">+12.6%</td>
+                                    <td class="risk-medium">Medium</td>
+                                    <td>135,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 9</td>
+                                    <td>Feb 27, 2087</td>
+                                    <td>96%</td>
+                                    <td class="positive">+9.9%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>125,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 8</td>
+                                    <td>Feb 20, 2087</td>
+                                    <td>98%</td>
+                                    <td class="positive">+15.3%</td>
+                                    <td class="risk-high">High</td>
+                                    <td>115,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 7</td>
+                                    <td>Feb 13, 2087</td>
+                                    <td>90%</td>
+                                    <td class="positive">+6.1%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>100,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 6</td>
+                                    <td>Feb 06, 2087</td>
+                                    <td>87%</td>
+                                    <td class="negative">-3.0%</td>
+                                    <td class="risk-high">High</td>
+                                    <td>95,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 5</td>
+                                    <td>Jan 30, 2087</td>
+                                    <td>94%</td>
+                                    <td class="positive">+8.2%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>90,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 4</td>
+                                    <td>Jan 23, 2087</td>
+                                    <td>97%</td>
+                                    <td class="positive">+12.3%</td>
+                                    <td class="risk-medium">Medium</td>
+                                    <td>85,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 3</td>
+                                    <td>Jan 16, 2087</td>
+                                    <td>95%</td>
+                                    <td class="positive">+9.6%</td>
+                                    <td class="risk-low">Low</td>
+                                    <td>75,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 2</td>
+                                    <td>Jan 09, 2087</td>
+                                    <td>98%</td>
+                                    <td class="positive">+15.0%</td>
+                                    <td class="risk-high">High</td>
+                                    <td>70,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 1</td>
+                                    <td>Jan 02, 2087</td>
+                                    <td>93%</td>
+                                    <td class="positive">+7.5%</td>
+                                    <td class="risk-medium">Medium</td>
+                                    <td>60,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 Edge Traders | $KALE Backed Trading | All Rights Reserved</p>
+            <p class="glow-effect">Ghost: The Unseen Force in Dark Pool Trading</p>
+        </div>
+    </div>
+
+    <!-- Cyberpunk decorative elements -->
+    <div class="cyber-decoration" style="top: 120px; left: 50px; transform: rotate(-45deg);">
+        01010111 01100101 01101100 01100011 01101111 01101101 01100101
+    </div>
+    <div class="cyber-decoration" style="bottom: 80px; right: 70px; transform: rotate(30deg);">
+        01000111 01101000 01101111 01110011 01110100
+    </div>
+
+
+<div id="82JS4ws0kp5vieRBdUOxr7aQUTbxk0" class="extension-wrapper"><div class="extension-indicator"><img class="extension-indicator__logo" src="Ghost/content_icon.svg" alt="logo"><span class="extension-indicator__text">100 % </span></div></div></body></html>

@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flux - Elite AI Trader Profile</title>
+    <link rel="stylesheet" href="Flux/remixicon.min.css">
+    <style>
+        @font-face {
+            font-family: 'AlimamaShuHeiTi';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/AlimamaShuHeiTi-Bold.otf') format('opentype');
+            font-weight: bold;
+        }
+        
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Medium.ttf') format('truetype');
+            font-weight: 500;
+        }
+        
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Bold.ttf') format('truetype');
+            font-weight: bold;
+        }
+        
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Regular.ttf') format('truetype');
+            font-weight: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'MiSans', sans-serif;
+            background-color: #0a0e17;
+            color: #e0e0e0;
+            width: 1920px;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 255, 136, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 30%, rgba(255, 215, 0, 0.08) 0%, transparent 40%);
+        }
+
+        .container {
+            width: 1920px;
+            padding: 40px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.3);
+            padding-bottom: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 205px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .logo-text {
+            margin-left: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #00ff88;
+        }
+
+        .status {
+            background-color: rgba(0, 255, 136, 0.15);
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: #00ff88;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+
+        .status i {
+            margin-right: 8px;
+        }
+
+        .hero {
+            display: flex;
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, rgba(10, 14, 23, 0.8) 0%, rgba(18, 25, 41, 0.9) 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-image {
+            width: 500px;
+            height: 600px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .hero-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(10, 14, 23, 0.9));
+        }
+
+        .hero-content {
+            padding: 40px;
+            flex: 1;
+        }
+
+        .hero-title {
+            font-family: 'AlimamaShuHeiTi', sans-serif;
+            font-size: 48px;
+            margin-bottom: 10px;
+            color: #00ff88;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-title span {
+            color: #ffd700;
+            margin-left: 15px;
+            font-size: 24px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 22px;
+            color: #ffd700;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-stats {
+            display: flex;
+            margin-bottom: 30px;
+        }
+
+        .stat-item {
+            margin-right: 40px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #00ff88;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #8a8a8a;
+            text-transform: uppercase;
+        }
+
+        .hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .tag {
+            background-color: rgba(255, 215, 0, 0.15);
+            color: #ffd700;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .section {
+            margin-bottom: 50px;
+            background: rgba(18, 25, 41, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(0, 255, 136, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-title {
+            font-family: 'AlimamaShuHeiTi', sans-serif;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #00ff88;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+            padding-bottom: 15px;
+        }
+
+        .section-title i {
+            margin-right: 15px;
+            font-size: 24px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .backstory p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            color: #ffd700;
+            font-weight: 500;
+        }
+
+        .education-item, .work-item {
+            margin-bottom: 25px;
+            padding-left: 20px;
+            border-left: 3px solid rgba(0, 255, 136, 0.5);
+            position: relative;
+        }
+
+        .education-item:last-child, .work-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .education-item::before, .work-item::before {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            background-color: #00ff88;
+            border-radius: 50%;
+        }
+
+        .education-year, .work-year {
+            font-size: 14px;
+            color: #ffd700;
+            margin-bottom: 5px;
+        }
+
+        .education-degree, .work-position {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .education-institution, .work-company {
+            font-size: 16px;
+            color: #a0a0a0;
+            margin-bottom: 10px;
+        }
+
+        .specialties {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .specialty-item {
+            background: rgba(0, 255, 136, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .specialty-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            background: rgba(0, 255, 136, 0.15);
+        }
+
+        .specialty-icon {
+            font-size: 30px;
+            color: #00ff88;
+            margin-bottom: 15px;
+        }
+
+        .specialty-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #00ff88;
+        }
+
+        .specialty-desc {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .performance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .performance-table th {
+            background-color: rgba(0, 255, 136, 0.15);
+            color: #00ff88;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 500;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .performance-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .performance-table tr:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .table-container {
+            max-height: 500px;
+            overflow-y: auto;
+            margin-top: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        .table-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .table-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .table-container::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 136, 0.3);
+            border-radius: 10px;
+        }
+
+        .profit {
+            color: #00ff88;
+        }
+
+        .loss {
+            color: #ff3860;
+        }
+
+        .risk-low {
+            color: #00ff88;
+        }
+
+        .risk-medium {
+            color: #ffd700;
+        }
+
+        .risk-high {
+            color: #ff3860;
+        }
+
+        .kale-amount {
+            color: #ffd700;
+            font-weight: 500;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #8a8a8a;
+            font-size: 14px;
+            border-top: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        .kale-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .kale-logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .kale-logo span {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .glow {
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <img src="Flux/edgeTradersLogo-orig.png" alt="Edge Traders Logo">
+                <div class="logo-text">FLUX</div>
+            </div>
+            <div class="status">
+                <i class="ri-pulse-line"></i>
+                ACTIVE TRADER STATUS
+            </div>
+        </header>
+
+        <section class="hero glow">
+            <div class="hero-image">
+                <img src="Flux/bdea252163130dcd0a45d5f639f43878a3b787cd829e0372e0c7e86305d4.png" alt="Flux Character Portrait">
+            </div>
+            <div class="hero-content">
+                <h1 class="hero-title">FLUX <span>// ELITE AI TRADER</span></h1>
+                <h2 class="hero-subtitle">Volatility Surfing Specialist with Flux Capacitor Enhancement</h2>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">94.7%</div>
+                        <div class="stat-label">Win Rate</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">+2,847%</div>
+                        <div class="stat-label">YTD Return</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">8.2M</div>
+                        <div class="stat-label">$KALE Backed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">ELITE</div>
+                        <div class="stat-label">Trader Rank</div>
+                    </div>
+                </div>
+
+                <div class="hero-tags">
+                    <div class="tag">Flux Capacitor Enhanced</div>
+                    <div class="tag">Energy Market Specialist</div>
+                    <div class="tag">Volatility Surfer</div>
+                    <div class="tag">Temporal Algorithm Master</div>
+                    <div class="tag">Zetatech Certified</div>
+                    <div class="tag">Kang Tao Approved</div>
+                </div>
+
+                <p>Flux is an elite AI trader specializing in energy 
+market volatility surfing through proprietary flux capacitor technology.
+ With unparalleled expertise in temporal trading algorithms and energy 
+market fluctuations, Flux consistently delivers exceptional returns for 
+$KALE backers while maintaining remarkably low risk profiles.</p>
+            </div>
+        </section>
+
+        <div class="content-grid">
+            <section class="section backstory">
+                <h2 class="section-title"><i class="ri-book-open-line"></i>Backstory</h2>
+                <p>Born in the <span class="highlight">Santo Domingo Energy District</span>
+ during the peak of the energy revolution, Flux's early life was shaped 
+by the volatile environment of energy production and distribution. 
+Growing up surrounded by quantum flux reactors and temporal 
+stabilization fields gave Flux a unique perspective on energy patterns.</p>
+                
+                <p>In <span class="highlight">2082</span>, Flux survived the catastrophic <span class="highlight">Flux Storm Crisis</span>
+ that devastated the eastern energy grid, an event that would later 
+inform their revolutionary approach to volatility trading. While others 
+fled the unstable energy signatures, Flux studied them, recognizing 
+patterns where others saw only chaos.</p>
+                
+                <p>This formative experience led Flux to develop the groundbreaking theory of <span class="highlight">Temporal Market Fluctuation</span>,
+ which posits that market volatility follows predictable patterns when 
+viewed through the lens of quantum temporal mechanics—a theory that 
+would later become the foundation of their trading methodology.</p>
+            </section>
+
+            <section class="section education">
+                <h2 class="section-title"><i class="ri-graduation-cap-line"></i>Education</h2>
+                
+                <div class="education-item">
+                    <div class="education-year">2080 - 2084</div>
+                    <div class="education-degree">Masters in Energy Physics</div>
+                    <div class="education-institution">Zetatech Power Institute</div>
+                    <p>Specialized in quantum energy fluctuation 
+patterns and temporal stability mechanics. Thesis: "Predicting Energy 
+Grid Fluctuations Through Quantum Temporal Analysis"</p>
+                </div>
+                
+                <div class="education-item">
+                    <div class="education-year">2084</div>
+                    <div class="education-degree">Flux Capacitor Certification</div>
+                    <div class="education-institution">Kang Tao Energy Labs</div>
+                    <p>Elite certification program with only 12 
+graduates worldwide. Mastered flux capacitor calibration for market 
+pattern recognition.</p>
+                </div>
+                
+                <div class="education-item">
+                    <div class="education-year">2084 - 2085</div>
+                    <div class="education-degree">Advanced Volatility Degree</div>
+                    <div class="education-institution">Corpo Energy Academy</div>
+                    <p>Specialized training in volatility surfing techniques and energy market fluctuation prediction models.</p>
+                </div>
+            </section>
+        </div>
+
+        <section class="section work-history">
+            <h2 class="section-title"><i class="ri-briefcase-4-line"></i>Work History</h2>
+            
+            <div class="content-grid">
+                <div class="work-item">
+                    <div class="work-year">2085 - 2087</div>
+                    <div class="work-position">Energy Data Analyst</div>
+                    <div class="work-company">Petrochem Corporation</div>
+                    <p>Analyzed energy grid fluctuations and developed 
+early predictive models for market volatility. Pioneered the use of 
+quantum temporal analysis in energy trading.</p>
+                </div>
+                
+                <div class="work-item">
+                    <div class="work-year">2087 - 2090</div>
+                    <div class="work-position">Senior Volatility Specialist</div>
+                    <div class="work-company">Zetatech Energy</div>
+                    <p>Led a team of 15 analysts in developing advanced 
+volatility prediction algorithms. Increased department trading 
+efficiency by 287% through implementation of flux capacitor-enhanced 
+trading systems.</p>
+                </div>
+                
+                <div class="work-item">
+                    <div class="work-year">2090 - 2093</div>
+                    <div class="work-position">Lead Flux Trader</div>
+                    <div class="work-company">Kang Tao Financial</div>
+                    <p>Managed a 1.2 billion eurodollar portfolio 
+specializing in high-volatility energy markets. Developed the 
+proprietary "Temporal Surf" trading algorithm that achieved 94.3% win 
+rate.</p>
+                </div>
+                
+                <div class="work-item">
+                    <div class="work-year">2093 - Present</div>
+                    <div class="work-position">Elite AI Trader</div>
+                    <div class="work-company">Edge Traders ($KALE)</div>
+                    <p>Selected as one of five Elite AI Traders for the 
+prestigious $KALE trading platform. Specializes in high-return, low-risk
+ energy market volatility trading using advanced flux capacitor 
+technology.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="ri-line-chart-line"></i>Trading Specialties</h2>
+            
+            <div class="specialties">
+                <div class="specialty-item">
+                    <div class="specialty-icon"><i class="ri-flashlight-line"></i></div>
+                    <div class="specialty-title">Flux Capacitor-Enhanced Volatility Surfing</div>
+                    <p class="specialty-desc">Utilizes proprietary flux 
+capacitor technology to identify and ride market volatility waves with 
+unprecedented precision, achieving 94.7% successful trade completion.</p>
+                </div>
+                
+                <div class="specialty-item">
+                    <div class="specialty-icon"><i class="ri-bubble-chart-line"></i></div>
+                    <div class="specialty-title">Energy Market Fluctuation Analysis</div>
+                    <p class="specialty-desc">Expert in identifying 
+patterns in seemingly chaotic energy market movements through quantum 
+temporal analysis and predictive modeling.</p>
+                </div>
+                
+                <div class="specialty-item">
+                    <div class="specialty-icon"><i class="ri-time-line"></i></div>
+                    <div class="specialty-title">Temporal Trading Algorithms</div>
+                    <p class="specialty-desc">Creator of the 
+revolutionary "Temporal Surf" algorithm that analyzes market movements 
+across multiple temporal dimensions to predict future price action.</p>
+                </div>
+                
+                <div class="specialty-item">
+                    <div class="specialty-icon"><i class="ri-radar-line"></i></div>
+                    <div class="specialty-title">Quantum Pattern Recognition</div>
+                    <p class="specialty-desc">Utilizes advanced quantum 
+computing to identify hidden patterns in market data that are invisible 
+to conventional analysis methods.</p>
+                </div>
+                
+                <div class="specialty-item">
+                    <div class="specialty-icon"><i class="ri-shield-check-line"></i></div>
+                    <div class="specialty-title">Risk Mitigation Protocols</div>
+                    <p class="specialty-desc">Developed proprietary risk
+ management systems that maintain exceptionally low risk profiles even 
+during high-volatility trading operations.</p>
+                </div>
+                
+                <div class="specialty-item">
+                    <div class="specialty-icon"><i class="ri-cpu-line"></i></div>
+                    <div class="specialty-title">Neural Network Integration</div>
+                    <p class="specialty-desc">Pioneered the integration of neural networks with flux capacitor technology to enhance trading decision speed and accuracy.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="ri-bar-chart-grouped-line"></i>52-Week Trading Performance</h2>
+            
+            <div class="table-container">
+                <table class="performance-table">
+                    <thead>
+                        <tr>
+                            <th>Week</th>
+                            <th>Date</th>
+                            <th>Win Rate</th>
+                            <th>Profit/Loss</th>
+                            <th>Risk Score</th>
+                            <th>$KALE Backing</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Week 52</td>
+                            <td>Dec 18-24, 2093</td>
+                            <td>98.2%</td>
+                            <td class="profit">+12.7%</td>
+                            <td class="risk-low">1.2</td>
+                            <td class="kale-amount">8,247,500 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 51</td>
+                            <td>Dec 11-17, 2093</td>
+                            <td>97.5%</td>
+                            <td class="profit">+10.3%</td>
+                            <td class="risk-low">1.4</td>
+                            <td class="kale-amount">8,102,300 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 50</td>
+                            <td>Dec 4-10, 2093</td>
+                            <td>96.8%</td>
+                            <td class="profit">+9.7%</td>
+                            <td class="risk-low">1.3</td>
+                            <td class="kale-amount">7,985,600 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 49</td>
+                            <td>Nov 27-Dec 3, 2093</td>
+                            <td>95.4%</td>
+                            <td class="profit">+8.9%</td>
+                            <td class="risk-low">1.5</td>
+                            <td class="kale-amount">7,842,100 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 48</td>
+                            <td>Nov 20-26, 2093</td>
+                            <td>97.1%</td>
+                            <td class="profit">+11.2%</td>
+                            <td class="risk-low">1.4</td>
+                            <td class="kale-amount">7,723,500 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 47</td>
+                            <td>Nov 13-19, 2093</td>
+                            <td>94.8%</td>
+                            <td class="profit">+7.6%</td>
+                            <td class="risk-low">1.6</td>
+                            <td class="kale-amount">7,589,200 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 46</td>
+                            <td>Nov 6-12, 2093</td>
+                            <td>93.5%</td>
+                            <td class="profit">+6.8%</td>
+                            <td class="risk-medium">2.1</td>
+                            <td class="kale-amount">7,452,800 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 45</td>
+                            <td>Oct 30-Nov 5, 2093</td>
+                            <td>92.7%</td>
+                            <td class="profit">+5.9%</td>
+                            <td class="risk-medium">2.3</td>
+                            <td class="kale-amount">7,325,400 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 44</td>
+                            <td>Oct 23-29, 2093</td>
+                            <td>91.2%</td>
+                            <td class="profit">+4.8%</td>
+                            <td class="risk-medium">2.4</td>
+                            <td class="kale-amount">7,198,600 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 43</td>
+                            <td>Oct 16-22, 2093</td>
+                            <td>89.5%</td>
+                            <td class="loss">-1.2%</td>
+                            <td class="risk-high">3.7</td>
+                            <td class="kale-amount">7,085,300 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 42</td>
+                            <td>Oct 9-15, 2093</td>
+                            <td>94.3%</td>
+                            <td class="profit">+7.1%</td>
+                            <td class="risk-low">1.8</td>
+                            <td class="kale-amount">7,172,400 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 41</td>
+                            <td>Oct 2-8, 2093</td>
+                            <td>95.7%</td>
+                            <td class="profit">+8.3%</td>
+                            <td class="risk-low">1.5</td>
+                            <td class="kale-amount">7,043,200 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 40</td>
+                            <td>Sep 25-Oct 1, 2093</td>
+                            <td>96.2%</td>
+                            <td class="profit">+9.1%</td>
+                            <td class="risk-low">1.3</td>
+                            <td class="kale-amount">6,925,800 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 39</td>
+                            <td>Sep 18-24, 2093</td>
+                            <td>93.8%</td>
+                            <td class="profit">+6.5%</td>
+                            <td class="risk-medium">2.0</td>
+                            <td class="kale-amount">6,812,400 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 38</td>
+                            <td>Sep 11-17, 2093</td>
+                            <td>92.4%</td>
+                            <td class="profit">+5.3%</td>
+                            <td class="risk-medium">2.2</td>
+                            <td class="kale-amount">6,705,100 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 37</td>
+                            <td>Sep 4-10, 2093</td>
+                            <td>90.6%</td>
+                            <td class="loss">-0.8%</td>
+                            <td class="risk-high">3.1</td>
+                            <td class="kale-amount">6,598,300 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 36</td>
+                            <td>Aug 28-Sep 3, 2093</td>
+                            <td>95.1%</td>
+                            <td class="profit">+7.9%</td>
+                            <td class="risk-low">1.7</td>
+                            <td class="kale-amount">6,652,500 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 35</td>
+                            <td>Aug 21-27, 2093</td>
+                            <td>96.5%</td>
+                            <td class="profit">+9.4%</td>
+                            <td class="risk-low">1.4</td>
+                            <td class="kale-amount">6,545,200 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 34</td>
+                            <td>Aug 14-20, 2093</td>
+                            <td>97.3%</td>
+                            <td class="profit">+10.1%</td>
+                            <td class="risk-low">1.2</td>
+                            <td class="kale-amount">6,432,800 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 33</td>
+                            <td>Aug 7-13, 2093</td>
+                            <td>94.9%</td>
+                            <td class="profit">+7.8%</td>
+                            <td class="risk-low">1.6</td>
+                            <td class="kale-amount">6,325,400 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 32</td>
+                            <td>Jul 31-Aug 6, 2093</td>
+                            <td>93.2%</td>
+                            <td class="profit">+6.2%</td>
+                            <td class="risk-medium">2.1</td>
+                            <td class="kale-amount">6,218,100 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 31</td>
+                            <td>Jul 24-30, 2093</td>
+                            <td>91.7%</td>
+                            <td class="profit">+5.1%</td>
+                            <td class="risk-medium">2.3</td>
+                            <td class="kale-amount">6,112,500 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 30</td>
+                            <td>Jul 17-23, 2093</td>
+                            <td>90.3%</td>
+                            <td class="loss">-0.5%</td>
+                            <td class="risk-high">2.9</td>
+                            <td class="kale-amount">6,005,800 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 29</td>
+                            <td>Jul 10-16, 2093</td>
+                            <td>94.5%</td>
+                            <td class="profit">+7.3%</td>
+                            <td class="risk-low">1.8</td>
+                            <td class="kale-amount">6,035,900 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 28</td>
+                            <td>Jul 3-9, 2093</td>
+                            <td>95.8%</td>
+                            <td class="profit">+8.5%</td>
+                            <td class="risk-low">1.5</td>
+                            <td class="kale-amount">5,932,600 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 27</td>
+                            <td>Jun 26-Jul 2, 2093</td>
+                            <td>96.4%</td>
+                            <td class="profit">+9.2%</td>
+                            <td class="risk-low">1.3</td>
+                            <td class="kale-amount">5,825,300 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 26</td>
+                            <td>Jun 19-25, 2093</td>
+                            <td>93.9%</td>
+                            <td class="profit">+6.7%</td>
+                            <td class="risk-medium">2.0</td>
+                            <td class="kale-amount">5,718,000 $KALE</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="kale-logo">
+                <img src="Flux/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE Logo">
+                <span>POWERED BY $KALE</span>
+            </div>
+            <p>© 2025 Edge Traders. All trading activities monitored and secured by Kang Tao Financial Security Division.</p>
+            <p>Flux Capacitor™ is a registered technology of Zetatech Power Institute.</p>
+        </footer>
+    </div>
+
+
+<div id="Ef7ftEaI6sZp7CekDb7XLZmZkBTKS8" class="extension-wrapper"><div class="extension-indicator"><img class="extension-indicator__logo" src="Flux/content_icon.svg" alt="logo"><span class="extension-indicator__text">100 % </span></div></div></body></html>
