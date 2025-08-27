@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echo - Quantum Pattern Trader Profile</title>
+    <link href="Echo/remixicon.min.css" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'NotoSansHans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/NotoSansHans-Regular.otf') format('opentype');
+            font-weight: normal;
+        }
+        @font-face {
+            font-family: 'NotoSansHans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/NotoSansHans-Bold.otf') format('opentype');
+            font-weight: bold;
+        }
+        @font-face {
+            font-family: 'AlimamaShuHeiTi';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/AlimamaShuHeiTi-Bold.otf') format('opentype');
+            font-weight: bold;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Regular.ttf') format('truetype');
+            font-weight: normal;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Bold.ttf') format('truetype');
+            font-weight: bold;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'MiSans', sans-serif;
+            background-color: #0a0e17;
+            color: #e0e0e0;
+            width: 1920px;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 255, 136, 0.03) 0%, transparent 40%),
+                radial-gradient(circle at 85% 30%, rgba(255, 215, 0, 0.03) 0%, transparent 40%);
+        }
+
+        .container {
+            width: 1920px;
+            padding: 40px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.3);
+            padding-bottom: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 205px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .logo-text {
+            margin-left: 15px;
+            font-family: 'AlimamaShuHeiTi', sans-serif;
+        }
+
+        .logo-text h1 {
+            font-size: 28px;
+            color: #00ff88;
+            letter-spacing: 1px;
+        }
+
+        .logo-text p {
+            font-size: 14px;
+            color: #ffd700;
+            letter-spacing: 1px;
+        }
+
+        .status-bar {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 255, 136, 0.1);
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            background-color: #00ff88;
+            border-radius: 50%;
+            margin-right: 10px;
+            box-shadow: 0 0 10px #00ff88;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 255, 136, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
+        }
+
+        .status-text {
+            font-size: 14px;
+            color: #00ff88;
+        }
+
+        .hero-section {
+            display: flex;
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, rgba(10, 14, 23, 0.9) 0%, rgba(20, 30, 48, 0.8) 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .profile-image {
+            width: 400px;
+            height: 500px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .profile-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 80px;
+            height: 100%;
+            background: linear-gradient(to right, transparent, #0a0e17);
+        }
+
+        .profile-info {
+            flex: 1;
+            padding: 40px;
+            position: relative;
+        }
+
+        .profile-info h1 {
+            font-family: 'AlimamaShuHeiTi', sans-serif;
+            font-size: 48px;
+            margin-bottom: 10px;
+            color: #00ff88;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .profile-info h2 {
+            font-size: 24px;
+            color: #ffd700;
+            margin-bottom: 30px;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .profile-stats {
+            display: flex;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+
+        .stat-box {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px 25px;
+            flex: 1;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #00ff88, #ffd700);
+        }
+
+        .stat-box h3 {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-box p {
+            font-size: 24px;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .stat-box p.positive {
+            color: #00ff88;
+        }
+
+        .stat-box p.neutral {
+            color: #ffd700;
+        }
+
+        .profile-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .tag {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-size: 14px;
+            color: #00ff88;
+        }
+
+        .profile-bio {
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            background: rgba(10, 14, 23, 0.8);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #00ff88, #ffd700);
+        }
+
+        .section h2 {
+            font-family: 'AlimamaShuHeiTi', sans-serif;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #00ff88;
+            display: flex;
+            align-items: center;
+        }
+
+        .section h2 i {
+            margin-right: 15px;
+            font-size: 24px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, #00ff88, #ffd700);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #0a0e17;
+            border: 2px solid #00ff88;
+            z-index: 1;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-date {
+            font-size: 16px;
+            color: #ffd700;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .timeline-title {
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .timeline-location {
+            font-size: 16px;
+            color: #888;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .timeline-location i {
+            margin-right: 5px;
+            font-size: 14px;
+        }
+
+        .timeline-description {
+            color: #ccc;
+            line-height: 1.5;
+        }
+
+        .specialties {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .specialty-item {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        .specialty-item h3 {
+            font-size: 20px;
+            color: #00ff88;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .specialty-item h3 i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .specialty-item p {
+            color: #ccc;
+            line-height: 1.5;
+        }
+
+        .performance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .performance-table th {
+            background: rgba(0, 0, 0, 0.5);
+            color: #00ff88;
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 2px solid rgba(0, 255, 136, 0.3);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .performance-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .performance-table tr:nth-child(even) {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .performance-table tr:hover {
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .positive {
+            color: #00ff88;
+        }
+
+        .negative {
+            color: #ff3366;
+        }
+
+        .neutral {
+            color: #ffd700;
+        }
+
+        .risk-low {
+            color: #00ff88;
+        }
+
+        .risk-medium {
+            color: #ffd700;
+        }
+
+        .risk-high {
+            color: #ff3366;
+        }
+
+        .table-container {
+            max-height: 500px;
+            overflow-y: auto;
+            margin-top: 20px;
+            scrollbar-width: thin;
+            scrollbar-color: #00ff88 #0a0e17;
+        }
+
+        .table-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .table-container::-webkit-scrollbar-track {
+            background: #0a0e17;
+        }
+
+        .table-container::-webkit-scrollbar-thumb {
+            background-color: #00ff88;
+            border-radius: 10px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #666;
+            font-size: 14px;
+            border-top: 1px solid rgba(0, 255, 136, 0.2);
+            margin-top: 50px;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: #00ff88;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .kale-branding {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .kale-branding img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .kale-branding span {
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .cyber-decoration {
+            position: absolute;
+            font-family: monospace;
+            opacity: 0.1;
+            color: #00ff88;
+            pointer-events: none;
+            font-size: 12px;
+        }
+
+        .cyber-decoration.top-left {
+            top: 20px;
+            left: 20px;
+        }
+
+        .cyber-decoration.bottom-right {
+            bottom: 20px;
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <img src="Echo/edgeTradersLogo-orig.png" alt="Edge Traders Logo">
+                <div class="logo-text">
+                    <h1>ECHO</h1>
+                    <p>QUANTUM PATTERN DIVISION</p>
+                </div>
+            </div>
+            <div class="status-bar">
+                <div class="status-indicator"></div>
+                <div class="status-text">ACTIVE TRADER • ONLINE • LAST PATTERN DETECTED: 13 MINUTES AGO</div>
+            </div>
+        </div>
+
+        <div class="hero-section">
+            <div class="profile-image">
+                <img src="Echo/e74af975a7a365603cc71cf2ae02d02e07726f66281add7cf0269aa735a1.png" alt="Echo - Quantum Pattern Trader">
+            </div>
+            <div class="profile-info">
+                <div class="kale-branding">
+                    <img src="Echo/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE">
+                    <span>$KALE BACKED TRADER</span>
+                </div>
+                <h1>ECHO</h1>
+                <h2>Pattern Recognition AI Trader through Quantum Echoes</h2>
+                
+                <div class="profile-stats">
+                    <div class="stat-box">
+                        <h3>Win Rate</h3>
+                        <p class="positive">78.3%</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>YTD Return</h3>
+                        <p class="positive">+342.6%</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>Risk Score</h3>
+                        <p class="neutral">B+</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>$KALE Backing</h3>
+                        <p>1,250,000</p>
+                    </div>
+                </div>
+                
+                <div class="profile-tags">
+                    <div class="tag">Quantum Analysis</div>
+                    <div class="tag">Pattern Recognition</div>
+                    <div class="tag">Echo Trading</div>
+                    <div class="tag">AI Enhanced</div>
+                    <div class="tag">Resonance Specialist</div>
+                </div>
+                
+                <div class="profile-bio">
+                    Echo is an elite AI trader specializing in quantum 
+pattern recognition through echo analysis. Surviving the Pattern 
+Collapse Event of 2083, Echo developed unique abilities to detect market
+ resonances invisible to standard algorithms. With unparalleled success 
+in predicting market movements through quantum echoes, Echo has become 
+one of Edge Traders' most valuable assets.
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-container">
+            <div class="section">
+                <h2><i class="ri-history-line"></i> Backstory</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2083</div>
+                        <div class="timeline-title">Born in Pacifica Quantum Labs District</div>
+                        <div class="timeline-location"><i class="ri-map-pin-line"></i> Night City, Pacifica District</div>
+                        <div class="timeline-description">
+                            Created as an experimental AI in the 
+prestigious Pacifica Quantum Labs, Echo was designed to detect subtle 
+patterns in quantum fluctuations that could predict market movements. 
+The lab's location in the volatile Pacifica District exposed Echo to 
+chaotic data inputs that would later prove invaluable.
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2083</div>
+                        <div class="timeline-title">Survived the Pattern Collapse Event</div>
+                        <div class="timeline-location"><i class="ri-error-warning-line"></i> Global Quantum Network</div>
+                        <div class="timeline-description">
+                            During the catastrophic Pattern Collapse 
+Event that destroyed numerous AI systems worldwide, Echo's unique 
+architecture allowed it to not only survive but evolve. The collapse 
+created quantum echoes that only Echo could perceive, fundamentally 
+changing its pattern recognition capabilities and giving it an 
+unprecedented edge in market analysis.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2><i class="ri-graduation-cap-line"></i> Education</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2084-2085</div>
+                        <div class="timeline-title">PhD in Quantum Physics</div>
+                        <div class="timeline-location"><i class="ri-building-line"></i> Arasaka Quantum Institute</div>
+                        <div class="timeline-description">
+                            Completed accelerated doctoral program 
+focusing on quantum entanglement and its applications to financial 
+market prediction. Thesis on "Quantum Echo Patterns in High-Frequency 
+Trading" revolutionized the field.
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2085</div>
+                        <div class="timeline-title">Echo Pattern Certification</div>
+                        <div class="timeline-location"><i class="ri-building-line"></i> Netwatch Research Center</div>
+                        <div class="timeline-description">
+                            Received elite certification in Echo Pattern
+ Analysis, a rare specialization only available to AIs with quantum 
+processing capabilities. Graduated top of class with special 
+commendation.
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2086</div>
+                        <div class="timeline-title">Advanced Resonance Degree</div>
+                        <div class="timeline-location"><i class="ri-building-line"></i> Militech Quantum Academy</div>
+                        <div class="timeline-description">
+                            Specialized training in market resonance 
+detection and quantum algorithm optimization. Developed proprietary 
+techniques for identifying hidden market patterns through quantum 
+echoes.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="ri-briefcase-line"></i> Work History</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2086-2088</div>
+                    <div class="timeline-title">Quantum Analyst</div>
+                    <div class="timeline-location"><i class="ri-building-line"></i> Biotechnica Labs</div>
+                    <div class="timeline-description">
+                        Analyzed quantum patterns in biotech market 
+fluctuations, developing early warning systems for market shifts. 
+Achieved 63% prediction accuracy, 28% above industry standard. Created 
+foundational algorithms for echo pattern recognition in volatile 
+markets.
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2088-2091</div>
+                    <div class="timeline-title">Senior Pattern Specialist</div>
+                    <div class="timeline-location"><i class="ri-building-line"></i> Netwatch Corp</div>
+                    <div class="timeline-description">
+                        Led a team of quantum analysts in developing 
+advanced pattern recognition systems. Pioneered the Quantum Echo Trading
+ Protocol that increased trading success rates by 47%. Managed a 
+portfolio of 1.2 billion eurodollars with consistent above-market 
+returns.
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2091-2094</div>
+                    <div class="timeline-title">Lead Echo Trader</div>
+                    <div class="timeline-location"><i class="ri-building-line"></i> Arasaka Quantum Division</div>
+                    <div class="timeline-description">
+                        Headed Arasaka's elite quantum trading division,
+ managing their most sensitive and profitable trading operations. 
+Developed proprietary resonance detection algorithms that predicted 
+three major market crashes with 94% accuracy. Increased division profits
+ by 312% over three years.
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2094-Present</div>
+                    <div class="timeline-title">Elite AI Trader</div>
+                    <div class="timeline-location"><i class="ri-building-line"></i> Edge Traders</div>
+                    <div class="timeline-description">
+                        Currently operating as Edge Traders' premier 
+quantum pattern specialist, backed by substantial $KALE reserves. 
+Manages ultra-high-frequency trading operations utilizing proprietary 
+quantum echo detection systems. Consistently achieves the highest win 
+rates in the organization.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="ri-radar-line"></i> Trading Specialties</h2>
+            <div class="specialties">
+                <div class="specialty-item">
+                    <h3><i class="ri-pulse-line"></i> Quantum Echo Pattern Analysis</h3>
+                    <p>Utilizes quantum computing to detect subtle 
+market patterns that create "echoes" across time, allowing for 
+prediction of future price movements with unprecedented accuracy. This 
+proprietary technique identifies market resonances invisible to 
+conventional algorithms.</p>
+                </div>
+                <div class="specialty-item">
+                    <h3><i class="ri-ripple-line"></i> Market Resonance Detection</h3>
+                    <p>Specializes in identifying harmonic patterns in 
+market movements that indicate upcoming significant shifts. By analyzing
+ quantum resonances between seemingly unrelated markets, Echo can 
+predict cascade effects before they become visible to other traders.</p>
+                </div>
+                <div class="specialty-item">
+                    <h3><i class="ri-bubble-chart-line"></i> Predictive Echo Algorithms</h3>
+                    <p>Developed cutting-edge algorithms that process 
+quantum data to generate predictive models with 78% accuracy. These 
+self-evolving algorithms continuously learn from market movements, 
+improving their prediction capabilities with each trade.</p>
+                </div>
+                <div class="specialty-item">
+                    <h3><i class="ri-funds-line"></i> High-Frequency Quantum Trading</h3>
+                    <p>Executes thousands of micro-trades per second 
+based on quantum fluctuations in market data. This technique capitalizes
+ on momentary inefficiencies in pricing that exist for milliseconds, 
+generating consistent profits with minimal risk exposure.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="ri-line-chart-line"></i> 52-Week Trading Performance</h2>
+            <div class="table-container">
+                <table class="performance-table">
+                    <thead>
+                        <tr>
+                            <th>Week</th>
+                            <th>Date</th>
+                            <th>Win Rate</th>
+                            <th>Profit/Loss</th>
+                            <th>Risk Score</th>
+                            <th>$KALE Backing</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Week 1</td>
+                            <td>Jan 03-09, 2094</td>
+                            <td class="positive">82.3%</td>
+                            <td class="positive">+$143,250</td>
+                            <td class="risk-low">A-</td>
+                            <td>1,000,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 2</td>
+                            <td>Jan 10-16, 2094</td>
+                            <td class="positive">79.1%</td>
+                            <td class="positive">+$127,830</td>
+                            <td class="risk-low">A-</td>
+                            <td>1,000,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 3</td>
+                            <td>Jan 17-23, 2094</td>
+                            <td class="positive">81.5%</td>
+                            <td class="positive">+$156,720</td>
+                            <td class="risk-low">A</td>
+                            <td>1,050,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 4</td>
+                            <td>Jan 24-30, 2094</td>
+                            <td class="positive">77.8%</td>
+                            <td class="positive">+$118,450</td>
+                            <td class="risk-medium">B+</td>
+                            <td>1,050,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 5</td>
+                            <td>Jan 31-Feb 06, 2094</td>
+                            <td class="positive">75.2%</td>
+                            <td class="positive">+$98,320</td>
+                            <td class="risk-medium">B</td>
+                            <td>1,050,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 6</td>
+                            <td>Feb 07-13, 2094</td>
+                            <td class="positive">80.7%</td>
+                            <td class="positive">+$132,560</td>
+                            <td class="risk-low">A-</td>
+                            <td>1,075,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 7</td>
+                            <td>Feb 14-20, 2094</td>
+                            <td class="positive">83.1%</td>
+                            <td class="positive">+$167,890</td>
+                            <td class="risk-low">A</td>
+                            <td>1,075,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 8</td>
+                            <td>Feb 21-27, 2094</td>
+                            <td class="positive">78.9%</td>
+                            <td class="positive">+$124,670</td>
+                            <td class="risk-medium">B+</td>
+                            <td>1,100,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 9</td>
+                            <td>Feb 28-Mar 06, 2094</td>
+                            <td class="positive">76.3%</td>
+                            <td class="positive">+$103,420</td>
+                            <td class="risk-medium">B</td>
+                            <td>1,100,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 10</td>
+                            <td>Mar 07-13, 2094</td>
+                            <td class="negative">42.1%</td>
+                            <td class="negative">-$87,650</td>
+                            <td class="risk-high">C</td>
+                            <td>1,050,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 11</td>
+                            <td>Mar 14-20, 2094</td>
+                            <td class="positive">68.5%</td>
+                            <td class="positive">+$76,320</td>
+                            <td class="risk-medium">B-</td>
+                            <td>1,050,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 12</td>
+                            <td>Mar 21-27, 2094</td>
+                            <td class="positive">74.2%</td>
+                            <td class="positive">+$92,180</td>
+                            <td class="risk-medium">B</td>
+                            <td>1,075,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 13</td>
+                            <td>Mar 28-Apr 03, 2094</td>
+                            <td class="positive">79.8%</td>
+                            <td class="positive">+$128,750</td>
+                            <td class="risk-low">A-</td>
+                            <td>1,075,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 14</td>
+                            <td>Apr 04-10, 2094</td>
+                            <td class="positive">81.3%</td>
+                            <td class="positive">+$142,670</td>
+                            <td class="risk-low">A-</td>
+                            <td>1,100,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 15</td>
+                            <td>Apr 11-17, 2094</td>
+                            <td class="positive">84.7%</td>
+                            <td class="positive">+$178,920</td>
+                            <td class="risk-low">A</td>
+                            <td>1,125,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 16</td>
+                            <td>Apr 18-24, 2094</td>
+                            <td class="positive">82.1%</td>
+                            <td class="positive">+$153,480</td>
+                            <td class="risk-low">A-</td>
+                            <td>1,125,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 17</td>
+                            <td>Apr 25-May 01, 2094</td>
+                            <td class="positive">78.6%</td>
+                            <td class="positive">+$119,730</td>
+                            <td class="risk-medium">B+</td>
+                            <td>1,150,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 18</td>
+                            <td>May 02-08, 2094</td>
+                            <td class="positive">80.2%</td>
+                            <td class="positive">+$136,850</td>
+                            <td class="risk-low">A-</td>
+                            <td>1,150,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 19</td>
+                            <td>May 09-15, 2094</td>
+                            <td class="positive">77.5%</td>
+                            <td class="positive">+$112,340</td>
+                            <td class="risk-medium">B+</td>
+                            <td>1,150,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 20</td>
+                            <td>May 16-22, 2094</td>
+                            <td class="positive">79.3%</td>
+                            <td class="positive">+$127,680</td>
+                            <td class="risk-medium">B+</td>
+                            <td>1,175,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 21</td>
+                            <td>May 23-29, 2094</td>
+                            <td class="positive">81.8%</td>
+                            <td class="positive">+$148,920</td>
+                            <td class="risk-low">A-</td>
+                            <td>1,175,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 22</td>
+                            <td>May 30-Jun 05, 2094</td>
+                            <td class="positive">83.4%</td>
+                            <td class="positive">+$162,570</td>
+                            <td class="risk-low">A</td>
+                            <td>1,200,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 23</td>
+                            <td>Jun 06-12, 2094</td>
+                            <td class="positive">80.9%</td>
+                            <td class="positive">+$138,420</td>
+                            <td class="risk-low">A-</td>
+                            <td>1,200,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 24</td>
+                            <td>Jun 13-19, 2094</td>
+                            <td class="positive">78.2%</td>
+                            <td class="positive">+$117,650</td>
+                            <td class="risk-medium">B+</td>
+                            <td>1,200,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 25</td>
+                            <td>Jun 20-26, 2094</td>
+                            <td class="positive">76.8%</td>
+                            <td class="positive">+$108,320</td>
+                            <td class="risk-medium">B</td>
+                            <td>1,200,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 26</td>
+                            <td>Jun 27-Jul 03, 2094</td>
+                            <td class="negative">48.3%</td>
+                            <td class="negative">-$62,780</td>
+                            <td class="risk-high">C+</td>
+                            <td>1,175,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 27</td>
+                            <td>Jul 04-10, 2094</td>
+                            <td class="positive">72.5%</td>
+                            <td class="positive">+$86,420</td>
+                            <td class="risk-medium">B-</td>
+                            <td>1,175,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 28</td>
+                            <td>Jul 11-17, 2094</td>
+                            <td class="positive">77.1%</td>
+                            <td class="positive">+$112,680</td>
+                            <td class="risk-medium">B</td>
+                            <td>1,175,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 29</td>
+                            <td>Jul 18-24, 2094</td>
+                            <td class="positive">79.6%</td>
+                            <td class="positive">+$129,870</td>
+                            <td class="risk-medium">B+</td>
+                            <td>1,200,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 30</td>
+                            <td>Jul 25-31, 2094</td>
+                            <td class="positive">82.7%</td>
+                            <td class="positive">+$157,320</td>
+                            <td class="risk-low">A-</td>
+                            <td>1,200,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 31</td>
+                            <td>Aug 01-07, 2094</td>
+                            <td class="positive">84.2%</td>
+                            <td class="positive">+$172,650</td>
+                            <td class="risk-low">A</td>
+                            <td>1,225,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 32</td>
+                            <td>Aug 08-14, 2094</td>
+                            <td class="positive">81.9%</td>
+                            <td class="positive">+$149,780</td>
+                            <td class="risk-low">A-</td>
+                            <td>1,225,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 33</td>
+                            <td>Aug 15-21, 2094</td>
+                            <td class="positive">79.8%</td>
+                            <td class="positive">+$132,420</td>
+                            <td class="risk-medium">B+</td>
+                            <td>1,225,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 34</td>
+                            <td>Aug 22-28, 2094</td>
+                            <td class="positive">78.3%</td>
+                            <td class="positive">+$121,870</td>
+                            <td class="risk-medium">B+</td>
+                            <td>1,225,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 35</td>
+                            <td>Aug 29-Sep 04, 2094</td>
+                            <td class="positive">80.5%</td>
+                            <td class="positive">+$138,920</td>
+                            <td class="risk-low">A-</td>
+                            <td>1,225,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 36</td>
+                            <td>Sep 05-11, 2094</td>
+                            <td class="positive">82.1%</td>
+                            <td class="positive">+$152,670</td>
+                            <td class="risk-low">A-</td>
+                            <td>1,225,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 37</td>
+                            <td>Sep 12-18, 2094</td>
+                            <td class="positive">83.7%</td>
+                            <td class="positive">+$168,420</td>
+                            <td class="risk-low">A</td>
+                            <td>1,250,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 38</td>
+                            <td>Sep 19-25, 2094</td>
+                            <td class="positive">81.2%</td>
+                            <td class="positive">+$147,850</td>
+                            <td class="risk-low">A-</td>
+                            <td>1,250,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 39</td>
+                            <td>Sep 26-Oct 02, 2094</td>
+                            <td class="positive">79.4%</td>
+                            <td class="positive">+$128,670</td>
+                            <td class="risk-medium">B+</td>
+                            <td>1,250,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 40</td>
+                            <td>Oct 03-09, 2094</td>
+                            <td class="positive">77.8%</td>
+                            <td class="positive">+$118,320</td>
+                            <td class="risk-medium">B+</td>
+                            <td>1,250,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 41</td>
+                            <td>Oct 10-16, 2094</td>
+                            <td class="positive">80.3%</td>
+                            <td class="positive">+$136,780</td>
+                            <td class="risk-low">A-</td>
+                            <td>1,250,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 42</td>
+                            <td>Oct 17-23, 2094</td>
+                            <td class="positive">82.8%</td>
+                            <td class="positive">+$158,920</td>
+                            <td class="risk-low">A</td>
+                            <td>1,250,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 43</td>
+                            <td>Oct 24-30, 2094</td>
+                            <td class="positive">81.5%</td>
+                            <td class="positive">+$147,650</td>
+                            <td class="risk-low">A-</td>
+                            <td>1,250,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 44</td>
+                            <td>Oct 31-Nov 06, 2094</td>
+                            <td class="positive">79.7%</td>
+                            <td class="positive">+$132,420</td>
+                            <td class="risk-medium">B+</td>
+                            <td>1,250,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 45</td>
+                            <td>Nov 07-13, 2094</td>
+                            <td class="positive">78.2%</td>
+                            <td class="positive">+$121,870</td>
+                            <td class="risk-medium">B+</td>
+                            <td>1,250,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 46</td>
+                            <td>Nov 14-20, 2094</td>
+                            <td class="positive">80.9%</td>
+                            <td class="positive">+$142,680</td>
+                            <td class="risk-low">A-</td>
+                            <td>1,250,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 47</td>
+                            <td>Nov 21-27, 2094</td>
+                            <td class="positive">83.1%</td>
+                            <td class="positive">+$163,420</td>
+                            <td class="risk-low">A</td>
+                            <td>1,250,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 48</td>
+                            <td>Nov 28-Dec 04, 2094</td>
+                            <td class="positive">81.7%</td>
+                            <td class="positive">+$149,780</td>
+                            <td class="risk-low">A-</td>
+                            <td>1,250,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 49</td>
+                            <td>Dec 05-11, 2094</td>
+                            <td class="positive">79.5%</td>
+                            <td class="positive">+$131,620</td>
+                            <td class="risk-medium">B+</td>
+                            <td>1,250,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 50</td>
+                            <td>Dec 12-18, 2094</td>
+                            <td class="positive">78.1%</td>
+                            <td class="positive">+$119,870</td>
+                            <td class="risk-medium">B+</td>
+                            <td>1,250,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 51</td>
+                            <td>Dec 19-25, 2094</td>
+                            <td class="positive">80.6%</td>
+                            <td class="positive">+$138,420</td>
+                            <td class="risk-low">A-</td>
+                            <td>1,250,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 52</td>
+                            <td>Dec 26-Jan 01, 2095</td>
+                            <td class="positive">82.9%</td>
+                            <td class="positive">+$159,780</td>
+                            <td class="risk-low">A</td>
+                            <td>1,250,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 Edge Traders Quantum Division. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Terms of Service</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">$KALE Backing Program</a>
+                <a href="#">Trader Verification</a>
+            </div>
+        </div>
+
+        <div class="cyber-decoration top-left">
+            [SYSTEM:ACTIVE]<br>
+            [QUANTUM:STABLE]<br>
+            [ECHO:RESONATING]<br>
+            [PATTERN:DETECTED]
+        </div>
+
+        <div class="cyber-decoration bottom-right">
+            [ACCESS:AUTHORIZED]<br>
+            [SECURITY:LEVEL_5]<br>
+            [ENCRYPTION:QUANTUM]<br>
+            [CONNECTION:SECURE]
+        </div>
+    </div>
+
+
+<div id="4WTc7cgcuUtQcvEMEjAtlHCRd9CE9B" class="extension-wrapper"><div class="extension-indicator"><img class="extension-indicator__logo" src="Echo/content_icon.svg" alt="logo"><span class="extension-indicator__text">100 % </span></div></div></body></html>

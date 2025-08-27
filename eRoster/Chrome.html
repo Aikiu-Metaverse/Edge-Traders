@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrome - Data Mining Specialist AI Trader</title>
+    <link href="Chrome/remixicon.min.css" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'AlimamaShuHeiTi';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/AlimamaShuHeiTi-Bold.otf') format('opentype');
+            font-weight: bold;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Regular.ttf') format('truetype');
+            font-weight: normal;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Medium.ttf') format('truetype');
+            font-weight: 500;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Bold.ttf') format('truetype');
+            font-weight: bold;
+        }
+
+        :root {
+            --bg-dark: #0a0c14;
+            --bg-card: #141824;
+            --text-primary: #e0e0e0;
+            --text-secondary: #9ca3af;
+            --accent-green: #36d399;
+            --accent-gold: #ffd700;
+            --accent-blue: #00b4d8;
+            --glow-green: rgba(54, 211, 153, 0.3);
+            --glow-gold: rgba(255, 215, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'MiSans', sans-serif;
+            line-height: 1.6;
+            width: 1920px;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(54, 211, 153, 0.05) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(255, 215, 0, 0.05) 0%, transparent 25%);
+        }
+
+        .container {
+            width: 1920px;
+            padding: 40px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-green), var(--accent-gold), transparent);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 205px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .title {
+            font-family: 'AlimamaShuHeiTi', sans-serif;
+            font-size: 32px;
+            font-weight: bold;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 18px;
+            margin-left: 20px;
+        }
+
+        .hero-section {
+            display: flex;
+            margin-bottom: 40px;
+            gap: 40px;
+        }
+
+        .character-portrait {
+            flex: 0 0 500px;
+            position: relative;
+        }
+
+        .portrait-img {
+            width: 500px;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(54, 211, 153, 0.3);
+        }
+
+        .portrait-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(54, 211, 153, 0.2), rgba(255, 215, 0, 0.2));
+            pointer-events: none;
+        }
+
+        .portrait-frame {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid var(--accent-green);
+            border-radius: 15px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .portrait-frame::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            width: 30px;
+            height: 30px;
+            border-top: 3px solid var(--accent-gold);
+            border-left: 3px solid var(--accent-gold);
+            border-radius: 5px 0 0 0;
+        }
+
+        .portrait-frame::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            width: 30px;
+            height: 30px;
+            border-bottom: 3px solid var(--accent-gold);
+            border-right: 3px solid var(--accent-gold);
+            border-radius: 0 0 5px 0;
+        }
+
+        .basic-info {
+            flex: 1;
+            padding: 30px;
+            background-color: var(--bg-card);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .basic-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-gold));
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .info-item {
+            margin-bottom: 15px;
+        }
+
+        .info-label {
+            color: var(--accent-green);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-label i {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .info-value {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background-color: var(--bg-card);
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-green), var(--accent-gold));
+            border-radius: 10px 0 0 10px;
+        }
+
+        .section-title {
+            font-family: 'AlimamaShuHeiTi', sans-serif;
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            color: var(--accent-green);
+        }
+
+        .section-title i {
+            margin-right: 15px;
+            font-size: 28px;
+            color: var(--accent-gold);
+        }
+
+        .section-content {
+            color: var(--text-secondary);
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-green), var(--accent-blue), var(--accent-gold));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: -39px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--accent-gold);
+            box-shadow: 0 0 10px var(--glow-gold);
+        }
+
+        .timeline-date {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--accent-green);
+            margin-bottom: 5px;
+        }
+
+        .timeline-title {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+        }
+
+        .specialties {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .specialty-item {
+            padding: 20px;
+            background-color: rgba(20, 24, 36, 0.7);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-green);
+            transition: all 0.3s ease;
+        }
+
+        .specialty-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(54, 211, 153, 0.2);
+        }
+
+        .specialty-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+        }
+
+        .specialty-title i {
+            margin-right: 10px;
+        }
+
+        .specialty-description {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .performance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .performance-table th {
+            background-color: rgba(54, 211, 153, 0.1);
+            color: var(--accent-green);
+            padding: 15px;
+            text-align: left;
+            font-size: 16px;
+            border-bottom: 1px solid rgba(54, 211, 153, 0.3);
+        }
+
+        .performance-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 15px;
+        }
+
+        .performance-table tr:nth-child(even) {
+            background-color: rgba(20, 24, 36, 0.5);
+        }
+
+        .performance-table tr:hover {
+            background-color: rgba(54, 211, 153, 0.05);
+        }
+
+        .positive {
+            color: var(--accent-green);
+        }
+
+        .negative {
+            color: #ff4d6d;
+        }
+
+        .risk-low {
+            color: #4ade80;
+        }
+
+        .risk-medium {
+            color: #facc15;
+        }
+
+        .risk-high {
+            color: #fb7185;
+        }
+
+        .table-container {
+            max-height: 500px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-green) var(--bg-card);
+        }
+
+        .table-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .table-container::-webkit-scrollbar-track {
+            background: var(--bg-card);
+        }
+
+        .table-container::-webkit-scrollbar-thumb {
+            background-color: var(--accent-green);
+            border-radius: 10px;
+        }
+
+        .kale-amount {
+            display: flex;
+            align-items: center;
+        }
+
+        .kale-icon {
+            width: 18px;
+            height: 18px;
+            margin-right: 5px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .kale-branding {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .kale-logo {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+        }
+
+        .kale-text {
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: bold;
+        }
+
+        .data-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .stat-card {
+            flex: 1;
+            padding: 20px;
+            background-color: rgba(20, 24, 36, 0.8);
+            border-radius: 8px;
+            margin: 0 10px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-green);
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .education-card {
+            padding: 20px;
+            background-color: rgba(20, 24, 36, 0.7);
+            border-radius: 8px;
+            border-top: 3px solid var(--accent-gold);
+        }
+
+        .education-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .education-institution {
+            font-size: 16px;
+            color: var(--accent-green);
+            margin-bottom: 10px;
+        }
+
+        .education-year {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .cyber-decoration {
+            position: absolute;
+            font-size: 12px;
+            color: var(--accent-green);
+            opacity: 0.3;
+            user-select: none;
+        }
+
+        .cyber-decoration:nth-child(1) {
+            top: 50px;
+            right: 100px;
+        }
+
+        .cyber-decoration:nth-child(2) {
+            bottom: 80px;
+            left: 150px;
+        }
+
+        .cyber-decoration:nth-child(3) {
+            top: 200px;
+            left: 80px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <img src="Chrome/edgeTradersLogo-orig.png" alt="Edge Traders Logo">
+                <!-- img src="Chrome/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE Logo" class="kale-logo" style="width: 60px; height: 60px;" -->
+            </div>
+            <h1 class="title">CHROME</h1>
+            <span class="subtitle">Edge Traders Elite Personnel</span>
+        </header>
+
+        <div class="hero-section">
+            <div class="character-portrait">
+                <img src="Chrome/8fc1816991a0f17eaebfb3d31e34af77d36c03d230228402c13928937d3a.png" alt="Chrome - Data Mining Specialist" class="portrait-img">
+                <div class="portrait-overlay"></div>
+                <div class="portrait-frame"></div>
+            </div>
+            <div class="basic-info">
+                <h2 class="section-title"><i class="ri-user-3-line"></i>Basic Information</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label"><i class="ri-profile-line"></i>Name</div>
+                        <div class="info-value">Chrome</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="ri-briefcase-4-line"></i>Occupation</div>
+                        <div class="info-value">Elite AI Trader</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="ri-building-line"></i>Employer</div>
+                        <div class="info-value">Edge Traders</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="ri-map-pin-line"></i>Origin</div>
+                        <div class="info-value">Night City Industrial District</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="ri-cpu-line"></i>Specialization</div>
+                        <div class="info-value">Data Mining &amp; AI Trading</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="ri-shield-check-line"></i>Certification Level</div>
+                        <div class="info-value">Chrome-Enhanced Tier 5</div>
+                    </div>
+                </div>
+
+                <div class="data-stats">
+                    <div class="stat-card">
+                        <div class="stat-value">98.7%</div>
+                        <div class="stat-label">Trading Accuracy</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">3.2M</div>
+                        <div class="stat-label">Data Points Processed/Sec</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">8+ Years</div>
+                        <div class="stat-label">Market Experience</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="section">
+            <h2 class="section-title"><i class="ri-file-history-line"></i>Backstory</h2>
+            <div class="section-content">
+                <p>Born in the industrial district of Night City, Chrome
+ grew up surrounded by the constant hum of factory machinery and the 
+glow of corporate advertisements. Life was challenging in the shadow of 
+megacorporations, but it fostered a resilience that would later define 
+their career.</p>
+                <p>In 2085, Chrome was caught in the infamous Corporate 
+Data Breach that exposed millions of citizens' personal information to 
+the darknet. Rather than becoming another victim, Chrome used this 
+experience as motivation to understand data security from the inside 
+out. Leveraging salvaged tech and self-taught coding skills, they began 
+developing algorithms to predict market movements based on data 
+patterns.</p>
+                <p>After securing a scholarship through unconventional 
+means, Chrome pursued formal education while maintaining connections to 
+Night City's underground tech scene. This dual existence provided unique
+ insights into both legitimate and shadow markets, eventually leading to
+ the decision to enhance natural abilities with chrome augmentations 
+specialized for data processing and market analysis.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="ri-graduation-cap-line"></i>Education</h2>
+            <div class="education-grid">
+                <div class="education-card">
+                    <div class="education-title">Masters in Data Science</div>
+                    <div class="education-institution">Biotechnica University</div>
+                    <div class="education-year">2086-2088</div>
+                </div>
+                <div class="education-card">
+                    <div class="education-title">Chrome Augmentation Certification</div>
+                    <div class="education-institution">Ripperdoc Institute</div>
+                    <div class="education-year">2089</div>
+                </div>
+                <div class="education-card">
+                    <div class="education-title">Advanced Analytics Degree</div>
+                    <div class="education-institution">Corpo Plaza Academy</div>
+                    <div class="education-year">2091-2092</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="ri-history-line"></i>Work History</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2088-2090</div>
+                    <div class="timeline-title">Junior Data Analyst at Trauma Team</div>
+                    <div class="timeline-description">Developed 
+emergency response algorithms based on city-wide incident data. 
+Optimized resource allocation during crisis situations, reducing 
+response time by 23%. Began experimenting with neural interface data 
+processing techniques.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2090-2093</div>
+                    <div class="timeline-title">Senior Mining Specialist at Netwatch</div>
+                    <div class="timeline-description">Led a team of data
+ miners tracking financial anomalies across global networks. Implemented
+ first-generation chrome augmentations to enhance processing 
+capabilities. Developed proprietary algorithms for pattern recognition 
+in market fluctuations.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2093-2096</div>
+                    <div class="timeline-title">Lead Chrome Trader at Arasaka Financial</div>
+                    <div class="timeline-description">Managed 
+high-frequency trading operations for corporate clients. Upgraded to 
+military-grade neural processors for millisecond market analysis. 
+Achieved 94% prediction accuracy for major market movements.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2096-Present</div>
+                    <div class="timeline-title">Elite AI Trader at Edge Traders</div>
+                    <div class="timeline-description">Currently leading a
+ specialized team of augmented traders focused on emerging markets. 
+Pioneering integration of quantum computing with neural interfaces for 
+unprecedented data processing. Specializing in $KALE token trading 
+strategies with record-breaking returns.</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="ri-line-chart-line"></i>Trading Specialties</h2>
+            <div class="specialties">
+                <div class="specialty-item">
+                    <div class="specialty-title"><i class="ri-cpu-line"></i>Chrome-Enhanced Data Processing</div>
+                    <div class="specialty-description">Utilizes 
+military-grade neural processors to analyze market data at speeds 
+exceeding standard human cognition by 300%. Can process multiple data 
+streams simultaneously while maintaining pattern recognition accuracy 
+above 99.2%.</div>
+                </div>
+                <div class="specialty-item">
+                    <div class="specialty-title"><i class="ri-radar-line"></i>Real-Time Market Analysis</div>
+                    <div class="specialty-description">Augmented visual 
+cortex allows for instantaneous recognition of market patterns across 
+multiple exchanges. Chrome enhancements enable continuous monitoring of 
+over 500 assets simultaneously with millisecond reaction times.</div>
+                </div>
+                <div class="specialty-item">
+                    <div class="specialty-title"><i class="ri-brain-line"></i>Predictive Modeling Algorithms</div>
+                    <div class="specialty-description">Creator of the 
+proprietary "NeuroPulse" trading algorithm that combines historical data
+ analysis with real-time sentiment scanning. Achieves 87% accuracy in 
+predicting short-term price movements in volatile markets.</div>
+                </div>
+                <div class="specialty-item">
+                    <div class="specialty-title"><i class="ri-coin-line"></i>$KALE Token Optimization</div>
+                    <div class="specialty-description">Specialized in 
+maximizing returns on $KALE token investments through custom liquidity 
+provision strategies. Developed risk-mitigation protocols that have 
+protected assets during three major market crashes.</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="ri-bar-chart-grouped-line"></i>52-Week Trading Performance</h2>
+            <div class="table-container">
+                <table class="performance-table">
+                    <thead>
+                        <tr>
+                            <th>Week</th>
+                            <th>Date Range</th>
+                            <th>Win Rate</th>
+                            <th>Profit/Loss</th>
+                            <th>Risk Score</th>
+                            <th>$KALE Backing</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Week 1</td>
+                            <td>Jan 3-9, 2096</td>
+                            <td>78%</td>
+                            <td class="positive">+12.4%</td>
+                            <td class="risk-medium">Medium</td>
+                            <td class="kale-amount"><img src="Chrome/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE" class="kale-icon">45,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 2</td>
+                            <td>Jan 10-16, 2096</td>
+                            <td>82%</td>
+                            <td class="positive">+15.7%</td>
+                            <td class="risk-medium">Medium</td>
+                            <td class="kale-amount"><img src="Chrome/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE" class="kale-icon">52,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 3</td>
+                            <td>Jan 17-23, 2096</td>
+                            <td>75%</td>
+                            <td class="positive">+8.3%</td>
+                            <td class="risk-low">Low</td>
+                            <td class="kale-amount"><img src="Chrome/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE" class="kale-icon">56,300</td>
+                        </tr>
+                        <tr>
+                            <td>Week 4</td>
+                            <td>Jan 24-30, 2096</td>
+                            <td>69%</td>
+                            <td class="negative">-3.2%</td>
+                            <td class="risk-high">High</td>
+                            <td class="kale-amount"><img src="Chrome/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE" class="kale-icon">54,500</td>
+                        </tr>
+                        <tr>
+                            <td>Week 5</td>
+                            <td>Jan 31-Feb 6, 2096</td>
+                            <td>88%</td>
+                            <td class="positive">+21.5%</td>
+                            <td class="risk-medium">Medium</td>
+                            <td class="kale-amount"><img src="Chrome/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE" class="kale-icon">66,200</td>
+                        </tr>
+                        <tr>
+                            <td>Week 6</td>
+                            <td>Feb 7-13, 2096</td>
+                            <td>92%</td>
+                            <td class="positive">+18.9%</td>
+                            <td class="risk-medium">Medium</td>
+                            <td class="kale-amount"><img src="Chrome/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE" class="kale-icon">78,700</td>
+                        </tr>
+                        <tr>
+                            <td>Week 7</td>
+                            <td>Feb 14-20, 2096</td>
+                            <td>85%</td>
+                            <td class="positive">+14.2%</td>
+                            <td class="risk-low">Low</td>
+                            <td class="kale-amount"><img src="Chrome/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE" class="kale-icon">89,900</td>
+                        </tr>
+                        <tr>
+                            <td>Week 8</td>
+                            <td>Feb 21-27, 2096</td>
+                            <td>79%</td>
+                            <td class="positive">+9.8%</td>
+                            <td class="risk-low">Low</td>
+                            <td class="kale-amount"><img src="Chrome/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE" class="kale-icon">98,700</td>
+                        </tr>
+                        <tr>
+                            <td>Week 9</td>
+                            <td>Feb 28-Mar 5, 2096</td>
+                            <td>73%</td>
+                            <td class="positive">+5.4%</td>
+                            <td class="risk-medium">Medium</td>
+                            <td class="kale-amount"><img src="Chrome/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE" class="kale-icon">104,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 10</td>
+                            <td>Mar 6-12, 2096</td>
+                            <td>65%</td>
+                            <td class="negative">-7.8%</td>
+                            <td class="risk-high">High</td>
+                            <td class="kale-amount"><img src="Chrome/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE" class="kale-icon">95,900</td>
+                        </tr>
+                        <tr>
+                            <td>Week 11</td>
+                            <td>Mar 13-19, 2096</td>
+                            <td>81%</td>
+                            <td class="positive">+11.3%</td>
+                            <td class="risk-medium">Medium</td>
+                            <td class="kale-amount"><img src="Chrome/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE" class="kale-icon">106,800</td>
+                        </tr>
+                        <tr>
+                            <td>Week 12</td>
+                            <td>Mar 20-26, 2096</td>
+                            <td>87%</td>
+                            <td class="positive">+16.5%</td>
+                            <td class="risk-medium">Medium</td>
+                            <td class="kale-amount"><img src="Chrome/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE" class="kale-icon">124,400</td>
+                        </tr>
+                        <tr>
+                            <td>Week 13</td>
+                            <td>Mar 27-Apr 2, 2096</td>
+                            <td>90%</td>
+                            <td class="positive">+19.2%</td>
+                            <td class="risk-high">High</td>
+                            <td class="kale-amount"><img src="Chrome/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE" class="kale-icon">148,300</td>
+                        </tr>
+                        <tr>
+                            <td>Week 14</td>
+                            <td>Apr 3-9, 2096</td>
+                            <td>84%</td>
+                            <td class="positive">+13.7%</td>
+                            <td class="risk-medium">Medium</td>
+                            <td class="kale-amount"><img src="Chrome/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE" class="kale-icon">168,600</td>
+                        </tr>
+                        <tr>
+                            <td>Week 15</td>
+                            <td>Apr 10-16, 2096</td>
+                            <td>77%</td>
+                            <td class="positive">+8.9%</td>
+                            <td class="risk-low">Low</td>
+                            <td class="kale-amount"><img src="Chrome/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE" class="kale-icon">183,600</td>
+                        </tr>
+                        <tr>
+                            <td>Week 16</td>
+                            <td>Apr 17-23, 2096</td>
+                            <td>68%</td>
+                            <td class="negative">-4.5%</td>
+                            <td class="risk-high">High</td>
+                            <td class="kale-amount"><img src="Chrome/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE" class="kale-icon">175,300</td>
+                        </tr>
+                        <tr>
+                            <td>Week 17</td>
+                            <td>Apr 24-30, 2096</td>
+                            <td>83%</td>
+                            <td class="positive">+12.8%</td>
+                            <td class="risk-medium">Medium</td>
+                            <td class="kale-amount"><img src="Chrome/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE" class="kale-icon">197,700</td>
+                        </tr>
+                        <tr>
+                            <td>Week 18</td>
+                            <td>May 1-7, 2096</td>
+                            <td>89%</td>
+                            <td class="positive">+17.3%</td>
+                            <td class="risk-medium">Medium</td>
+                            <td class="kale-amount"><img src="Chrome/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE" class="kale-icon">232,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 19</td>
+                            <td>May 8-14, 2096</td>
+                            <td>91%</td>
+                            <td class="positive">+20.1%</td>
+                            <td class="risk-high">High</td>
+                            <td class="kale-amount"><img src="Chrome/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE" class="kale-icon">278,600</td>
+                        </tr>
+                        <tr>
+                            <td>Week 20</td>
+                            <td>May 15-21, 2096</td>
+                            <td>86%</td>
+                            <td class="positive">+15.8%</td>
+                            <td class="risk-medium">Medium</td>
+                            <td class="kale-amount"><img src="Chrome/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE" class="kale-icon">322,600</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="kale-branding">
+                <img src="Chrome/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE Logo" class="kale-logo">
+                <span class="kale-text">Powered by $KALE - The Future of Crypto Trading</span>
+            </div>
+            <p>Edge Traders Personnel File - Classified - 2025</p>
+        </footer>
+
+        <div class="cyber-decoration">// DATA:ENCRYPTED // ACCESS:LEVEL_5 // NEURAL:LINKED</div>
+        <div class="cyber-decoration">// CHROME:ENHANCED // MARKET:SCANNING // ALGO:ACTIVE</div>
+        <div class="cyber-decoration">// SYSTEM:ONLINE // TRADING:ENABLED // RISK:CALCULATED</div>
+    </div>
+
+
+<div id="mU8Ca5Rwa2qzszGZ7iHZ649v9nY9tJ" class="extension-wrapper"><div class="extension-indicator"><img class="extension-indicator__logo" src="Chrome/content_icon.svg" alt="logo"><span class="extension-indicator__text">100 % </span></div></div></body></html>
