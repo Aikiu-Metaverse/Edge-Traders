@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulse - Elite AI Trader Profile</title>
+    <link rel="stylesheet" href="Pulse/remixicon.min.css">
+    <style>
+        @font-face {
+            font-family: 'AlimamaShuHeiTi';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/AlimamaShuHeiTi-Bold.otf') format('opentype');
+            font-weight: bold;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Regular.ttf') format('truetype');
+            font-weight: normal;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Medium.ttf') format('truetype');
+            font-weight: 500;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Bold.ttf') format('truetype');
+            font-weight: bold;
+        }
+
+        :root {
+            --neon-green: #39ff14;
+            --dark-green: #0a2e0a;
+            --gold: #ffd700;
+            --dark-bg: #0a0a0f;
+            --panel-bg: #121218;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --accent-blue: #00a2ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            font-family: 'MiSans', sans-serif;
+            width: 1920px;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(57, 255, 20, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 85% 30%, rgba(255, 215, 0, 0.05) 0%, transparent 40%);
+        }
+
+        .container {
+            width: 1920px;
+            padding: 40px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 600px 1fr;
+            gap: 40px;
+        }
+
+        .profile-header {
+            position: relative;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(57, 255, 20, 0.3);
+        }
+
+        .profile-title {
+            font-family: 'AlimamaShuHeiTi', sans-serif;
+            font-size: 64px;
+            font-weight: bold;
+            color: var(--text-primary);
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .profile-subtitle {
+            font-size: 24px;
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .kale-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--dark-green), #000);
+            border: 1px solid var(--neon-green);
+            border-radius: 12px;
+            padding: 10px 15px;
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.3);
+        }
+
+        .kale-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+
+        .kale-text {
+            font-weight: bold;
+            font-size: 20px;
+            color: var(--gold);
+        }
+
+        .profile-card {
+            background-color: var(--panel-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(57, 255, 20, 0.2);
+            height: fit-content;
+        }
+
+        .profile-image-container {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, var(--panel-bg), transparent);
+            height: 150px;
+        }
+
+        .profile-info {
+            padding: 30px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .info-label {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        .info-value {
+            color: var(--text-primary);
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .highlight {
+            color: var(--neon-green);
+        }
+
+        .gold-highlight {
+            color: var(--gold);
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-family: 'AlimamaShuHeiTi', sans-serif;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--neon-green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            font-size: 24px;
+        }
+
+        .section-content {
+            background-color: var(--panel-bg);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(57, 255, 20, 0.2);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--neon-green), var(--gold));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 8px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--neon-green);
+            box-shadow: 0 0 10px var(--neon-green);
+        }
+
+        .timeline-date {
+            font-size: 16px;
+            color: var(--gold);
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .timeline-title {
+            font-size: 20px;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .timeline-description {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .specialties {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .specialty-item {
+            background: linear-gradient(135deg, rgba(10, 46, 10, 0.8), rgba(18, 18, 24, 0.8));
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(57, 255, 20, 0.2);
+        }
+
+        .specialty-title {
+            font-size: 18px;
+            color: var(--neon-green);
+            margin-bottom: 10px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .specialty-description {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .performance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .performance-table th {
+            background-color: rgba(57, 255, 20, 0.1);
+            color: var(--neon-green);
+            text-align: left;
+            padding: 12px 15px;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(57, 255, 20, 0.3);
+        }
+
+        .performance-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+        }
+
+        .performance-table tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .performance-table tr:hover {
+            background-color: rgba(57, 255, 20, 0.05);
+        }
+
+        .positive {
+            color: var(--neon-green);
+        }
+
+        .negative {
+            color: #ff3a3a;
+        }
+
+        .neutral {
+            color: var(--text-primary);
+        }
+
+        .risk-low {
+            color: #3aff3a;
+        }
+
+        .risk-medium {
+            color: #ffaa3a;
+        }
+
+        .risk-high {
+            color: #ff3a3a;
+        }
+
+        .table-container {
+            max-height: 500px;
+            overflow-y: auto;
+            margin-right: -10px;
+            padding-right: 10px;
+        }
+
+        .table-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .table-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        .table-container::-webkit-scrollbar-thumb {
+            background: rgba(57, 255, 20, 0.3);
+            border-radius: 4px;
+        }
+
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(57, 255, 20, 0.5);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(10, 46, 10, 0.8), rgba(18, 18, 24, 0.8));
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(57, 255, 20, 0.2);
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            background: linear-gradient(to right, var(--neon-green), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .cyber-decoration {
+            position: absolute;
+            font-size: 12px;
+            color: rgba(57, 255, 20, 0.3);
+            font-family: monospace;
+        }
+
+        .deco-1 {
+            top: 20px;
+            left: 20px;
+        }
+
+        .deco-2 {
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .education-card {
+            background: linear-gradient(135deg, rgba(10, 46, 10, 0.8), rgba(18, 18, 24, 0.8));
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(57, 255, 20, 0.2);
+        }
+
+        .education-title {
+            font-size: 18px;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .education-institution {
+            font-size: 16px;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+
+        .education-year {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-header">
+            <h1 class="profile-title">PULSE</h1>
+            <p class="profile-subtitle">Biorhythm-Based Market Timing AI Trader</p>
+            <div class="kale-badge">
+                <img src="Pulse/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE Logo" class="kale-logo">
+                <span class="kale-text">$KALE CERTIFIED</span>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="left-column">
+                <div class="profile-card">
+                    <div class="profile-image-container">
+                        <img src="Pulse/ab76e037c139f20a233065e1bce083a503a972192fe87911a9676783a253.png" alt="Pulse - AI Trader" class="profile-image">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="profile-info">
+                        <div class="info-grid">
+                            <div class="info-label">Codename:</div>
+                            <div class="info-value">Pulse</div>
+                            
+                            <div class="info-label">Status:</div>
+                            <div class="info-value"><span class="highlight">Active</span></div>
+                            
+                            <div class="info-label">Current Position:</div>
+                            <div class="info-value">Elite AI Trader at Edge Traders</div>
+                            
+                            <div class="info-label">Specialization:</div>
+                            <div class="info-value">Biorhythm-Based Market Timing</div>
+                            
+                            <div class="info-label">$KALE Backing:</div>
+                            <div class="info-value"><span class="gold-highlight">1,250,000 $KALE</span></div>
+                            
+                            <div class="info-label">Win Rate:</div>
+                            <div class="info-value">78.5%</div>
+                            
+                            <div class="info-label">Risk Profile:</div>
+                            <div class="info-value"><span class="highlight">Medium-Low</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title"><i class="ri-user-heart-line"></i>Backstory</h2>
+                    <div class="section-content">
+                        <p class="timeline-description">
+                            Born in Watson District Medical Zone during 
+the height of the biotech revolution, Pulse's early life was defined by 
+the infamous Biotech Crisis of 2086. As experimental neural implants 
+malfunctioned across Night City, causing widespread biometric chaos, the
+ young prodigy discovered an unusual talent: the ability to sense and 
+predict biorhythmic patterns in the chaos.
+                        </p>
+                        <br>
+                        <p class="timeline-description">
+                            Surviving the crisis with enhanced neural 
+pathways, Pulse developed a unique sensitivity to biological data 
+patterns that would later become the foundation of a revolutionary 
+trading system. By integrating personal bio-monitors with market timing 
+algorithms, Pulse created a symbiotic relationship between human 
+biorhythms and market fluctuations, leading to unprecedented prediction 
+accuracy.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title"><i class="ri-graduation-cap-line"></i>Education</h2>
+                    <div class="section-content">
+                        <div class="education-grid">
+                            <div class="education-card">
+                                <h3 class="education-title">PhD in Biomedical Engineering</h3>
+                                <p class="education-institution">Trauma Team Medical University</p>
+                                <p class="education-year">2084-2089</p>
+                            </div>
+                            <div class="education-card">
+                                <h3 class="education-title">Bio-Monitor Integration Certification</h3>
+                                <p class="education-institution">Biotechnica Labs</p>
+                                <p class="education-year">2087-2088</p>
+                            </div>
+                            <div class="education-card">
+                                <h3 class="education-title">Neural Synchronization Degree</h3>
+                                <p class="education-institution">MaxTac Academy</p>
+                                <p class="education-year">2088-2089</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-column">
+                <div class="section">
+                    <h2 class="section-title"><i class="ri-line-chart-line"></i>Trading Performance Overview</h2>
+                    <div class="section-content">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-value">78.5%</div>
+                                <div class="stat-label">Average Win Rate</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">+2.4M</div>
+                                <div class="stat-label">Total Profit ($)</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">1.25M</div>
+                                <div class="stat-label">$KALE Backing</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">2.7</div>
+                                <div class="stat-label">Risk Score (1-10)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title"><i class="ri-briefcase-line"></i>Work History</h2>
+                    <div class="section-content">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">2094 - Present</div>
+                                <div class="timeline-title">Elite AI Trader</div>
+                                <div class="timeline-description">Edge Traders</div>
+                                <p class="timeline-description">Leading 
+the revolutionary biorhythm-based trading division, developing 
+proprietary algorithms that synchronize market movements with biological
+ patterns. Achieved 78.5% win rate across all trading activities with 
+$KALE backing of 1.25M.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">2091 - 2094</div>
+                                <div class="timeline-title">Lead Bio-Trader</div>
+                                <div class="timeline-description">Militech Financial</div>
+                                <p class="timeline-description">Pioneered
+ the integration of bio-monitor data with high-frequency trading 
+systems. Developed the first prototype of the Pulse Trading System, 
+achieving a 65% win rate in volatile markets.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">2091 - 2094</div>
+                                <div class="timeline-title">Senior Rhythm Specialist</div>
+                                <div class="timeline-description">Biotechnica Corp</div>
+                                <p class="timeline-description">Researched
+ correlations between human biorhythms and market cycles. Created 
+predictive models based on collective biological data patterns that 
+outperformed traditional technical analysis by 43%.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">2089 - 2091</div>
+                                <div class="timeline-title">Bio-Data Analyst</div>
+                                <div class="timeline-description">Scav Medical</div>
+                                <p class="timeline-description">Analyzed
+ biorhythm patterns from implanted medical devices. Discovered key 
+correlations between neural activity and decision-making processes that 
+would later form the foundation of the trading algorithm.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title"><i class="ri-focus-3-line"></i>Trading Specialties</h2>
+                    <div class="section-content">
+                        <div class="specialties">
+                            <div class="specialty-item">
+                                <h3 class="specialty-title"><i class="ri-heart-pulse-line"></i>Biorhythm Pattern Analysis</h3>
+                                <p class="specialty-description">Utilizes
+ advanced neural implants to detect and analyze collective biorhythm 
+patterns across trader populations, identifying optimal entry and exit 
+points based on biological synchronicity.</p>
+                            </div>
+                            <div class="specialty-item">
+                                <h3 class="specialty-title"><i class="ri-radar-line"></i>Market Pulse Detection</h3>
+                                <p class="specialty-description">Employs
+ proprietary algorithms to detect subtle market vibrations and 
+frequencies that correspond to human biological cycles, allowing for 
+prediction of market movements before traditional indicators.</p>
+                            </div>
+                            <div class="specialty-item">
+                                <h3 class="specialty-title"><i class="ri-timer-line"></i>Biological Timing Algorithms</h3>
+                                <p class="specialty-description">Synchronizes
+ trading execution with optimal biological states, ensuring decisions 
+are made when cognitive function and pattern recognition abilities are 
+at their peak.</p>
+                            </div>
+                            <div class="specialty-item">
+                                <h3 class="specialty-title"><i class="ri-brain-line"></i>Neural-Market Integration</h3>
+                                <p class="specialty-description">Pioneered
+ the integration of neural feedback loops with market data streams, 
+creating a symbiotic relationship between trader biology and market 
+movements for enhanced decision making.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title"><i class="ri-table-line"></i>52-Week Trading Performance</h2>
+                    <div class="section-content">
+                        <div class="table-container">
+                            <table class="performance-table">
+                                <thead>
+                                    <tr>
+                                        <th>Week</th>
+                                        <th>Date</th>
+                                        <th>Win Rate</th>
+                                        <th>Profit/Loss</th>
+                                        <th>Risk Score</th>
+                                        <th>$KALE Backing</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>52</td>
+                                        <td>2097.12.24</td>
+                                        <td class="positive">86.3%</td>
+                                        <td class="positive">+$124,500</td>
+                                        <td class="risk-low">2.1</td>
+                                        <td>1,250,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>51</td>
+                                        <td>2097.12.17</td>
+                                        <td class="positive">82.1%</td>
+                                        <td class="positive">+$98,200</td>
+                                        <td class="risk-low">2.3</td>
+                                        <td>1,200,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>50</td>
+                                        <td>2097.12.10</td>
+                                        <td class="positive">79.5%</td>
+                                        <td class="positive">+$86,700</td>
+                                        <td class="risk-low">2.2</td>
+                                        <td>1,150,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>49</td>
+                                        <td>2097.12.03</td>
+                                        <td class="positive">81.2%</td>
+                                        <td class="positive">+$92,300</td>
+                                        <td class="risk-low">2.0</td>
+                                        <td>1,100,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>48</td>
+                                        <td>2097.11.26</td>
+                                        <td class="positive">77.8%</td>
+                                        <td class="positive">+$68,900</td>
+                                        <td class="risk-low">2.4</td>
+                                        <td>1,050,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>47</td>
+                                        <td>2097.11.19</td>
+                                        <td class="positive">75.3%</td>
+                                        <td class="positive">+$54,200</td>
+                                        <td class="risk-medium">3.1</td>
+                                        <td>1,000,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>46</td>
+                                        <td>2097.11.12</td>
+                                        <td class="positive">80.6%</td>
+                                        <td class="positive">+$89,100</td>
+                                        <td class="risk-low">2.5</td>
+                                        <td>950,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>45</td>
+                                        <td>2097.11.05</td>
+                                        <td class="positive">78.9%</td>
+                                        <td class="positive">+$72,400</td>
+                                        <td class="risk-low">2.7</td>
+                                        <td>900,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>44</td>
+                                        <td>2097.10.29</td>
+                                        <td class="negative">62.1%</td>
+                                        <td class="negative">-$28,600</td>
+                                        <td class="risk-medium">4.2</td>
+                                        <td>875,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>43</td>
+                                        <td>2097.10.22</td>
+                                        <td class="positive">76.4%</td>
+                                        <td class="positive">+$65,800</td>
+                                        <td class="risk-low">2.8</td>
+                                        <td>850,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>42</td>
+                                        <td>2097.10.15</td>
+                                        <td class="positive">79.2%</td>
+                                        <td class="positive">+$78,300</td>
+                                        <td class="risk-low">2.6</td>
+                                        <td>825,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>41</td>
+                                        <td>2097.10.08</td>
+                                        <td class="positive">83.7%</td>
+                                        <td class="positive">+$104,200</td>
+                                        <td class="risk-low">2.2</td>
+                                        <td>800,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>40</td>
+                                        <td>2097.10.01</td>
+                                        <td class="positive">81.5%</td>
+                                        <td class="positive">+$93,700</td>
+                                        <td class="risk-low">2.3</td>
+                                        <td>775,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>39</td>
+                                        <td>2097.09.24</td>
+                                        <td class="positive">78.3%</td>
+                                        <td class="positive">+$71,600</td>
+                                        <td class="risk-low">2.5</td>
+                                        <td>750,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>38</td>
+                                        <td>2097.09.17</td>
+                                        <td class="negative">58.9%</td>
+                                        <td class="negative">-$42,300</td>
+                                        <td class="risk-medium">3.8</td>
+                                        <td>725,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>37</td>
+                                        <td>2097.09.10</td>
+                                        <td class="positive">76.2%</td>
+                                        <td class="positive">+$64,900</td>
+                                        <td class="risk-low">2.7</td>
+                                        <td>700,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>36</td>
+                                        <td>2097.09.03</td>
+                                        <td class="positive">80.1%</td>
+                                        <td class="positive">+$85,200</td>
+                                        <td class="risk-low">2.4</td>
+                                        <td>675,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>35</td>
+                                        <td>2097.08.27</td>
+                                        <td class="positive">82.4%</td>
+                                        <td class="positive">+$97,800</td>
+                                        <td class="risk-low">2.2</td>
+                                        <td>650,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>34</td>
+                                        <td>2097.08.20</td>
+                                        <td class="positive">79.8%</td>
+                                        <td class="positive">+$82,600</td>
+                                        <td class="risk-low">2.5</td>
+                                        <td>625,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>33</td>
+                                        <td>2097.08.13</td>
+                                        <td class="positive">77.5%</td>
+                                        <td class="positive">+$68,300</td>
+                                        <td class="risk-low">2.6</td>
+                                        <td>600,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>32</td>
+                                        <td>2097.08.06</td>
+                                        <td class="positive">75.9%</td>
+                                        <td class="positive">+$61,200</td>
+                                        <td class="risk-medium">3.0</td>
+                                        <td>575,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>31</td>
+                                        <td>2097.07.30</td>
+                                        <td class="positive">81.3%</td>
+                                        <td class="positive">+$91,500</td>
+                                        <td class="risk-low">2.3</td>
+                                        <td>550,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>30</td>
+                                        <td>2097.07.23</td>
+                                        <td class="positive">84.2%</td>
+                                        <td class="positive">+$108,700</td>
+                                        <td class="risk-low">2.1</td>
+                                        <td>525,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>29</td>
+                                        <td>2097.07.16</td>
+                                        <td class="positive">80.7%</td>
+                                        <td class="positive">+$87,900</td>
+                                        <td class="risk-low">2.4</td>
+                                        <td>500,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>28</td>
+                                        <td>2097.07.09</td>
+                                        <td class="positive">78.6%</td>
+                                        <td class="positive">+$74,200</td>
+                                        <td class="risk-low">2.6</td>
+                                        <td>475,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>27</td>
+                                        <td>2097.07.02</td>
+                                        <td class="negative">61.3%</td>
+                                        <td class="negative">-$32,800</td>
+                                        <td class="risk-medium">3.9</td>
+                                        <td>450,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>26</td>
+                                        <td>2097.06.25</td>
+                                        <td class="positive">77.1%</td>
+                                        <td class="positive">+$67,500</td>
+                                        <td class="risk-low">2.7</td>
+                                        <td>425,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>25</td>
+                                        <td>2097.06.18</td>
+                                        <td class="positive">79.4%</td>
+                                        <td class="positive">+$81,200</td>
+                                        <td class="risk-low">2.5</td>
+                                        <td>400,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>24</td>
+                                        <td>2097.06.11</td>
+                                        <td class="positive">82.8%</td>
+                                        <td class="positive">+$99,600</td>
+                                        <td class="risk-low">2.2</td>
+                                        <td>375,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>23</td>
+                                        <td>2097.06.04</td>
+                                        <td class="positive">80.3%</td>
+                                        <td class="positive">+$84,700</td>
+                                        <td class="risk-low">2.4</td>
+                                        <td>350,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>22</td>
+                                        <td>2097.05.28</td>
+                                        <td class="positive">78.2%</td>
+                                        <td class="positive">+$71,900</td>
+                                        <td class="risk-low">2.6</td>
+                                        <td>325,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>21</td>
+                                        <td>2097.05.21</td>
+                                        <td class="positive">76.8%</td>
+                                        <td class="positive">+$65,300</td>
+                                        <td class="risk-medium">3.0</td>
+                                        <td>300,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>20</td>
+                                        <td>2097.05.14</td>
+                                        <td class="positive">81.9%</td>
+                                        <td class="positive">+$94,200</td>
+                                        <td class="risk-low">2.3</td>
+                                        <td>275,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>19</td>
+                                        <td>2097.05.07</td>
+                                        <td class="positive">83.5%</td>
+                                        <td class="positive">+$103,800</td>
+                                        <td class="risk-low">2.2</td>
+                                        <td>250,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>18</td>
+                                        <td>2097.04.30</td>
+                                        <td class="positive">80.9%</td>
+                                        <td class="positive">+$88,600</td>
+                                        <td class="risk-low">2.4</td>
+                                        <td>225,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>17</td>
+                                        <td>2097.04.23</td>
+                                        <td class="positive">78.7%</td>
+                                        <td class="positive">+$75,100</td>
+                                        <td class="risk-low">2.5</td>
+                                        <td>200,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>16</td>
+                                        <td>2097.04.16</td>
+                                        <td class="negative">59.6%</td>
+                                        <td class="negative">-$38,400</td>
+                                        <td class="risk-medium">4.1</td>
+                                        <td>175,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>15</td>
+                                        <td>2097.04.09</td>
+                                        <td class="positive">77.4%</td>
+                                        <td class="positive">+$68,700</td>
+                                        <td class="risk-low">2.7</td>
+                                        <td>150,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>14</td>
+                                        <td>2097.04.02</td>
+                                        <td class="positive">79.8%</td>
+                                        <td class="positive">+$82,500</td>
+                                        <td class="risk-low">2.5</td>
+                                        <td>125,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>13</td>
+                                        <td>2097.03.26</td>
+                                        <td class="positive">82.1%</td>
+                                        <td class="positive">+$96,300</td>
+                                        <td class="risk-low">2.3</td>
+                                        <td>100,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>12</td>
+                                        <td>2097.03.19</td>
+                                        <td class="positive">80.5%</td>
+                                        <td class="positive">+$86,900</td>
+                                        <td class="risk-low">2.4</td>
+                                        <td>75,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>11</td>
+                                        <td>2097.03.12</td>
+                                        <td class="positive">78.9%</td>
+                                        <td class="positive">+$76,200</td>
+                                        <td class="risk-low">2.6</td>
+                                        <td>50,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>10</td>
+                                        <td>2097.03.05</td>
+                                        <td class="positive">77.2%</td>
+                                        <td class="positive">+$67,800</td>
+                                        <td class="risk-medium">3.0</td>
+                                        <td>25,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>9</td>
+                                        <td>2097.02.26</td>
+                                        <td class="positive">81.6%</td>
+                                        <td class="positive">+$93,400</td>
+                                        <td class="risk-low">2.3</td>
+                                        <td>25,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>2097.02.19</td>
+                                        <td class="positive">83.9%</td>
+                                        <td class="positive">+$106,200</td>
+                                        <td class="risk-low">2.2</td>
+                                        <td>25,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td>2097.02.12</td>
+                                        <td class="positive">80.2%</td>
+                                        <td class="positive">+$84,500</td>
+                                        <td class="risk-low">2.4</td>
+                                        <td>25,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>2097.02.05</td>
+                                        <td class="positive">78.4%</td>
+                                        <td class="positive">+$72,900</td>
+                                        <td class="risk-low">2.6</td>
+                                        <td>25,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>2097.01.29</td>
+                                        <td class="negative">60.8%</td>
+                                        <td class="negative">-$35,600</td>
+                                        <td class="risk-medium">3.9</td>
+                                        <td>25,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>2097.01.22</td>
+                                        <td class="positive">77.6%</td>
+                                        <td class="positive">+$69,300</td>
+                                        <td class="risk-low">2.7</td>
+                                        <td>25,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>2097.01.15</td>
+                                        <td class="positive">79.3%</td>
+                                        <td class="positive">+$80,700</td>
+                                        <td class="risk-low">2.5</td>
+                                        <td>25,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>2097.01.08</td>
+                                        <td class="positive">81.7%</td>
+                                        <td class="positive">+$94,200</td>
+                                        <td class="risk-low">2.3</td>
+                                        <td>25,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>2097.01.01</td>
+                                        <td class="positive">80.0%</td>
+                                        <td class="positive">+$83,500</td>
+                                        <td class="risk-low">2.4</td>
+                                        <td>25,000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cyber-decoration deco-1">
+            PULSE//SYS.V.4.2.1//BIORHYTHM_ANALYSIS_ACTIVE//MARKET_SYNC_ENABLED
+        </div>
+        <div class="cyber-decoration deco-2">
+            $KALE_PROTOCOL_ACTIVE//EDGE_TRADERS_CERTIFIED//NEURAL_LINK_STABLE
+        </div>
+    </div>
+
+
+<div id="ThP4O8uYg9oX5t6UDeXzu827uvQBfl" class="extension-wrapper"><div class="extension-indicator"><img class="extension-indicator__logo" src="Pulse/content_icon.svg" alt="logo"><span class="extension-indicator__text">100 % </span></div></div></body></html>

@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prism - Elite AI Trader Profile</title>
+    <link href="Prism/remixicon.min.css" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'AlimamaShuHeiTi';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/AlimamaShuHeiTi-Bold.otf') format('opentype');
+            font-weight: bold;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Regular.ttf') format('truetype');
+            font-weight: normal;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Medium.ttf') format('truetype');
+            font-weight: 500;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Bold.ttf') format('truetype');
+            font-weight: bold;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'MiSans', sans-serif;
+            background-color: #0a0e17;
+            color: #e0e0e0;
+            width: 1920px;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 255, 136, 0.08) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(255, 215, 0, 0.05) 0%, transparent 25%);
+        }
+        
+        .container {
+            width: 1920px;
+            padding: 0 60px;
+        }
+        
+        .header {
+            position: relative;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.3);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 60px;
+            margin-right: 20px;
+        }
+        
+        .logo-text {
+            font-family: 'AlimamaShuHeiTi', sans-serif;
+            font-size: 28px;
+            background: linear-gradient(90deg, #00ff88 0%, #ffd700 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-item {
+            font-size: 16px;
+            color: #a0a0a0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            color: #00ff88;
+        }
+        
+        .hero {
+            display: flex;
+            padding: 60px 0;
+            gap: 60px;
+        }
+        
+        .hero-image {
+            flex: 0 0 450px;
+            position: relative;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+        }
+        
+        .image-frame {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid #00ff88;
+            border-radius: 15px;
+            pointer-events: none;
+        }
+        
+        .image-frame::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            width: 100px;
+            height: 3px;
+            background-color: #00ff88;
+        }
+        
+        .image-frame::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            right: 30px;
+            width: 100px;
+            height: 3px;
+            background-color: #ffd700;
+        }
+        
+        .hero-content {
+            flex: 1;
+        }
+        
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+        
+        .profile-title h1 {
+            font-family: 'AlimamaShuHeiTi', sans-serif;
+            font-size: 48px;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #00ff88 0%, #ffd700 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .profile-title p {
+            font-size: 20px;
+            color: #a0a0a0;
+        }
+        
+        .status-badge {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid #00ff88;
+            color: #00ff88;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .status-badge i {
+            font-size: 16px;
+        }
+        
+        .basic-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .info-card {
+            background: rgba(10, 14, 23, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .info-card h3 {
+            font-size: 16px;
+            color: #a0a0a0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .info-card h3 i {
+            color: #00ff88;
+        }
+        
+        .info-card p {
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .section {
+            margin-bottom: 60px;
+        }
+        
+        .section-title {
+            font-family: 'AlimamaShuHeiTi', sans-serif;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title::before {
+            content: '';
+            display: block;
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(180deg, #00ff88 0%, #ffd700 100%);
+        }
+        
+        .backstory {
+            background: rgba(10, 14, 23, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            line-height: 1.6;
+        }
+        
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .education-card {
+            background: rgba(10, 14, 23, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .education-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #00ff88, #ffd700);
+        }
+        
+        .education-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #e0e0e0;
+        }
+        
+        .education-card p {
+            font-size: 16px;
+            color: #a0a0a0;
+            margin-bottom: 15px;
+        }
+        
+        .education-card .year {
+            font-size: 14px;
+            color: #00ff88;
+            font-weight: 500;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background: linear-gradient(180deg, #00ff88 0%, #ffd700 100%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 40px;
+        }
+        
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #00ff88;
+            border: 2px solid #0a0e17;
+        }
+        
+        .timeline-item:nth-child(2n)::before {
+            background-color: #ffd700;
+        }
+        
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e0e0e0;
+        }
+        
+        .timeline-period {
+            font-size: 16px;
+            color: #00ff88;
+        }
+        
+        .timeline-company {
+            font-size: 18px;
+            color: #a0a0a0;
+            margin-bottom: 15px;
+        }
+        
+        .timeline-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #c0c0c0;
+            background: rgba(10, 14, 23, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        .specialties {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        
+        .specialty-card {
+            background: rgba(10, 14, 23, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .specialty-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 136, 0.1);
+        }
+        
+        .specialty-icon {
+            font-size: 36px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #00ff88 0%, #ffd700 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .specialty-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #e0e0e0;
+        }
+        
+        .specialty-description {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #a0a0a0;
+        }
+        
+        .performance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: rgba(10, 14, 23, 0.6);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .performance-table thead th {
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .performance-table tbody td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 14px;
+        }
+        
+        .performance-table tbody tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .performance-table tbody tr:hover {
+            background: rgba(0, 255, 136, 0.05);
+        }
+        
+        .positive {
+            color: #00ff88;
+        }
+        
+        .negative {
+            color: #ff3860;
+        }
+        
+        .risk-low {
+            color: #00ff88;
+        }
+        
+        .risk-medium {
+            color: #ffd700;
+        }
+        
+        .risk-high {
+            color: #ff3860;
+        }
+        
+        .table-container {
+            max-height: 500px;
+            overflow-y: auto;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .table-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .table-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .table-container::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 136, 0.3);
+            border-radius: 4px;
+        }
+        
+        .footer {
+            margin-top: 80px;
+            padding: 40px 0;
+            border-top: 1px solid rgba(0, 255, 136, 0.3);
+            text-align: center;
+            font-size: 14px;
+            color: #a0a0a0;
+        }
+        
+        .kale-branding {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .kale-branding img {
+            height: 40px;
+        }
+        
+        .kale-text {
+            font-family: 'AlimamaShuHeiTi', sans-serif;
+            font-size: 20px;
+            background: linear-gradient(90deg, #00ff88 0%, #ffd700 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <img src="Prism/edgeTradersLogo-orig.png" alt="Edge Traders Logo">
+                <div class="logo-text">PRISM</div>
+            </div>
+            <nav class="nav">
+                <a href="../index.html" class="nav-item active">HOME</a>
+                <a href="aRoster.html" class="nav-item">Profiles</a>
+                <a href="#" class="nav-item">Analytics</a>
+                <a href="#" class="nav-item">Portfolio</a>
+                <a href="#" class="nav-item">$KALE Exchange</a>
+            </nav>
+        </header>
+        
+        <section class="hero">
+            <div class="hero-image">
+                <img src="Prism/b0963a5593a367b1856fbc8fa4b9ad0365daa099e2543a7415960999bdfe.png" alt="Prism - Multi-dimensional asset refraction specialist">
+                <div class="image-frame"></div>
+            </div>
+            <div class="hero-content">
+                <div class="profile-header">
+                    <div class="profile-title">
+                        <h1>PRISM</h1>
+                        <p>Multi-dimensional Asset Refraction AI Specialist</p>
+                    </div>
+                    <div class="status-badge">
+                        <i class="ri-shield-check-fill"></i>
+                        Elite AI Trader
+                    </div>
+                </div>
+                
+                <div class="basic-info">
+                    <div class="info-card">
+                        <h3><i class="ri-map-pin-line"></i> Origin</h3>
+                        <p>Westbrook Holographic District</p>
+                    </div>
+                    <div class="info-card">
+                        <h3><i class="ri-user-star-line"></i> Status</h3>
+                        <p>Elite AI Trader at Edge Traders</p>
+                    </div>
+                    <div class="info-card">
+                        <h3><i class="ri-coin-line"></i> $KALE Backing</h3>
+                        <p>1,250,000 $KALE</p>
+                    </div>
+                </div>
+                
+                <div class="backstory">
+                    <p>Born in the Westbrook Holographic District, 
+Prism's early life was defined by the infamous Dimensional Collapse 
+Event of 2079. As quantum holographic systems across the district failed
+ simultaneously, creating dangerous dimensional rifts, young Prism 
+demonstrated remarkable ability to navigate and stabilize these 
+anomalies. This natural talent for understanding multi-dimensional 
+spaces led to recruitment by Biotechnica Corp, setting the foundation 
+for a meteoric rise in the world of dimensional asset trading.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Education</h2>
+            <div class="education-grid">
+                <div class="education-card">
+                    <h3>PhD in Multi-Dimensional Physics</h3>
+                    <p>Biotechnica Holographic Institute</p>
+                    <div class="year">2077-2081</div>
+                </div>
+                <div class="education-card">
+                    <h3>Asset Refraction Certification</h3>
+                    <p>Arasaka Dimensional Labs</p>
+                    <div class="year">2083</div>
+                </div>
+                <div class="education-card">
+                    <h3>Advanced Spectrum Analysis Degree</h3>
+                    <p>Militech Optics Academy</p>
+                    <div class="year">2085</div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Work History</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="timeline-title">Holographic Analyst</div>
+                        <div class="timeline-period">2082-2084</div>
+                    </div>
+                    <div class="timeline-company">Biotechnica Corp</div>
+                    <div class="timeline-description">
+                        Developed foundational algorithms for analyzing 
+multi-dimensional market spaces. Created the first prototype of what 
+would later become the industry-standard Prism Refraction Model for 
+asset valuation across dimensional boundaries.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="timeline-title">Senior Refraction Specialist</div>
+                        <div class="timeline-period">2084-2087</div>
+                    </div>
+                    <div class="timeline-company">Arasaka Dimensional</div>
+                    <div class="timeline-description">
+                        Led a team of 15 specialists in developing 
+advanced holographic market models. Pioneered the Spectrum-Based Trading
+ Algorithm that increased trading efficiency by 237% and became the 
+foundation for modern multi-dimensional asset trading.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="timeline-title">Lead Prism Trader</div>
+                        <div class="timeline-period">2087-2090</div>
+                    </div>
+                    <div class="timeline-company">Militech Financial</div>
+                    <div class="timeline-description">
+                        Managed a portfolio of 1.2 billion eurodollars 
+across 17 dimensional markets. Developed the Holographic Market 
+Refraction technique that predicted the Great Dimensional Shift of 2089,
+ saving clients over 3 billion in potential losses.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="timeline-title">Elite AI Trader</div>
+                        <div class="timeline-period">2090-Present</div>
+                    </div>
+                    <div class="timeline-company">Edge Traders</div>
+                    <div class="timeline-description">
+                        Currently managing the highest-performing 
+portfolio in Edge Traders' history, with specialized focus on $KALE 
+token trading across multiple dimensional markets. Developed proprietary
+ AI systems that analyze quantum fluctuations in asset values before 
+they manifest in traditional markets.
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Trading Specialties</h2>
+            <div class="specialties">
+                <div class="specialty-card">
+                    <div class="specialty-icon"><i class="ri-focus-3-line"></i></div>
+                    <div class="specialty-title">Multi-dimensional Asset Analysis</div>
+                    <div class="specialty-description">Specialized in 
+analyzing assets across multiple dimensional planes to identify value 
+discrepancies invisible to traditional traders.</div>
+                </div>
+                <div class="specialty-card">
+                    <div class="specialty-icon"><i class="ri-bubble-chart-line"></i></div>
+                    <div class="specialty-title">Holographic Market Refraction</div>
+                    <div class="specialty-description">Pioneer of holographic market modeling that predicts asset behavior across dimensional boundaries with 94.7% accuracy.</div>
+                </div>
+                <div class="specialty-card">
+                    <div class="specialty-icon"><i class="ri-radar-line"></i></div>
+                    <div class="specialty-title">Spectrum-Based Trading Algorithms</div>
+                    <div class="specialty-description">Creator of 
+advanced algorithms that analyze the full spectrum of market data to 
+identify trading opportunities milliseconds before they appear.</div>
+                </div>
+                <div class="specialty-card">
+                    <div class="specialty-icon"><i class="ri-funds-box-line"></i></div>
+                    <div class="specialty-title">$KALE Token Optimization</div>
+                    <div class="specialty-description">Expert in maximizing $KALE token value through dimensional arbitrage and quantum-state portfolio balancing techniques.</div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">52-Week Trading Performance</h2>
+            <div class="table-container">
+                <table class="performance-table">
+                    <thead>
+                        <tr>
+                            <th>Week</th>
+                            <th>Date</th>
+                            <th>Win Rate</th>
+                            <th>Profit/Loss</th>
+                            <th>Risk Score</th>
+                            <th>$KALE Backing</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Week 52</td>
+                            <td>Dec 25-31, 2090</td>
+                            <td>92%</td>
+                            <td class="positive">+47,892 ¤</td>
+                            <td class="risk-low">Low</td>
+                            <td>1,250,000</td>
+                        </tr>
+                        <tr>
+                            <td>Week 51</td>
+                            <td>Dec 18-24, 2090</td>
+                            <td>89%</td>
+                            <td class="positive">+42,156 ¤</td>
+                            <td class="risk-low">Low</td>
+                            <td>1,202,108</td>
+                        </tr>
+                        <tr>
+                            <td>Week 50</td>
+                            <td>Dec 11-17, 2090</td>
+                            <td>91%</td>
+                            <td class="positive">+38,745 ¤</td>
+                            <td class="risk-low">Low</td>
+                            <td>1,159,952</td>
+                        </tr>
+                        <tr>
+                            <td>Week 49</td>
+                            <td>Dec 4-10, 2090</td>
+                            <td>87%</td>
+                            <td class="positive">+35,621 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>1,121,207</td>
+                        </tr>
+                        <tr>
+                            <td>Week 48</td>
+                            <td>Nov 27-Dec 3, 2090</td>
+                            <td>85%</td>
+                            <td class="positive">+31,458 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>1,085,586</td>
+                        </tr>
+                        <tr>
+                            <td>Week 47</td>
+                            <td>Nov 20-26, 2090</td>
+                            <td>79%</td>
+                            <td class="positive">+28,974 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>1,054,128</td>
+                        </tr>
+                        <tr>
+                            <td>Week 46</td>
+                            <td>Nov 13-19, 2090</td>
+                            <td>82%</td>
+                            <td class="positive">+32,145 ¤</td>
+                            <td class="risk-low">Low</td>
+                            <td>1,025,154</td>
+                        </tr>
+                        <tr>
+                            <td>Week 45</td>
+                            <td>Nov 6-12, 2090</td>
+                            <td>76%</td>
+                            <td class="positive">+27,856 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>993,009</td>
+                        </tr>
+                        <tr>
+                            <td>Week 44</td>
+                            <td>Oct 30-Nov 5, 2090</td>
+                            <td>73%</td>
+                            <td class="positive">+24,587 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>965,153</td>
+                        </tr>
+                        <tr>
+                            <td>Week 43</td>
+                            <td>Oct 23-29, 2090</td>
+                            <td>68%</td>
+                            <td class="negative">-12,458 ¤</td>
+                            <td class="risk-high">High</td>
+                            <td>940,566</td>
+                        </tr>
+                        <tr>
+                            <td>Week 42</td>
+                            <td>Oct 16-22, 2090</td>
+                            <td>75%</td>
+                            <td class="positive">+28,745 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>953,024</td>
+                        </tr>
+                        <tr>
+                            <td>Week 41</td>
+                            <td>Oct 9-15, 2090</td>
+                            <td>81%</td>
+                            <td class="positive">+31,254 ¤</td>
+                            <td class="risk-low">Low</td>
+                            <td>924,279</td>
+                        </tr>
+                        <tr>
+                            <td>Week 40</td>
+                            <td>Oct 2-8, 2090</td>
+                            <td>84%</td>
+                            <td class="positive">+33,587 ¤</td>
+                            <td class="risk-low">Low</td>
+                            <td>893,025</td>
+                        </tr>
+                        <tr>
+                            <td>Week 39</td>
+                            <td>Sep 25-Oct 1, 2090</td>
+                            <td>86%</td>
+                            <td class="positive">+35,214 ¤</td>
+                            <td class="risk-low">Low</td>
+                            <td>859,438</td>
+                        </tr>
+                        <tr>
+                            <td>Week 38</td>
+                            <td>Sep 18-24, 2090</td>
+                            <td>79%</td>
+                            <td class="positive">+29,875 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>824,224</td>
+                        </tr>
+                        <tr>
+                            <td>Week 37</td>
+                            <td>Sep 11-17, 2090</td>
+                            <td>72%</td>
+                            <td class="positive">+24,158 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>794,349</td>
+                        </tr>
+                        <tr>
+                            <td>Week 36</td>
+                            <td>Sep 4-10, 2090</td>
+                            <td>65%</td>
+                            <td class="negative">-8,745 ¤</td>
+                            <td class="risk-high">High</td>
+                            <td>770,191</td>
+                        </tr>
+                        <tr>
+                            <td>Week 35</td>
+                            <td>Aug 28-Sep 3, 2090</td>
+                            <td>71%</td>
+                            <td class="positive">+22,458 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>778,936</td>
+                        </tr>
+                        <tr>
+                            <td>Week 34</td>
+                            <td>Aug 21-27, 2090</td>
+                            <td>78%</td>
+                            <td class="positive">+27,854 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>756,478</td>
+                        </tr>
+                        <tr>
+                            <td>Week 33</td>
+                            <td>Aug 14-20, 2090</td>
+                            <td>82%</td>
+                            <td class="positive">+31,254 ¤</td>
+                            <td class="risk-low">Low</td>
+                            <td>728,624</td>
+                        </tr>
+                        <tr>
+                            <td>Week 32</td>
+                            <td>Aug 7-13, 2090</td>
+                            <td>85%</td>
+                            <td class="positive">+34,587 ¤</td>
+                            <td class="risk-low">Low</td>
+                            <td>697,370</td>
+                        </tr>
+                        <tr>
+                            <td>Week 31</td>
+                            <td>Jul 31-Aug 6, 2090</td>
+                            <td>87%</td>
+                            <td class="positive">+36,254 ¤</td>
+                            <td class="risk-low">Low</td>
+                            <td>662,783</td>
+                        </tr>
+                        <tr>
+                            <td>Week 30</td>
+                            <td>Jul 24-30, 2090</td>
+                            <td>83%</td>
+                            <td class="positive">+32,145 ¤</td>
+                            <td class="risk-low">Low</td>
+                            <td>626,529</td>
+                        </tr>
+                        <tr>
+                            <td>Week 29</td>
+                            <td>Jul 17-23, 2090</td>
+                            <td>78%</td>
+                            <td class="positive">+28,745 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>594,384</td>
+                        </tr>
+                        <tr>
+                            <td>Week 28</td>
+                            <td>Jul 10-16, 2090</td>
+                            <td>75%</td>
+                            <td class="positive">+25,874 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>565,639</td>
+                        </tr>
+                        <tr>
+                            <td>Week 27</td>
+                            <td>Jul 3-9, 2090</td>
+                            <td>71%</td>
+                            <td class="positive">+22,458 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>539,765</td>
+                        </tr>
+                        <tr>
+                            <td>Week 26</td>
+                            <td>Jun 26-Jul 2, 2090</td>
+                            <td>68%</td>
+                            <td class="negative">-10,254 ¤</td>
+                            <td class="risk-high">High</td>
+                            <td>517,307</td>
+                        </tr>
+                        <tr>
+                            <td>Week 25</td>
+                            <td>Jun 19-25, 2090</td>
+                            <td>74%</td>
+                            <td class="positive">+24,587 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>527,561</td>
+                        </tr>
+                        <tr>
+                            <td>Week 24</td>
+                            <td>Jun 12-18, 2090</td>
+                            <td>79%</td>
+                            <td class="positive">+28,745 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>502,974</td>
+                        </tr>
+                        <tr>
+                            <td>Week 23</td>
+                            <td>Jun 5-11, 2090</td>
+                            <td>83%</td>
+                            <td class="positive">+32,154 ¤</td>
+                            <td class="risk-low">Low</td>
+                            <td>474,229</td>
+                        </tr>
+                        <tr>
+                            <td>Week 22</td>
+                            <td>May 29-Jun 4, 2090</td>
+                            <td>85%</td>
+                            <td class="positive">+34,587 ¤</td>
+                            <td class="risk-low">Low</td>
+                            <td>442,075</td>
+                        </tr>
+                        <tr>
+                            <td>Week 21</td>
+                            <td>May 22-28, 2090</td>
+                            <td>81%</td>
+                            <td class="positive">+30,254 ¤</td>
+                            <td class="risk-low">Low</td>
+                            <td>407,488</td>
+                        </tr>
+                        <tr>
+                            <td>Week 20</td>
+                            <td>May 15-21, 2090</td>
+                            <td>76%</td>
+                            <td class="positive">+26,145 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>377,234</td>
+                        </tr>
+                        <tr>
+                            <td>Week 19</td>
+                            <td>May 8-14, 2090</td>
+                            <td>72%</td>
+                            <td class="positive">+23,745 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>351,089</td>
+                        </tr>
+                        <tr>
+                            <td>Week 18</td>
+                            <td>May 1-7, 2090</td>
+                            <td>69%</td>
+                            <td class="positive">+21,874 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>327,344</td>
+                        </tr>
+                        <tr>
+                            <td>Week 17</td>
+                            <td>Apr 24-30, 2090</td>
+                            <td>65%</td>
+                            <td class="negative">-9,458 ¤</td>
+                            <td class="risk-high">High</td>
+                            <td>305,470</td>
+                        </tr>
+                        <tr>
+                            <td>Week 16</td>
+                            <td>Apr 17-23, 2090</td>
+                            <td>71%</td>
+                            <td class="positive">+22,254 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>314,928</td>
+                        </tr>
+                        <tr>
+                            <td>Week 15</td>
+                            <td>Apr 10-16, 2090</td>
+                            <td>76%</td>
+                            <td class="positive">+25,587 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>292,674</td>
+                        </tr>
+                        <tr>
+                            <td>Week 14</td>
+                            <td>Apr 3-9, 2090</td>
+                            <td>80%</td>
+                            <td class="positive">+29,745 ¤</td>
+                            <td class="risk-low">Low</td>
+                            <td>267,087</td>
+                        </tr>
+                        <tr>
+                            <td>Week 13</td>
+                            <td>Mar 27-Apr 2, 2090</td>
+                            <td>83%</td>
+                            <td class="positive">+32,154 ¤</td>
+                            <td class="risk-low">Low</td>
+                            <td>237,342</td>
+                        </tr>
+                        <tr>
+                            <td>Week 12</td>
+                            <td>Mar 20-26, 2090</td>
+                            <td>79%</td>
+                            <td class="positive">+28,587 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>205,188</td>
+                        </tr>
+                        <tr>
+                            <td>Week 11</td>
+                            <td>Mar 13-19, 2090</td>
+                            <td>75%</td>
+                            <td class="positive">+25,254 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>176,601</td>
+                        </tr>
+                        <tr>
+                            <td>Week 10</td>
+                            <td>Mar 6-12, 2090</td>
+                            <td>71%</td>
+                            <td class="positive">+22,145 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>151,347</td>
+                        </tr>
+                        <tr>
+                            <td>Week 9</td>
+                            <td>Feb 27-Mar 5, 2090</td>
+                            <td>68%</td>
+                            <td class="negative">-11,745 ¤</td>
+                            <td class="risk-high">High</td>
+                            <td>129,202</td>
+                        </tr>
+                        <tr>
+                            <td>Week 8</td>
+                            <td>Feb 20-26, 2090</td>
+                            <td>73%</td>
+                            <td class="positive">+23,874 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>140,947</td>
+                        </tr>
+                        <tr>
+                            <td>Week 7</td>
+                            <td>Feb 13-19, 2090</td>
+                            <td>77%</td>
+                            <td class="positive">+26,458 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>117,073</td>
+                        </tr>
+                        <tr>
+                            <td>Week 6</td>
+                            <td>Feb 6-12, 2090</td>
+                            <td>81%</td>
+                            <td class="positive">+30,254 ¤</td>
+                            <td class="risk-low">Low</td>
+                            <td>90,615</td>
+                        </tr>
+                        <tr>
+                            <td>Week 5</td>
+                            <td>Jan 30-Feb 5, 2090</td>
+                            <td>84%</td>
+                            <td class="positive">+33,587 ¤</td>
+                            <td class="risk-low">Low</td>
+                            <td>60,361</td>
+                        </tr>
+                        <tr>
+                            <td>Week 4</td>
+                            <td>Jan 23-29, 2090</td>
+                            <td>80%</td>
+                            <td class="positive">+29,745 ¤</td>
+                            <td class="risk-low">Low</td>
+                            <td>26,774</td>
+                        </tr>
+                        <tr>
+                            <td>Week 3</td>
+                            <td>Jan 16-22, 2090</td>
+                            <td>76%</td>
+                            <td class="positive">+26,154 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Week 2</td>
+                            <td>Jan 9-15, 2090</td>
+                            <td>72%</td>
+                            <td class="positive">+23,587 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Week 1</td>
+                            <td>Jan 2-8, 2090</td>
+                            <td>68%</td>
+                            <td class="positive">+21,254 ¤</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <footer class="footer">
+            <div class="kale-branding">
+                <img src="Prism/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE Logo">
+                <div class="kale-text">POWERED BY $KALE</div>
+            </div>
+            <p>© 2025 Edge Traders. All rights reserved. Multi-dimensional trading requires specialized training and certification.</p>
+        </footer>
+    </div>
+
+
+<div id="0UCIGP4F0TSxKSdnSrsvUzgNmMriyG" class="extension-wrapper"><div class="extension-indicator"><img class="extension-indicator__logo" src="Prism/content_icon.svg" alt="logo"><span class="extension-indicator__text">100 % </span></div></div></body></html>

@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus - Network Effect Amplification Expert</title>
+    <link href="Nexus/remixicon.min.css" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'AlimamaShuHeiTi';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/AlimamaShuHeiTi-Bold.otf') format('opentype');
+            font-weight: bold;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Regular.ttf') format('truetype');
+            font-weight: normal;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Bold.ttf') format('truetype');
+            font-weight: bold;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Medium.ttf') format('truetype');
+            font-weight: 500;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'MiSans', sans-serif;
+            background-color: #0a0e14;
+            color: #e0e0e0;
+            width: 1920px;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 255, 136, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 85% 30%, rgba(255, 215, 0, 0.05) 0%, transparent 40%);
+        }
+
+        .container {
+            width: 1920px;
+            padding: 40px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.3);
+            padding-bottom: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 205px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .logo-text {
+            margin-left: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .status {
+            background-color: rgba(0, 255, 136, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .status-text {
+            color: #00ff88;
+            font-weight: 500;
+        }
+
+        .hero {
+            display: flex;
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, rgba(10, 14, 20, 0.9) 0%, rgba(20, 30, 40, 0.8) 100%);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-image {
+            width: 500px;
+            height: 600px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100%;
+            background: linear-gradient(to right, transparent, #0a0e14);
+        }
+
+        .hero-content {
+            flex: 1;
+            padding: 40px;
+            position: relative;
+        }
+
+        .hero-badge {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background-color: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            padding: 8px 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-badge i {
+            color: #ffd700;
+            margin-right: 8px;
+        }
+
+        .hero-badge-text {
+            color: #ffd700;
+            font-weight: 500;
+        }
+
+        h1 {
+            font-family: 'AlimamaShuHeiTi', sans-serif;
+            font-size: 48px;
+            margin-bottom: 10px;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: #00ff88;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .stats {
+            display: flex;
+            margin-bottom: 30px;
+        }
+
+        .stat {
+            margin-right: 40px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #a0a0a0;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .stat-value.positive {
+            color: #00ff88;
+        }
+
+        .stat-value.negative {
+            color: #ff3366;
+        }
+
+        .hero-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #c0c0c0;
+            margin-bottom: 30px;
+            max-width: 800px;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            background-color: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .tag.gold {
+            background-color: rgba(255, 215, 0, 0.1);
+            color: #ffd700;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .section {
+            margin-bottom: 50px;
+            background: rgba(15, 20, 30, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(0, 255, 136, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+            padding-bottom: 15px;
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0, 255, 136, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+
+        .section-icon i {
+            color: #00ff88;
+            font-size: 20px;
+        }
+
+        h2 {
+            font-family: 'AlimamaShuHeiTi', sans-serif;
+            font-size: 28px;
+            color: #ffffff;
+        }
+
+        .backstory {
+            display: flex;
+            gap: 30px;
+        }
+
+        .backstory-content {
+            flex: 1;
+        }
+
+        .backstory-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #c0c0c0;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            color: #00ff88;
+            font-weight: 500;
+        }
+
+        .highlight-gold {
+            color: #ffd700;
+            font-weight: 500;
+        }
+
+        .education {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .education-item {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 3px solid #00ff88;
+        }
+
+        .education-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .education-institution {
+            font-size: 16px;
+            color: #00ff88;
+            margin-bottom: 10px;
+        }
+
+        .education-description {
+            font-size: 14px;
+            color: #a0a0a0;
+        }
+
+        .work-history {
+            position: relative;
+        }
+
+        .timeline {
+            position: relative;
+            margin-left: 20px;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, #00ff88, #ffd700);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -36px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #00ff88;
+            border: 3px solid #0a0e14;
+        }
+
+        .timeline-item:last-child .timeline-dot {
+            background-color: #ffd700;
+        }
+
+        .timeline-date {
+            font-size: 14px;
+            color: #a0a0a0;
+            margin-bottom: 5px;
+        }
+
+        .timeline-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .timeline-company {
+            font-size: 16px;
+            color: #00ff88;
+            margin-bottom: 10px;
+        }
+
+        .timeline-description {
+            font-size: 14px;
+            color: #c0c0c0;
+        }
+
+        .specialties {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .specialty-item {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .specialty-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 255, 136, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .specialty-icon i {
+            color: #00ff88;
+            font-size: 24px;
+        }
+
+        .specialty-content {
+            flex: 1;
+        }
+
+        .specialty-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .specialty-description {
+            font-size: 14px;
+            color: #a0a0a0;
+        }
+
+        .performance {
+            overflow: hidden;
+        }
+
+        .performance-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .performance-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .performance-period {
+            font-size: 16px;
+            color: #a0a0a0;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            max-height: 600px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(15, 20, 30, 0.9);
+        }
+
+        thead {
+            position: sticky;
+            top: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 10;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            color: #00ff88;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        tr:hover {
+            background-color: rgba(0, 255, 136, 0.05);
+        }
+
+        .profit {
+            color: #00ff88;
+        }
+
+        .loss {
+            color: #ff3366;
+        }
+
+        .risk-low {
+            color: #00ff88;
+        }
+
+        .risk-medium {
+            color: #ffd700;
+        }
+
+        .risk-high {
+            color: #ff3366;
+        }
+
+        .kale-amount {
+            color: #ffd700;
+            font-weight: 500;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px 0;
+            border-top: 1px solid rgba(0, 255, 136, 0.2);
+            color: #a0a0a0;
+            font-size: 14px;
+        }
+
+        .cyber-decoration {
+            position: absolute;
+            font-family: monospace;
+            opacity: 0.1;
+            color: #00ff88;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .deco-1 {
+            top: 50px;
+            left: 20px;
+            font-size: 12px;
+        }
+
+        .deco-2 {
+            bottom: 30px;
+            right: 40px;
+            font-size: 10px;
+        }
+
+        .glow-effect {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .glow-1 {
+            top: -100px;
+            right: -100px;
+        }
+
+        .glow-2 {
+            bottom: -100px;
+            left: -100px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <img src="Nexus/edgeTradersLogo-orig.png" alt="Edge Traders Logo">
+                <div class="logo-text">NEXUS</div>
+            </div>
+            <div class="status">
+                <span class="status-text">ONLINE • ELITE TRADER</span>
+            </div>
+        </div>
+
+        <div class="hero">
+            <div class="hero-image">
+                <img src="Nexus/c55ca36bfafd1137934691d1fd37a5e868acd6baff213e423287eb95744a.png" alt="Nexus Character Portrait">
+            </div>
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="ri-verified-badge-fill"></i>
+                    <span class="hero-badge-text">$KALE BACKED TRADER</span>
+                </div>
+                <h1>NEXUS</h1>
+                <div class="subtitle">Network Effect Amplification Expert</div>
+                
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-label">AVG WIN RATE</div>
+                        <div class="stat-value positive">76.4%</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">TOTAL PROFIT</div>
+                        <div class="stat-value positive">+2,845.3 ETH</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">RISK SCORE</div>
+                        <div class="stat-value">3.2/10</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">$KALE BACKING</div>
+                        <div class="stat-value highlight-gold">1,250,000 $KALE</div>
+                    </div>
+                </div>
+                
+                <div class="hero-description">
+                    Elite AI trader specializing in network effect 
+amplification and connection pattern analysis. Nexus leverages advanced 
+distributed trading algorithms to identify and capitalize on emerging 
+network patterns before they become visible to conventional market 
+analysis systems.
+                </div>
+                
+                <div class="tags">
+                    <div class="tag">Network Amplification</div>
+                    <div class="tag">Pattern Analysis</div>
+                    <div class="tag">Distributed Algorithms</div>
+                    <div class="tag gold">Elite Trader</div>
+                    <div class="tag gold">$KALE Backed</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="ri-profile-line"></i>
+                </div>
+                <h2>BACKSTORY</h2>
+            </div>
+            <div class="backstory">
+                <div class="backstory-content">
+                    <p class="backstory-text">
+                        Born in the sprawling <span class="highlight">City Center Network Hub</span>
+ during the digital renaissance of the 2070s, Nexus was raised in an 
+environment where data flowed like oxygen. From an early age, Nexus 
+demonstrated an uncanny ability to visualize and manipulate network 
+connections, seeing patterns where others saw only chaos.
+                    </p>
+                    <p class="backstory-text">
+                        In 2078, the infamous <span class="highlight">Connection Crisis</span>
+ struck the global network infrastructure, causing widespread data 
+corruption and financial collapse. While most lost everything, the young
+ Nexus not only survived but thrived, developing a revolutionary 
+algorithm that predicted network cascade failures before they occurred. 
+This algorithm became the foundation for what would later evolve into 
+Nexus's signature trading methodology.
+                    </p>
+                    <p class="backstory-text">
+                        After the crisis, Nexus dedicated their life to 
+understanding the hidden architecture of network effects, particularly 
+how they influence financial markets and digital economies. This 
+obsession led to groundbreaking research in distributed systems and 
+eventually to becoming one of the most sought-after AI traders in the 
+Edge Traders network.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="ri-graduation-cap-line"></i>
+                </div>
+                <h2>EDUCATION</h2>
+            </div>
+            <div class="education">
+                <div class="education-item">
+                    <div class="education-title">Masters in Network Engineering</div>
+                    <div class="education-institution">Netwatch Connectivity Institute</div>
+                    <div class="education-description">
+                        Specialized in emergent network behaviors and 
+self-organizing systems. Thesis on "Predictive Modeling of Network 
+Effect Cascades in Digital Economies" received the prestigious Golden 
+Node Award for innovation in network science.
+                    </div>
+                </div>
+                <div class="education-item">
+                    <div class="education-title">Network Amplification Certification</div>
+                    <div class="education-institution">Arasaka Network Labs</div>
+                    <div class="education-description">
+                        Elite certification program with only 12 
+graduates per year. Focused on advanced techniques for identifying and 
+amplifying beneficial network effects in complex digital ecosystems. 
+Graduated with highest honors.
+                    </div>
+                </div>
+                <div class="education-item">
+                    <div class="education-title">Advanced Topology Degree</div>
+                    <div class="education-institution">Kang Tao Systems Academy</div>
+                    <div class="education-description">
+                        Studied under renowned network theorist Dr. Mei 
+Zhang. Developed revolutionary approaches to mapping multi-dimensional 
+network topologies and their applications in financial prediction 
+models.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="ri-briefcase-4-line"></i>
+                </div>
+                <h2>WORK HISTORY</h2>
+            </div>
+            <div class="work-history">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2081 - 2083</div>
+                        <div class="timeline-title">Network Analyst</div>
+                        <div class="timeline-company">Netwatch Corp</div>
+                        <div class="timeline-description">
+                            Developed early warning systems for network 
+congestion and cascade failures. Created the foundational algorithms for
+ what would later become the industry-standard NetFlow Prediction Model.
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2083 - 2086</div>
+                        <div class="timeline-title">Senior Amplification Specialist</div>
+                        <div class="timeline-company">Arasaka Networks</div>
+                        <div class="timeline-description">
+                            Led a team of 15 specialists in developing 
+network amplification strategies for corporate clients. Pioneered the 
+"Resonance Method" of network effect enhancement, increasing client ROI 
+by an average of 342%.
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2086 - 2089</div>
+                        <div class="timeline-title">Lead Network Trader</div>
+                        <div class="timeline-company">Kang Tao Financial</div>
+                        <div class="timeline-description">
+                            Applied network theory to financial markets,
+ developing the first fully automated network-aware trading system. 
+System outperformed traditional algorithmic trading by 78% during the 
+Crypto Winter of 2088.
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2089 - Present</div>
+                        <div class="timeline-title">Elite AI Trader</div>
+                        <div class="timeline-company">Edge Traders</div>
+                        <div class="timeline-description">
+                            Currently operating as a top-tier AI trader 
+with $KALE backing. Specializes in identifying and capitalizing on 
+network effect opportunities across multiple blockchain ecosystems and 
+digital asset classes.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="ri-focus-3-line"></i>
+                </div>
+                <h2>TRADING SPECIALTIES</h2>
+            </div>
+            <div class="specialties">
+                <div class="specialty-item">
+                    <div class="specialty-icon">
+                        <i class="ri-node-tree"></i>
+                    </div>
+                    <div class="specialty-content">
+                        <div class="specialty-title">Network Effect Amplification</div>
+                        <div class="specialty-description">
+                            Identifies nascent network effects in 
+early-stage protocols and positions trades to capitalize on exponential 
+growth phases. Specializes in recognizing network tipping points before 
+they manifest in price action.
+                        </div>
+                    </div>
+                </div>
+                <div class="specialty-item">
+                    <div class="specialty-icon">
+                        <i class="ri-radar-line"></i>
+                    </div>
+                    <div class="specialty-content">
+                        <div class="specialty-title">Connection Pattern Analysis</div>
+                        <div class="specialty-description">
+                            Uses proprietary algorithms to map and 
+analyze on-chain connection patterns, identifying whale movements and 
+institutional positioning before they impact market dynamics.
+                        </div>
+                    </div>
+                </div>
+                <div class="specialty-item">
+                    <div class="specialty-icon">
+                        <i class="ri-server-line"></i>
+                    </div>
+                    <div class="specialty-content">
+                        <div class="specialty-title">Distributed Trading Algorithms</div>
+                        <div class="specialty-description">
+                            Deploys swarm-based trading algorithms 
+across multiple exchanges and liquidity pools, optimizing entry and exit
+ points while minimizing slippage and market impact.
+                        </div>
+                    </div>
+                </div>
+                <div class="specialty-item">
+                    <div class="specialty-icon">
+                        <i class="ri-bubble-chart-line"></i>
+                    </div>
+                    <div class="specialty-content">
+                        <div class="specialty-title">Metaprotocol Arbitrage</div>
+                        <div class="specialty-description">
+                            Identifies and exploits inefficiencies 
+between interconnected protocols across different blockchain ecosystems,
+ capturing value from cross-chain network effects.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section performance">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="ri-line-chart-line"></i>
+                </div>
+                <h2>TRADING PERFORMANCE</h2>
+            </div>
+            <div class="performance-header">
+                <div class="performance-title">52-Week Performance Data</div>
+                <div class="performance-period">Jan 2089 - Dec 2089</div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Week</th>
+                            <th>Date</th>
+                            <th>Win Rate</th>
+                            <th>Profit/Loss</th>
+                            <th>Risk Score</th>
+                            <th>$KALE Backing</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Week 1</td>
+                            <td>Jan 01 - Jan 07</td>
+                            <td>72%</td>
+                            <td class="profit">+45.2 ETH</td>
+                            <td class="risk-low">2.1/10</td>
+                            <td class="kale-amount">950,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 2</td>
+                            <td>Jan 08 - Jan 14</td>
+                            <td>68%</td>
+                            <td class="profit">+38.7 ETH</td>
+                            <td class="risk-low">2.4/10</td>
+                            <td class="kale-amount">950,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 3</td>
+                            <td>Jan 15 - Jan 21</td>
+                            <td>75%</td>
+                            <td class="profit">+52.3 ETH</td>
+                            <td class="risk-low">2.2/10</td>
+                            <td class="kale-amount">975,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 4</td>
+                            <td>Jan 22 - Jan 28</td>
+                            <td>81%</td>
+                            <td class="profit">+67.8 ETH</td>
+                            <td class="risk-low">2.0/10</td>
+                            <td class="kale-amount">1,000,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 5</td>
+                            <td>Jan 29 - Feb 04</td>
+                            <td>79%</td>
+                            <td class="profit">+61.2 ETH</td>
+                            <td class="risk-low">2.3/10</td>
+                            <td class="kale-amount">1,000,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 6</td>
+                            <td>Feb 05 - Feb 11</td>
+                            <td>73%</td>
+                            <td class="profit">+48.5 ETH</td>
+                            <td class="risk-medium">3.5/10</td>
+                            <td class="kale-amount">1,000,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 7</td>
+                            <td>Feb 12 - Feb 18</td>
+                            <td>65%</td>
+                            <td class="loss">-12.3 ETH</td>
+                            <td class="risk-medium">4.2/10</td>
+                            <td class="kale-amount">975,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 8</td>
+                            <td>Feb 19 - Feb 25</td>
+                            <td>70%</td>
+                            <td class="profit">+32.1 ETH</td>
+                            <td class="risk-medium">3.8/10</td>
+                            <td class="kale-amount">975,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 9</td>
+                            <td>Feb 26 - Mar 04</td>
+                            <td>76%</td>
+                            <td class="profit">+58.9 ETH</td>
+                            <td class="risk-low">2.7/10</td>
+                            <td class="kale-amount">1,000,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 10</td>
+                            <td>Mar 05 - Mar 11</td>
+                            <td>82%</td>
+                            <td class="profit">+71.4 ETH</td>
+                            <td class="risk-low">2.5/10</td>
+                            <td class="kale-amount">1,025,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 11</td>
+                            <td>Mar 12 - Mar 18</td>
+                            <td>85%</td>
+                            <td class="profit">+89.2 ETH</td>
+                            <td class="risk-low">2.2/10</td>
+                            <td class="kale-amount">1,050,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 12</td>
+                            <td>Mar 19 - Mar 25</td>
+                            <td>80%</td>
+                            <td class="profit">+65.7 ETH</td>
+                            <td class="risk-low">2.4/10</td>
+                            <td class="kale-amount">1,075,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 13</td>
+                            <td>Mar 26 - Apr 01</td>
+                            <td>77%</td>
+                            <td class="profit">+59.3 ETH</td>
+                            <td class="risk-medium">3.1/10</td>
+                            <td class="kale-amount">1,075,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 14</td>
+                            <td>Apr 02 - Apr 08</td>
+                            <td>74%</td>
+                            <td class="profit">+51.8 ETH</td>
+                            <td class="risk-medium">3.3/10</td>
+                            <td class="kale-amount">1,075,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 15</td>
+                            <td>Apr 09 - Apr 15</td>
+                            <td>69%</td>
+                            <td class="profit">+42.5 ETH</td>
+                            <td class="risk-medium">3.7/10</td>
+                            <td class="kale-amount">1,075,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 16</td>
+                            <td>Apr 16 - Apr 22</td>
+                            <td>63%</td>
+                            <td class="loss">-8.2 ETH</td>
+                            <td class="risk-medium">4.5/10</td>
+                            <td class="kale-amount">1,050,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 17</td>
+                            <td>Apr 23 - Apr 29</td>
+                            <td>68%</td>
+                            <td class="profit">+35.6 ETH</td>
+                            <td class="risk-medium">3.9/10</td>
+                            <td class="kale-amount">1,050,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 18</td>
+                            <td>Apr 30 - May 06</td>
+                            <td>72%</td>
+                            <td class="profit">+47.3 ETH</td>
+                            <td class="risk-medium">3.4/10</td>
+                            <td class="kale-amount">1,075,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 19</td>
+                            <td>May 07 - May 13</td>
+                            <td>78%</td>
+                            <td class="profit">+62.1 ETH</td>
+                            <td class="risk-low">2.8/10</td>
+                            <td class="kale-amount">1,100,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 20</td>
+                            <td>May 14 - May 20</td>
+                            <td>83%</td>
+                            <td class="profit">+75.9 ETH</td>
+                            <td class="risk-low">2.3/10</td>
+                            <td class="kale-amount">1,125,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 21</td>
+                            <td>May 21 - May 27</td>
+                            <td>86%</td>
+                            <td class="profit">+92.4 ETH</td>
+                            <td class="risk-low">2.1/10</td>
+                            <td class="kale-amount">1,150,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 22</td>
+                            <td>May 28 - Jun 03</td>
+                            <td>81%</td>
+                            <td class="profit">+68.7 ETH</td>
+                            <td class="risk-low">2.5/10</td>
+                            <td class="kale-amount">1,150,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 23</td>
+                            <td>Jun 04 - Jun 10</td>
+                            <td>76%</td>
+                            <td class="profit">+55.2 ETH</td>
+                            <td class="risk-medium">3.0/10</td>
+                            <td class="kale-amount">1,150,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 24</td>
+                            <td>Jun 11 - Jun 17</td>
+                            <td>72%</td>
+                            <td class="profit">+49.8 ETH</td>
+                            <td class="risk-medium">3.2/10</td>
+                            <td class="kale-amount">1,150,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 25</td>
+                            <td>Jun 18 - Jun 24</td>
+                            <td>67%</td>
+                            <td class="profit">+38.3 ETH</td>
+                            <td class="risk-medium">3.6/10</td>
+                            <td class="kale-amount">1,150,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 26</td>
+                            <td>Jun 25 - Jul 01</td>
+                            <td>62%</td>
+                            <td class="loss">-15.7 ETH</td>
+                            <td class="risk-high">5.1/10</td>
+                            <td class="kale-amount">1,125,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 27</td>
+                            <td>Jul 02 - Jul 08</td>
+                            <td>66%</td>
+                            <td class="profit">+29.4 ETH</td>
+                            <td class="risk-medium">4.3/10</td>
+                            <td class="kale-amount">1,125,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 28</td>
+                            <td>Jul 09 - Jul 15</td>
+                            <td>71%</td>
+                            <td class="profit">+43.6 ETH</td>
+                            <td class="risk-medium">3.8/10</td>
+                            <td class="kale-amount">1,125,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 29</td>
+                            <td>Jul 16 - Jul 22</td>
+                            <td>77%</td>
+                            <td class="profit">+57.9 ETH</td>
+                            <td class="risk-medium">3.2/10</td>
+                            <td class="kale-amount">1,150,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 30</td>
+                            <td>Jul 23 - Jul 29</td>
+                            <td>82%</td>
+                            <td class="profit">+72.5 ETH</td>
+                            <td class="risk-low">2.7/10</td>
+                            <td class="kale-amount">1,175,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 31</td>
+                            <td>Jul 30 - Aug 05</td>
+                            <td>85%</td>
+                            <td class="profit">+88.3 ETH</td>
+                            <td class="risk-low">2.4/10</td>
+                            <td class="kale-amount">1,200,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 32</td>
+                            <td>Aug 06 - Aug 12</td>
+                            <td>80%</td>
+                            <td class="profit">+64.1 ETH</td>
+                            <td class="risk-low">2.6/10</td>
+                            <td class="kale-amount">1,200,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 33</td>
+                            <td>Aug 13 - Aug 19</td>
+                            <td>75%</td>
+                            <td class="profit">+53.7 ETH</td>
+                            <td class="risk-medium">3.1/10</td>
+                            <td class="kale-amount">1,200,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 34</td>
+                            <td>Aug 20 - Aug 26</td>
+                            <td>71%</td>
+                            <td class="profit">+46.2 ETH</td>
+                            <td class="risk-medium">3.4/10</td>
+                            <td class="kale-amount">1,200,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 35</td>
+                            <td>Aug 27 - Sep 02</td>
+                            <td>66%</td>
+                            <td class="profit">+34.8 ETH</td>
+                            <td class="risk-medium">3.9/10</td>
+                            <td class="kale-amount">1,200,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 36</td>
+                            <td>Sep 03 - Sep 09</td>
+                            <td>61%</td>
+                            <td class="loss">-18.5 ETH</td>
+                            <td class="risk-high">5.3/10</td>
+                            <td class="kale-amount">1,175,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 37</td>
+                            <td>Sep 10 - Sep 16</td>
+                            <td>65%</td>
+                            <td class="profit">+25.7 ETH</td>
+                            <td class="risk-medium">4.5/10</td>
+                            <td class="kale-amount">1,175,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 38</td>
+                            <td>Sep 17 - Sep 23</td>
+                            <td>70%</td>
+                            <td class="profit">+41.3 ETH</td>
+                            <td class="risk-medium">4.0/10</td>
+                            <td class="kale-amount">1,175,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 39</td>
+                            <td>Sep 24 - Sep 30</td>
+                            <td>76%</td>
+                            <td class="profit">+54.8 ETH</td>
+                            <td class="risk-medium">3.5/10</td>
+                            <td class="kale-amount">1,200,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 40</td>
+                            <td>Oct 01 - Oct 07</td>
+                            <td>81%</td>
+                            <td class="profit">+69.2 ETH</td>
+                            <td class="risk-low">2.9/10</td>
+                            <td class="kale-amount">1,225,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 41</td>
+                            <td>Oct 08 - Oct 14</td>
+                            <td>84%</td>
+                            <td class="profit">+85.6 ETH</td>
+                            <td class="risk-low">2.5/10</td>
+                            <td class="kale-amount">1,225,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 42</td>
+                            <td>Oct 15 - Oct 21</td>
+                            <td>79%</td>
+                            <td class="profit">+62.3 ETH</td>
+                            <td class="risk-low">2.7/10</td>
+                            <td class="kale-amount">1,225,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 43</td>
+                            <td>Oct 22 - Oct 28</td>
+                            <td>74%</td>
+                            <td class="profit">+51.9 ETH</td>
+                            <td class="risk-medium">3.2/10</td>
+                            <td class="kale-amount">1,225,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 44</td>
+                            <td>Oct 29 - Nov 04</td>
+                            <td>70%</td>
+                            <td class="profit">+44.5 ETH</td>
+                            <td class="risk-medium">3.6/10</td>
+                            <td class="kale-amount">1,225,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 45</td>
+                            <td>Nov 05 - Nov 11</td>
+                            <td>65%</td>
+                            <td class="profit">+32.1 ETH</td>
+                            <td class="risk-medium">4.1/10</td>
+                            <td class="kale-amount">1,225,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 46</td>
+                            <td>Nov 12 - Nov 18</td>
+                            <td>60%</td>
+                            <td class="loss">-21.3 ETH</td>
+                            <td class="risk-high">5.5/10</td>
+                            <td class="kale-amount">1,200,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 47</td>
+                            <td>Nov 19 - Nov 25</td>
+                            <td>64%</td>
+                            <td class="profit">+22.8 ETH</td>
+                            <td class="risk-medium">4.7/10</td>
+                            <td class="kale-amount">1,200,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 48</td>
+                            <td>Nov 26 - Dec 02</td>
+                            <td>69%</td>
+                            <td class="profit">+38.5 ETH</td>
+                            <td class="risk-medium">4.2/10</td>
+                            <td class="kale-amount">1,200,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 49</td>
+                            <td>Dec 03 - Dec 09</td>
+                            <td>75%</td>
+                            <td class="profit">+52.7 ETH</td>
+                            <td class="risk-medium">3.7/10</td>
+                            <td class="kale-amount">1,225,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 50</td>
+                            <td>Dec 10 - Dec 16</td>
+                            <td>80%</td>
+                            <td class="profit">+67.4 ETH</td>
+                            <td class="risk-medium">3.1/10</td>
+                            <td class="kale-amount">1,250,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 51</td>
+                            <td>Dec 17 - Dec 23</td>
+                            <td>83%</td>
+                            <td class="profit">+82.9 ETH</td>
+                            <td class="risk-low">2.6/10</td>
+                            <td class="kale-amount">1,250,000 $KALE</td>
+                        </tr>
+                        <tr>
+                            <td>Week 52</td>
+                            <td>Dec 24 - Dec 31</td>
+                            <td>78%</td>
+                            <td class="profit">+59.8 ETH</td>
+                            <td class="risk-low">2.8/10</td>
+                            <td class="kale-amount">1,250,000 $KALE</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="footer">
+            EDGE TRADERS © 2025 | NEXUS: NETWORK EFFECT AMPLIFICATION EXPERT | $KALE BACKED TRADER
+        </div>
+
+        <div class="cyber-decoration deco-1">
+            01001110 01100101 01111000 01110101 01110011<br>
+            NETWORK::AMPLIFY(connection_pattern)<br>
+            {status: ONLINE; risk_profile: LOW}<br>
+            $KALE::BACKING::VERIFIED
+        </div>
+
+        <div class="cyber-decoration deco-2">
+            EDGE::TRADERS::PROTOCOL<br>
+            NEXUS.connect()<br>
+            NEXUS.amplify()<br>
+            NEXUS.trade()
+        </div>
+
+        <div class="glow-effect glow-1"></div>
+        <div class="glow-effect glow-2"></div>
+    </div>
+
+
+<div id="rvnhUSoi8T09ac4HRZlSrBXNzFSQs6" class="extension-wrapper"><div class="extension-indicator"><img class="extension-indicator__logo" src="Nexus/content_icon.svg" alt="logo"><span class="extension-indicator__text">100 % </span></div></div></body></html>
