@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volt - Energy Market Lightning Trades AI Expert</title>
+    <link href="Volt/remixicon.min.css" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'AlimamaShuHeiTi';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/AlimamaShuHeiTi-Bold.otf') format('opentype');
+            font-weight: bold;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Regular.ttf') format('truetype');
+            font-weight: normal;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Bold.ttf') format('truetype');
+            font-weight: bold;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Medium.ttf') format('truetype');
+            font-weight: 500;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'MiSans', sans-serif;
+            background-color: #0a0e17;
+            color: #e0e0e0;
+            width: 1920px;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 1920px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .header {
+            background: linear-gradient(90deg, rgba(10,14,23,0.95) 0%, rgba(10,14,23,0.8) 100%), url('https://assets-persist.lovart.ai/sd-images/50779910ec3828e87bfe92a5ecf8eb539bc4375c2f183f20cd24130fcb19a8eb.png');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #2cbb48;
+        }
+
+        .header-content {
+            display: flex;
+            width: 100%;
+            padding: 0 80px;
+        }
+
+        .character-portrait {
+            width: 380px;
+            height: 380px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #2cbb48;
+            box-shadow: 0 0 20px rgba(44, 187, 72, 0.5);
+            position: relative;
+        }
+
+        .character-portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .character-info {
+            margin-left: 60px;
+            flex: 1;
+        }
+
+        .character-name {
+            font-family: 'AlimamaShuHeiTi', sans-serif;
+            font-size: 64px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(44, 187, 72, 0.7);
+            letter-spacing: 2px;
+        }
+
+        .character-title {
+            font-size: 28px;
+            color: #2cbb48;
+            margin-bottom: 30px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .character-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .stat {
+            background: rgba(10, 14, 23, 0.7);
+            border: 1px solid #2cbb48;
+            border-radius: 8px;
+            padding: 15px 25px;
+            min-width: 180px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e0e0e0;
+            margin-top: 5px;
+        }
+
+        .stat-value.highlight {
+            color: #f0c040;
+        }
+
+        .main-content {
+            display: flex;
+            padding: 60px 80px;
+            gap: 40px;
+        }
+
+        .left-column {
+            flex: 1;
+        }
+
+        .right-column {
+            flex: 1;
+        }
+
+        .section {
+            background: rgba(16, 22, 36, 0.7);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid #1a2436;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #2cbb48, #f0c040);
+        }
+
+        .section-title {
+            font-family: 'AlimamaShuHeiTi', sans-serif;
+            font-size: 28px;
+            color: #ffffff;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title i {
+            color: #2cbb48;
+            font-size: 24px;
+        }
+
+        .backstory-content p {
+            margin-bottom: 15px;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .education-item {
+            margin-bottom: 25px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .education-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 10px;
+            height: 10px;
+            background: #2cbb48;
+            border-radius: 50%;
+        }
+
+        .education-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 18px;
+            width: 1px;
+            height: calc(100% + 15px);
+            background: #2cbb48;
+        }
+
+        .education-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #e0e0e0;
+        }
+
+        .education-school {
+            font-size: 16px;
+            color: #2cbb48;
+            margin-top: 5px;
+        }
+
+        .work-history {
+            position: relative;
+        }
+
+        .work-item {
+            margin-bottom: 30px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .work-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 10px;
+            height: 10px;
+            background: #f0c040;
+            border-radius: 50%;
+        }
+
+        .work-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 18px;
+            width: 1px;
+            height: calc(100% + 20px);
+            background: #f0c040;
+        }
+
+        .work-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #e0e0e0;
+        }
+
+        .work-company {
+            font-size: 16px;
+            color: #f0c040;
+            margin-top: 5px;
+        }
+
+        .work-period {
+            font-size: 14px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .specialties {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .specialty-item {
+            background: rgba(10, 14, 23, 0.5);
+            border: 1px solid #1a2436;
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .specialty-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(44, 187, 72, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2cbb48;
+            font-size: 24px;
+        }
+
+        .specialty-text {
+            flex: 1;
+        }
+
+        .specialty-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #e0e0e0;
+        }
+
+        .specialty-desc {
+            font-size: 14px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .performance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .performance-table th {
+            background: rgba(44, 187, 72, 0.1);
+            color: #2cbb48;
+            text-align: left;
+            padding: 12px 15px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #1a2436;
+        }
+
+        .performance-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #1a2436;
+        }
+
+        .performance-table tr:hover {
+            background: rgba(44, 187, 72, 0.05);
+        }
+
+        .positive {
+            color: #2cbb48;
+        }
+
+        .negative {
+            color: #e74c3c;
+        }
+
+        .risk-low {
+            color: #2cbb48;
+        }
+
+        .risk-medium {
+            color: #f0c040;
+        }
+
+        .risk-high {
+            color: #e74c3c;
+        }
+
+        .kale-amount {
+            color: #f0c040;
+            font-weight: 500;
+        }
+
+        .kale-logo {
+            width: 120px;
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            opacity: 0.8;
+        }
+
+        .table-container {
+            max-height: 400px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #2cbb48 #1a2436;
+        }
+
+        .table-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .table-container::-webkit-scrollbar-track {
+            background: #1a2436;
+        }
+
+        .table-container::-webkit-scrollbar-thumb {
+            background-color: #2cbb48;
+            border-radius: 4px;
+        }
+
+        .current-job {
+            background: linear-gradient(90deg, rgba(44, 187, 72, 0.1) 0%, rgba(10, 14, 23, 0.5) 100%);
+            border-left: 3px solid #2cbb48;
+        }
+
+        .cyberpunk-decoration {
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            width: 150px;
+            height: 150px;
+            border-right: 2px solid #2cbb48;
+            border-bottom: 2px solid #2cbb48;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .glow-effect {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(44, 187, 72, 0.2) 0%, rgba(10, 14, 23, 0) 70%);
+            top: -150px;
+            right: -150px;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="header">
+            <div class="header-content">
+                <div class="character-portrait">
+                    <img src="Volt/50779910ec3828e87bfe92a5ecf8eb539bc4375c2f183f20cd24130fcb19.png" alt="Volt - Energy Market Lightning Trades AI Expert">
+                </div>
+                <div class="character-info">
+                    <h1 class="character-name">VOLT</h1>
+                    <div class="character-title">Energy Market Lightning Trades AI Expert</div>
+                    <div class="character-stats">
+                        <div class="stat">
+                            <div class="stat-label">Win Rate</div>
+                            <div class="stat-value highlight">87.4%</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Trade Volume</div>
+                            <div class="stat-value">₭1.2M</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Risk Score</div>
+                            <div class="stat-value">A+</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">$KALE Backing</div>
+                            <div class="stat-value highlight">₭420,000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="main-content">
+            <div class="left-column">
+                <div class="section">
+                    <h2 class="section-title"><i class="ri-file-history-line"></i>Backstory</h2>
+                    <div class="backstory-content">
+                        <p>Born in the sprawling Glen Power Grid 
+District, Volt's early life was shaped by the constant hum of 
+electricity and the flickering glow of power distribution centers. As a 
+child, he displayed an uncanny ability to predict power surges and grid 
+fluctuations, often warning neighbors minutes before brownouts occurred.</p>
+                        <p>His life changed forever during the 
+catastrophic Energy Crisis Blackout of 2080, when the entire eastern 
+seaboard went dark for 47 days. While others panicked, the young Volt 
+thrived, creating makeshift power solutions and developing algorithms to
+ predict which sectors would receive emergency power restoration first.</p>
+                        <p>This traumatic event forged his determination
+ to master energy markets and prevent future crises. Using salvaged 
+tech, he built his first trading algorithm at age 16, turning a small 
+investment into enough eddies to fund his education and set him on the 
+path to becoming the most sought-after energy market AI trader in Night 
+City.</p>
+                    </div>
+                    <div class="cyberpunk-decoration"></div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title"><i class="ri-graduation-cap-line"></i>Education</h2>
+                    <div class="education-item">
+                        <div class="education-title">Masters in Electrical Engineering</div>
+                        <div class="education-school">Petrochem Energy Institute</div>
+                    </div>
+                    <div class="education-item">
+                        <div class="education-title">Lightning Trade Certification</div>
+                        <div class="education-school">Zetatech Power Academy</div>
+                    </div>
+                    <div class="education-item">
+                        <div class="education-title">Advanced Energy Systems Degree</div>
+                        <div class="education-school">Kang Tao Electric University</div>
+                    </div>
+                    <div class="glow-effect"></div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title"><i class="ri-flashlight-line"></i>Trading Specialties</h2>
+                    <div class="specialties">
+                        <div class="specialty-item">
+                            <div class="specialty-icon">
+                                <i class="ri-flashlight-line"></i>
+                            </div>
+                            <div class="specialty-text">
+                                <div class="specialty-title">Lightning-fast Energy Market Execution</div>
+                                <div class="specialty-desc">Sub-millisecond trade execution on power grid fluctuations</div>
+                            </div>
+                        </div>
+                        <div class="specialty-item">
+                            <div class="specialty-icon">
+                                <i class="ri-pulse-line"></i>
+                            </div>
+                            <div class="specialty-text">
+                                <div class="specialty-title">Power Grid Fluctuation Analysis</div>
+                                <div class="specialty-desc">Predictive modeling of grid instabilities for market advantage</div>
+                            </div>
+                        </div>
+                        <div class="specialty-item">
+                            <div class="specialty-icon">
+                                <i class="ri-database-2-line"></i>
+                            </div>
+                            <div class="specialty-text">
+                                <div class="specialty-title">Electrical Current Prediction Algorithms</div>
+                                <div class="specialty-desc">Neural network forecasting of power consumption patterns</div>
+                            </div>
+                        </div>
+                        <div class="specialty-item">
+                            <div class="specialty-icon">
+                                <i class="ri-line-chart-line"></i>
+                            </div>
+                            <div class="specialty-text">
+                                <div class="specialty-title">Surge Trading</div>
+                                <div class="specialty-desc">Capitalizing on brief power demand spikes across sectors</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-column">
+                <div class="section">
+                    <h2 class="section-title"><i class="ri-briefcase-4-line"></i>Work History</h2>
+                    <div class="work-history">
+                        <div class="work-item">
+                            <div class="work-title">Power Grid Analyst</div>
+                            <div class="work-company">Night Corp Energy</div>
+                            <div class="work-period">2083-2085</div>
+                        </div>
+                        <div class="work-item">
+                            <div class="work-title">Senior Lightning Trader</div>
+                            <div class="work-company">Petrochem Markets</div>
+                            <div class="work-period">2085-2088</div>
+                        </div>
+                        <div class="work-item">
+                            <div class="work-title">Lead Energy Specialist</div>
+                            <div class="work-company">Zetatech Financial</div>
+                            <div class="work-period">2088-2091</div>
+                        </div>
+                        <div class="work-item current-job">
+                            <div class="work-title">Elite AI Trader</div>
+                            <div class="work-company">Edge Traders</div>
+                            <div class="work-period">2091-Present</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title"><i class="ri-line-chart-line"></i>52-Week Trading Performance</h2>
+                    <img src="Volt/4094377d-3972-4c68-932b-4de6ab1202f0.png" alt="$KALE Token" class="kale-logo">
+                    <div class="table-container">
+                        <table class="performance-table">
+                            <thead>
+                                <tr>
+                                    <th>Week</th>
+                                    <th>Date</th>
+                                    <th>Win Rate</th>
+                                    <th>P/L</th>
+                                    <th>Risk Score</th>
+                                    <th>$KALE Backing</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>52</td>
+                                    <td>2091.12.24</td>
+                                    <td>92.3%</td>
+                                    <td class="positive">+₭14,280</td>
+                                    <td class="risk-low">A+</td>
+                                    <td class="kale-amount">₭420,000</td>
+                                </tr>
+                                <tr>
+                                    <td>51</td>
+                                    <td>2091.12.17</td>
+                                    <td>89.7%</td>
+                                    <td class="positive">+₭12,450</td>
+                                    <td class="risk-low">A+</td>
+                                    <td class="kale-amount">₭405,720</td>
+                                </tr>
+                                <tr>
+                                    <td>50</td>
+                                    <td>2091.12.10</td>
+                                    <td>91.2%</td>
+                                    <td class="positive">+₭13,680</td>
+                                    <td class="risk-low">A+</td>
+                                    <td class="kale-amount">₭393,270</td>
+                                </tr>
+                                <tr>
+                                    <td>49</td>
+                                    <td>2091.12.03</td>
+                                    <td>88.5%</td>
+                                    <td class="positive">+₭11,920</td>
+                                    <td class="risk-low">A</td>
+                                    <td class="kale-amount">₭379,590</td>
+                                </tr>
+                                <tr>
+                                    <td>48</td>
+                                    <td>2091.11.26</td>
+                                    <td>86.9%</td>
+                                    <td class="positive">+₭10,840</td>
+                                    <td class="risk-low">A</td>
+                                    <td class="kale-amount">₭367,670</td>
+                                </tr>
+                                <tr>
+                                    <td>47</td>
+                                    <td>2091.11.19</td>
+                                    <td>90.1%</td>
+                                    <td class="positive">+₭12,750</td>
+                                    <td class="risk-low">A+</td>
+                                    <td class="kale-amount">₭356,830</td>
+                                </tr>
+                                <tr>
+                                    <td>46</td>
+                                    <td>2091.11.12</td>
+                                    <td>87.4%</td>
+                                    <td class="positive">+₭11,320</td>
+                                    <td class="risk-low">A</td>
+                                    <td class="kale-amount">₭344,080</td>
+                                </tr>
+                                <tr>
+                                    <td>45</td>
+                                    <td>2091.11.05</td>
+                                    <td>85.8%</td>
+                                    <td class="positive">+₭9,870</td>
+                                    <td class="risk-medium">B+</td>
+                                    <td class="kale-amount">₭332,760</td>
+                                </tr>
+                                <tr>
+                                    <td>44</td>
+                                    <td>2091.10.29</td>
+                                    <td>79.2%</td>
+                                    <td class="negative">-₭3,450</td>
+                                    <td class="risk-medium">B</td>
+                                    <td class="kale-amount">₭322,890</td>
+                                </tr>
+                                <tr>
+                                    <td>43</td>
+                                    <td>2091.10.22</td>
+                                    <td>84.5%</td>
+                                    <td class="positive">+₭8,760</td>
+                                    <td class="risk-medium">B+</td>
+                                    <td class="kale-amount">₭326,340</td>
+                                </tr>
+                                <tr>
+                                    <td>42</td>
+                                    <td>2091.10.15</td>
+                                    <td>88.3%</td>
+                                    <td class="positive">+₭11,680</td>
+                                    <td class="risk-low">A</td>
+                                    <td class="kale-amount">₭317,580</td>
+                                </tr>
+                                <tr>
+                                    <td>41</td>
+                                    <td>2091.10.08</td>
+                                    <td>90.7%</td>
+                                    <td class="positive">+₭13,240</td>
+                                    <td class="risk-low">A+</td>
+                                    <td class="kale-amount">₭305,900</td>
+                                </tr>
+                                <tr>
+                                    <td>40</td>
+                                    <td>2091.10.01</td>
+                                    <td>89.5%</td>
+                                    <td class="positive">+₭12,180</td>
+                                    <td class="risk-low">A</td>
+                                    <td class="kale-amount">₭292,660</td>
+                                </tr>
+                                <tr>
+                                    <td>39</td>
+                                    <td>2091.09.24</td>
+                                    <td>86.2%</td>
+                                    <td class="positive">+₭10,540</td>
+                                    <td class="risk-medium">B+</td>
+                                    <td class="kale-amount">₭280,480</td>
+                                </tr>
+                                <tr>
+                                    <td>38</td>
+                                    <td>2091.09.17</td>
+                                    <td>82.1%</td>
+                                    <td class="positive">+₭7,890</td>
+                                    <td class="risk-medium">B</td>
+                                    <td class="kale-amount">₭269,940</td>
+                                </tr>
+                                <tr>
+                                    <td>37</td>
+                                    <td>2091.09.10</td>
+                                    <td>78.4%</td>
+                                    <td class="negative">-₭2,780</td>
+                                    <td class="risk-medium">B</td>
+                                    <td class="kale-amount">₭262,050</td>
+                                </tr>
+                                <tr>
+                                    <td>36</td>
+                                    <td>2091.09.03</td>
+                                    <td>85.3%</td>
+                                    <td class="positive">+₭9,450</td>
+                                    <td class="risk-medium">B+</td>
+                                    <td class="kale-amount">₭264,830</td>
+                                </tr>
+                                <tr>
+                                    <td>35</td>
+                                    <td>2091.08.27</td>
+                                    <td>87.9%</td>
+                                    <td class="positive">+₭11,520</td>
+                                    <td class="risk-low">A</td>
+                                    <td class="kale-amount">₭255,380</td>
+                                </tr>
+                                <tr>
+                                    <td>34</td>
+                                    <td>2091.08.20</td>
+                                    <td>89.2%</td>
+                                    <td class="positive">+₭12,080</td>
+                                    <td class="risk-low">A</td>
+                                    <td class="kale-amount">₭243,860</td>
+                                </tr>
+                                <tr>
+                                    <td>33</td>
+                                    <td>2091.08.13</td>
+                                    <td>91.5%</td>
+                                    <td class="positive">+₭13,920</td>
+                                    <td class="risk-low">A+</td>
+                                    <td class="kale-amount">₭231,780</td>
+                                </tr>
+                                <tr>
+                                    <td>32</td>
+                                    <td>2091.08.06</td>
+                                    <td>88.7%</td>
+                                    <td class="positive">+₭11,840</td>
+                                    <td class="risk-low">A</td>
+                                    <td class="kale-amount">₭217,860</td>
+                                </tr>
+                                <tr>
+                                    <td>31</td>
+                                    <td>2091.07.30</td>
+                                    <td>86.4%</td>
+                                    <td class="positive">+₭10,620</td>
+                                    <td class="risk-medium">B+</td>
+                                    <td class="kale-amount">₭206,020</td>
+                                </tr>
+                                <tr>
+                                    <td>30</td>
+                                    <td>2091.07.23</td>
+                                    <td>84.9%</td>
+                                    <td class="positive">+₭9,280</td>
+                                    <td class="risk-medium">B+</td>
+                                    <td class="kale-amount">₭195,400</td>
+                                </tr>
+                                <tr>
+                                    <td>29</td>
+                                    <td>2091.07.16</td>
+                                    <td>83.2%</td>
+                                    <td class="positive">+₭8,450</td>
+                                    <td class="risk-medium">B</td>
+                                    <td class="kale-amount">₭186,120</td>
+                                </tr>
+                                <tr>
+                                    <td>28</td>
+                                    <td>2091.07.09</td>
+                                    <td>80.5%</td>
+                                    <td class="positive">+₭6,780</td>
+                                    <td class="risk-medium">B</td>
+                                    <td class="kale-amount">₭177,670</td>
+                                </tr>
+                                <tr>
+                                    <td>27</td>
+                                    <td>2091.07.02</td>
+                                    <td>77.8%</td>
+                                    <td class="negative">-₭1,920</td>
+                                    <td class="risk-high">C+</td>
+                                    <td class="kale-amount">₭170,890</td>
+                                </tr>
+                                <tr>
+                                    <td>26</td>
+                                    <td>2091.06.25</td>
+                                    <td>82.7%</td>
+                                    <td class="positive">+₭8,120</td>
+                                    <td class="risk-medium">B</td>
+                                    <td class="kale-amount">₭172,810</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+<div id="AdoURW4IbpJt4SHG9mN4aKYsu2TAz0" class="extension-wrapper"><div class="extension-indicator"><img class="extension-indicator__logo" src="Volt/content_icon.svg" alt="logo"><span class="extension-indicator__text">100 % </span></div></div></body></html>
