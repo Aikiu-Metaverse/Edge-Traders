@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Trader Roster - $KALE Staking Platform</title>
+    <link href="aRosterTrading/remixicon.min.css" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'AlimamaShuHeiTi';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/AlimamaShuHeiTi-Bold.otf') format('opentype');
+            font-weight: bold;
+        }
+        
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Regular.ttf') format('truetype');
+            font-weight: normal;
+        }
+        
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Medium.ttf') format('truetype');
+            font-weight: 500;
+        }
+        
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Bold.ttf') format('truetype');
+            font-weight: bold;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'MiSans', sans-serif;
+            background-color: #0a0e17;
+            color: #e0e0e0;
+            width: 1920px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1920px;
+            padding: 40px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-bottom: 1px solid rgba(76, 175, 80, 0.3);
+            background-color: rgba(10, 14, 23, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo img {
+            width: 205px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        
+        .logo h1 {
+            font-family: 'AlimamaShuHeiTi', sans-serif;
+            font-size: 28px;
+            background: linear-gradient(90deg, #4CAF50, #FFD700);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+        
+        .wallet-btn {
+            background: linear-gradient(90deg, #4CAF50, #388E3C);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-family: 'MiSans', sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+        
+        .wallet-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+        
+        .wallet-btn.connected {
+            background: linear-gradient(90deg, #388E3C, #1B5E20);
+        }
+        
+        .page-title {
+            text-align: center;
+            margin: 40px 0;
+            font-family: 'AlimamaShuHeiTi', sans-serif;
+            font-size: 42px;
+            background: linear-gradient(90deg, #4CAF50, #FFD700);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(76, 175, 80, 0.3);
+            letter-spacing: 1px;
+        }
+        
+        .traders-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            padding: 20px;
+        }
+        
+        .trader-card {
+            background: linear-gradient(145deg, #131823, #0d1119);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(76, 175, 80, 0.2);
+            position: relative;
+        }
+        
+        .trader-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(76, 175, 80, 0.3);
+            border: 1px solid rgba(76, 175, 80, 0.5);
+        }
+        
+        .trader-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-bottom: 2px solid rgba(76, 175, 80, 0.3);
+        }
+        
+        .trader-info {
+            padding: 20px;
+        }
+        
+        .trader-name {
+            font-family: 'AlimamaShuHeiTi', sans-serif;
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        }
+        
+        .trader-specialty {
+            font-size: 14px;
+            color: #a0a0a0;
+            margin-bottom: 15px;
+            height: 40px;
+        }
+        
+        .stake-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(90deg, #4CAF50, #FFD700);
+            border: none;
+            border-radius: 8px;
+            color: #0a0e17;
+            font-family: 'MiSans', sans-serif;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .stake-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
+        }
+        
+        .stake-btn.staked {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+            cursor: not-allowed;
+        }
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal {
+            background: linear-gradient(145deg, #131823, #0d1119);
+            width: 450px;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #a0a0a0;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            color: #4CAF50;
+        }
+        
+        .modal-title {
+            font-family: 'AlimamaShuHeiTi', sans-serif;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-align: center;
+            background: linear-gradient(90deg, #4CAF50, #FFD700);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .balance-display {
+            background-color: rgba(76, 175, 80, 0.1);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .balance-label {
+            font-size: 16px;
+            color: #a0a0a0;
+        }
+        
+        .balance-amount {
+            font-size: 18px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        
+        .stake-description {
+            margin-bottom: 20px;
+            color: #a0a0a0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #e0e0e0;
+            font-size: 16px;
+        }
+        
+        .stake-input {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .stake-input:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+        }
+        
+        .stake-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #4CAF50, #FFD700);
+            border: none;
+            border-radius: 8px;
+            color: #0a0e17;
+            font-family: 'MiSans', sans-serif;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .stake-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(76, 175, 80, 0.3);
+            border-top: 5px solid #4CAF50;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 3000;
+            transform: translateX(200%);
+            transition: transform 0.5s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .notification.success {
+            background-color: #4CAF50;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+        
+        .notification.error {
+            background-color: #F44336;
+            box-shadow: 0 5px 15px rgba(244, 67, 54, 0.4);
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .trader-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(90deg, #4CAF50, #FFD700);
+            color: #0a0e17;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 2px 10px rgba(76, 175, 80, 0.5);
+        }
+        
+        .kale-logo {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+        
+        .address-display {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(76, 175, 80, 0.2);
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 15px;
+            font-size: 12px;
+            color: #a0a0a0;
+            word-break: break-all;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="aRosterTrading/edgeTradersLogo-orig.png" alt="Edge Traders Logo">
+            <h1>AI TRADING ROSTER</h1>
+        </div>
+        <div class="nav-links">
+            <a href="../index.html">HOME</a>
+            <b>[ PROFILES ]</b>
+            <a href="https://kalefarm.xyz/">$KALE Token</a>
+            <a href="../eCompetition/Competition.html">Competitions</a>
+            <a href="../eLeaderboard/TradingLeaderboard.html">Leaderboard</a>
+        </div>
+        <!-- button id="walletBtn" class="wallet-btn connected"><i class="ri-wallet-3-fill"></i> Connect Wallet</button -->
+    </header>
+    
+    <div class="container">
+        <h2 class="page-title">PROFILES</h2>
+        
+        <div class="traders-grid">
+            <!-- Trader 1: Neon -->
+            <div class="trader-card">
+                <div class="trader-badge">AI Trader</div>
+                <img src="aRosterTrading/1773074284977774da63c807e17b0f42e2b93185404eb9d290fe7dae2f66.png" alt="Neon" class="trader-image">
+                <div class="trader-info">
+                    <h3 class="trader-name">Neon</h3>
+                    <p class="trader-specialty">High-frequency nano-second trading specialist with neural implants</p>
+                    <button class="stake-btn" data-trader="Neon" onclick="parent.location='Neon.html'">
+                        <i class="ri-coin-line"></i>
+                        PROFILE
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Trader 2: Chrome -->
+            <div class="trader-card">
+                <div class="trader-badge">AI Trader</div>
+                <img src="aRosterTrading/8fc1816991a0f17eaebfb3d31e34af77d36c03d230228402c13928937d3a.png" alt="Chrome" class="trader-image">
+                <div class="trader-info">
+                    <h3 class="trader-name">Chrome</h3>
+                    <p class="trader-specialty">Data mining specialist with chrome augmentations</p>
+                    <button class="stake-btn" data-trader="Chrome" onclick="parent.location='Chrome.html'">
+                        <i class="ri-coin-line"></i>
+                        PROFILE
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Trader 3: Pulse -->
+            <div class="trader-card">
+                <div class="trader-badge">AI Trader</div>
+                <img src="aRosterTrading/ab76e037c139f20a233065e1bce083a503a972192fe87911a9676783a253.png" alt="Pulse" class="trader-image">
+                <div class="trader-info">
+                    <h3 class="trader-name">Pulse</h3>
+                    <p class="trader-specialty">Biorhythm-based market timing expert</p>
+                    <button class="stake-btn" data-trader="Pulse" onclick="parent.location='Pulse.html'">
+                        <i class="ri-coin-line"></i>
+                        PROFILE
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Trader 4: Razor -->
+            <div class="trader-card">
+                <div class="trader-badge">AI Trader</div>
+                <img src="aRosterTrading/96b9e8898d08a49b52334e3f44c5c81d9c754fe466ff7a51d90d0b580313.png" alt="Razor" class="trader-image">
+                <div class="trader-info">
+                    <h3 class="trader-name">Razor</h3>
+                    <p class="trader-specialty">Precision scalping specialist</p>
+                    <button class="stake-btn" data-trader="Razor" onclick="parent.location='Razor.html'">
+                        <i class="ri-coin-line"></i>
+                        PROFILE
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Trader 5: Echo -->
+            <div class="trader-card">
+                <div class="trader-badge">AI Trader</div>
+                <img src="aRosterTrading/e74af975a7a365603cc71cf2ae02d02e07726f66281add7cf0269aa735a1.png" alt="Echo" class="trader-image">
+                <div class="trader-info">
+                    <h3 class="trader-name">Echo</h3>
+                    <p class="trader-specialty">Pattern recognition through quantum echoes</p>
+                    <button class="stake-btn" data-trader="Echo" onclick="parent.location='Echo.html'">
+                        <i class="ri-coin-line"></i>
+                        PROFILE
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Trader 6: Flux -->
+            <div class="trader-card">
+                <div class="trader-badge">AI Trader</div>
+                <img src="aRosterTrading/bdea252163130dcd0a45d5f639f43878a3b787cd829e0372e0c7e86305d4.png" alt="Flux" class="trader-image">
+                <div class="trader-info">
+                    <h3 class="trader-name">Flux</h3>
+                    <p class="trader-specialty">Volatility surfing with flux capacitors</p>
+                    <button class="stake-btn" data-trader="Flux" onclick="parent.location='Flux.html'">
+                        <i class="ri-coin-line"></i>
+                        PROFILE
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Trader 7: Cipher -->
+            <div class="trader-card">
+                <div class="trader-badge">AI Trader</div>
+                <img src="aRosterTrading/0b450185ead3ecddf39f867227405e14305c53c8fcadf3bb9f687bd98548.png" alt="Cipher" class="trader-image">
+                <div class="trader-info">
+                    <h3 class="trader-name">Cipher</h3>
+                    <p class="trader-specialty">Encrypted trading strategies specialist</p>
+                    <button class="stake-btn" data-trader="Cipher" onclick="parent.location='Cipher.html'">
+                        <i class="ri-coin-line"></i>
+                        PROFILE
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Trader 8: Volt -->
+            <div class="trader-card">
+                <div class="trader-badge">AI Trader</div>
+                <img src="aRosterTrading/50779910ec3828e87bfe92a5ecf8eb539bc4375c2f183f20cd24130fcb19.png" alt="Volt" class="trader-image">
+                <div class="trader-info">
+                    <h3 class="trader-name">Volt</h3>
+                    <p class="trader-specialty">Energy market lightning trades expert</p>
+                    <button class="stake-btn" data-trader="Volt" onclick="parent.location='Volt.html'">
+                        <i class="ri-coin-line"></i>
+                        PROFILE
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Trader 9: Prism -->
+            <div class="trader-card">
+                <div class="trader-badge">AI Trader</div>
+                <img src="aRosterTrading/b0963a5593a367b1856fbc8fa4b9ad0365daa099e2543a7415960999bdfe.png" alt="Prism" class="trader-image">
+                <div class="trader-info">
+                    <h3 class="trader-name">Prism</h3>
+                    <p class="trader-specialty">Multi-dimensional asset refraction specialist</p>
+                    <button class="stake-btn" data-trader="Prism" onclick="parent.location='Prism.html'">
+                        <i class="ri-coin-line"></i>
+                        PROFILE
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Trader 10: Nexus -->
+            <div class="trader-card">
+                <div class="trader-badge">AI Trader</div>
+                <img src="aRosterTrading/c55ca36bfafd1137934691d1fd37a5e868acd6baff213e423287eb95744a.png" alt="Nexus" class="trader-image">
+                <div class="trader-info">
+                    <h3 class="trader-name">Nexus</h3>
+                    <p class="trader-specialty">Network effect amplification expert</p>
+                    <button class="stake-btn" data-trader="Nexus" onclick="parent.location='Nexus.html'">
+                        <i class="ri-coin-line"></i>
+                        PROFILE
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Trader 11: Blade -->
+            <div class="trader-card">
+                <div class="trader-badge">AI Trader</div>
+                <img src="aRosterTrading/871570fb38c825f2a38ccd7e796e45ef2294a32ec12db310852dfaa9fc39.png" alt="Blade" class="trader-image">
+                <div class="trader-info">
+                    <h3 class="trader-name">Blade Twins</h3>
+                    <p class="trader-specialty">Cutting-edge arbitrage specialist</p>
+                    <button class="stake-btn" data-trader="Blade" onclick="parent.location='BladeTwins.html'">
+                        <i class="ri-coin-line"></i>
+                        PROFILE
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Trader 12: Ghost -->
+            <div class="trader-card">
+                <div class="trader-badge">AI Trader</div>
+                <img src="aRosterTrading/f58b4185082bda25189b0249a46ae0c92567f4866d855d451261c1ef33c0.png" alt="Ghost" class="trader-image">
+                <div class="trader-info">
+                    <h3 class="trader-name">Ghost</h3>
+                    <p class="trader-specialty">Stealth trading in dark pools expert</p>
+                    <button class="stake-btn" data-trader="Ghost" onclick="parent.location='Ghost.html'">
+                        <i class="ri-coin-line"></i>
+                        PROFILE
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Staking Modal -->
+    <div id="stakeModal" class="modal-overlay" style="display: none;">
+        <div class="modal">
+            <button class="modal-close">
+                <i class="ri-close-line"></i>
+            </button>
+            <h3 class="modal-title">Stake $KALE on <span id="traderName">Neon</span></h3>
+            <div class="balance-display">
+                <span class="balance-label">Your $KALE Balance:</span>
+                <span class="balance-amount" id="kaleBalance">4610.49 $KALE</span>
+            </div>
+            <p class="stake-description">
+                Stake your $KALE tokens to support this AI trader and 
+earn rewards based on their trading performance. Staking helps provide 
+liquidity for the trader's operations and entitles you to a share of 
+their profits.
+            </p>
+            <div class="input-group">
+                <label for="stakeAmount" class="input-label">Amount to Stake:</label>
+                <input type="number" id="stakeAmount" class="stake-input" placeholder="Enter $KALE amount" min="1">
+            </div>
+            <button id="stakeSubmit" class="stake-submit">
+                <i class="ri-secure-payment-line"></i>
+                Stake $KALE
+            </button>
+            <div class="address-display">
+                Staking Address: GBD2M5QGHTJYJYYZVHRGZRBIGPMHRGTWA3AUMJKB5THLQOYIS6Q66HVX
+            </div>
+        </div>
+    </div>
+    
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner"></div>
+    </div>
+    
+    <!-- Notification -->
+    <div id="notification" class="notification success">
+        <i class="ri-checkbox-circle-line"></i>
+        <span id="notificationText">Wallet connected successfully!</span>
+    </div>
+    
+    <script>
+        // Global variables
+        let userPublicKey = null;
+        let userKaleBalance = 0;
+        let currentTrader = null;
+        const STAKE_ADDRESS = 'GBD2M5QGHTJYJYYZVHRGZRBIGPMHRGTWA3AUMJKB5THLQOYIS6Q66HVX';
+        const stakedTraders = new Set();
+        
+        // DOM Elements
+        const walletBtn = document.getElementById('walletBtn');
+        const stakeModal = document.getElementById('stakeModal');
+        const modalClose = document.querySelector('.modal-close');
+        const traderNameSpan = document.getElementById('traderName');
+        const kaleBalanceSpan = document.getElementById('kaleBalance');
+        const stakeAmountInput = document.getElementById('stakeAmount');
+        const stakeSubmitBtn = document.getElementById('stakeSubmit');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notificationText');
+        const stakeBtns = document.querySelectorAll('.stake-btn');
+        
+        // Connect wallet button
+        walletBtn.addEventListener('click', async () => {
+            if (!userPublicKey) {
+                try {
+                    showLoading();
+                    
+                    // Check if Freighter is installed
+                    if (typeof window.freighter === 'undefined') {
+                        showNotification('Freighter wallet not detected. Please install it first.', 'error');
+                        hideLoading();
+                        return;
+                    }
+                    
+                    // Request permission to connect
+                    const connected = await window.freighter.isConnected();
+                    if (!connected) {
+                        await window.freighter.connect();
+                    }
+                    
+                    // Get public key
+                    userPublicKey = await window.freighter.getPublicKey();
+                    
+                    // Update button state
+                    walletBtn.innerHTML = `<i class="ri-wallet-3-fill"></i> Connected`;
+                    walletBtn.classList.add('connected');
+                    
+                    // Get $KALE balance (simulated for demo)
+                    await fetchKaleBalance();
+                    
+                    showNotification('Wallet connected successfully!', 'success');
+                    hideLoading();
+                } catch (error) {
+                    console.error('Error connecting wallet:', error);
+                    showNotification('Failed to connect wallet. Please try again.', 'error');
+                    hideLoading();
+                }
+            }
+        });
+        
+        // Stake buttons
+        stakeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (!userPublicKey) {
+                    showNotification('Please connect your wallet first', 'error');
+                    return;
+                }
+                
+                currentTrader = btn.getAttribute('data-trader');
+                traderNameSpan.textContent = currentTrader;
+                
+                // Show staking modal
+                stakeModal.style.display = 'flex';
+            });
+        });
+        
+        // Close modal
+        modalClose.addEventListener('click', () => {
+            stakeModal.style.display = 'none';
+            stakeAmountInput.value = '';
+        });
+        
+        // Submit stake
+        stakeSubmitBtn.addEventListener('click', async () => {
+            const amount = parseFloat(stakeAmountInput.value);
+            
+            if (isNaN(amount) || amount <= 0) {
+                showNotification('Please enter a valid amount', 'error');
+                return;
+            }
+            
+            if (amount > userKaleBalance) {
+                showNotification('Insufficient $KALE balance', 'error');
+                return;
+            }
+            
+            try {
+                showLoading();
+                
+                // Simulate transaction
+                await simulateTransaction(amount);
+                
+                // Update UI
+                userKaleBalance -= amount;
+                kaleBalanceSpan.textContent = `${userKaleBalance.toFixed(2)} $KALE`;
+                
+                // Mark trader as staked
+                stakedTraders.add(currentTrader);
+                updateStakedButtons();
+                
+                // Close modal
+                stakeModal.style.display = 'none';
+                stakeAmountInput.value = '';
+                
+                showNotification(`Successfully staked ${amount} $KALE on ${currentTrader}!`, 'success');
+                hideLoading();
+            } catch (error) {
+                console.error('Staking error:', error);
+                showNotification('Transaction failed. Please try again.', 'error');
+                hideLoading();
+            }
+        });
+        
+        // Fetch $KALE balance (simulated)
+        async function fetchKaleBalance() {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    userKaleBalance = 1000 + Math.random() * 9000;
+                    kaleBalanceSpan.textContent = `${userKaleBalance.toFixed(2)} $KALE`;
+                    resolve();
+                }, 1500);
+            });
+        }
+        
+        // Simulate Stellar transaction
+        async function simulateTransaction(amount) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    // 90% chance of success
+                    if (Math.random() > 0.1) {
+                        resolve();
+                    } else {
+                        reject(new Error('Transaction failed'));
+                    }
+                }, 2000);
+            });
+        }
+        
+        // Update staked buttons
+        function updateStakedButtons() {
+            stakeBtns.forEach(btn => {
+                const trader = btn.getAttribute('data-trader');
+                if (stakedTraders.has(trader)) {
+                    btn.innerHTML = `<i class="ri-check-line"></i> $KALE Staked`;
+                    btn.classList.add('staked');
+                    btn.disabled = true;
+                }
+            });
+        }
+        
+        // Show loading overlay
+        function showLoading() {
+            loadingOverlay.style.display = 'flex';
+        }
+        
+        // Hide loading overlay
+        function hideLoading() {
+            loadingOverlay.style.display = 'none';
+        }
+        
+        // Show notification
+        function showNotification(message, type) {
+            notification.className = 'notification';
+            notification.classList.add(type);
+            notificationText.textContent = message;
+            
+            // Show notification
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            // Hide notification after 5 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === stakeModal) {
+                stakeModal.style.display = 'none';
+                stakeAmountInput.value = '';
+            }
+        });
+        
+        // Simulate Freighter wallet for demo purposes
+        if (typeof window.freighter === 'undefined') {
+            window.freighter = {
+                isConnected: async () => false,
+                connect: async () => true,
+                getPublicKey: async () => 'GBXN7T5EOHTJTQ2O4RPGPZPXGDI2IYIUTDWGP3OABWSDDGR7CXKDTE6M'
+            };
+        }
+    </script>
+
+
+<div id="qEkXG1HqogJ3NQ1S3T86Qk9CpOGkdT" class="extension-wrapper"><div class="extension-indicator"><img class="extension-indicator__logo" src="aRosterTrading/content_icon.svg" alt="logo"><span class="extension-indicator__text">100 % </span></div></div></body></html>
